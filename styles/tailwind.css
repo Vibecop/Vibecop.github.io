@@ -1,0 +1,75 @@
+/*
+ * Tailwind v4, set up to sit alongside the original kit's CSS rather than
+ * replace it. Three deliberate choices keep it from touching the design:
+ *
+ * 1. Every class is prefixed: `tw:flex`, `tw:lg:grid`, `tw:bg-primary`.
+ *
+ *    Without it Tailwind and Bootstrap 4 fight over names the pages already
+ *    use. `container`, `mb-0`, `mx-auto`, `text-center`, `w-100`, `border-0`
+ *    and the whole `m-*`/`p-*` scale exist in both, with different values --
+ *    Bootstrap's `.container` maxes out at 1140px, Tailwind's at the breakpoint
+ *    itself. Unprefixed, Tailwind is imported last and silently wins on every
+ *    page. Measured: it moved pixels on all 14 pages the visual check covers
+ *    (faq.html went from 286 differing pixels to 10,362). Prefixed, all 14 are
+ *    back to their baseline.
+ *
+ * 2. Preflight is not imported. Tailwind's reset restyles headings, lists,
+ *    form controls and images -- all things the kit already styles, and all
+ *    things Bootstrap's reboot is already handling.
+ *
+ * 3. The breakpoints are Bootstrap 4's (576/768/992/1200), not Tailwind's
+ *    defaults (640/768/1024/1280), so `tw:md:` and Bootstrap's `-md-` break at
+ *    the same width. Mixing the two otherwise gives you a layout that reflows
+ *    at two different points.
+ *
+ * Imported last in app/layout.jsx, so a `tw:` utility wins over the kit's CSS
+ * at equal specificity -- which is what you want when you reach for one.
+ */
+
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme) prefix(tw);
+@import "tailwindcss/utilities.css" layer(utilities) prefix(tw);
+
+@theme {
+  /* Bootstrap 4 breakpoints */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1400px;
+
+  /*
+   * The kit's palette, mirrored into Tailwind's colour namespace so utilities
+   * can reach it: bg-primary, text-accent, border-navy, ... The kit's own
+   * `--primary--color` custom properties (note the double dash) are untouched
+   * and still drive style.css.
+   */
+  --color-primary: #f95b34;
+  --color-secondary: #ffffff;
+  --color-accent: #d76666;
+  --color-purple: #a97ad5;
+  --color-purple-2: #8347dc;
+  --color-apricot: #efb664;
+  --color-yellow: #ffc045;
+  --color-pink: #c291ac;
+  --color-pink-2: #be8db3;
+  --color-tea-pink: #c694a3;
+  --color-body: #bababa;
+  --color-body-2: #2b2b2b;
+  --color-body-3: #a6a9b9;
+  --color-body-4: #666a82;
+  --color-body-5: #5f5f5f;
+  --color-ink: #000000;
+  --color-ink-2: #0c0c0c;
+  --color-line: #200205;
+  --color-navy-bg: #0c0d13;
+  --color-navy: #14151e;
+  --color-navy-2: #191b26;
+  --color-cool: #4a41ec;
+  --color-cool-2: #b8b6cc;
+  --color-cool-3: #8e8ca9;
+
+  /* the kit's body face */
+  --font-sans: "Inter Tight", sans-serif;
+}
