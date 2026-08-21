@@ -115,11 +115,11 @@ export default function Header() {
   useEffect(() => setMenuOpen(false), [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-black/80 pt-4 backdrop-blur-md">
+    <header className="site-header sticky top-0 z-50 bg-black/80 pt-4 backdrop-blur-md">
       <Container>
         <nav
           aria-label="Main"
-          className="rounded-3xl border border-white/10 bg-surface-2/80 px-5 py-3 backdrop-blur-md lg:px-8"
+          className="site-nav rounded-3xl border border-white/10 bg-surface-2/80 px-5 py-3 backdrop-blur-md lg:px-8"
         >
           <div className="flex items-center justify-between gap-6">
             <Link href="/" className="shrink-0" aria-label="Vibecop — home">

@@ -5,7 +5,7 @@ import { FOOTER_NAV, SOCIAL_LINKS } from "@/content/navigation";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-surface pt-16 md:pt-20">
+    <footer className="site-footer border-t border-white/10 bg-surface pt-16 md:pt-20">
       <Container>
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">

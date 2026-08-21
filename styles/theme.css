@@ -20,9 +20,9 @@
 
   /* ---- surfaces, darkest to lightest ------------------------------- */
   --color-ink: #000000;
-  --color-surface: #0c0d13;
-  --color-surface-2: #14151e;
-  --color-surface-3: #191b26;
+  --color-surface: #0a0909;
+  --color-surface-2: #121010;
+  --color-surface-3: #1b1718;
 
   /* ---- text -------------------------------------------------------- */
   --color-muted: #bababa;
@@ -79,7 +79,7 @@
   }
 
   body {
-    background-color: var(--color-ink);
+    background-color: #050505;
     color: var(--color-muted);
     font-family: var(--font-sans);
     font-size: 1.125rem;
@@ -114,6 +114,53 @@
   }
 }
 
+.site-main {
+  background:
+    radial-gradient(ellipse 44rem 22rem at 96% 12%, rgb(249 91 52 / 5%), transparent 72%),
+    radial-gradient(ellipse 38rem 22rem at 2% 46%, rgb(124 24 16 / 6%), transparent 72%),
+    #050505;
+}
+
+/* Match the reference's orange-on-black panel system everywhere below the
+ * Hero, without applying these overrides to the untouched Hero section. */
+.site-main > :not(.hero-reference-bg) [class~="bg-white/5"] {
+  background: linear-gradient(145deg, rgb(255 255 255 / 7%), rgb(255 255 255 / 2%));
+}
+
+.site-main > :not(.hero-reference-bg) [class~="bg-white/[0.03]"] {
+  background: rgb(255 255 255 / 2%);
+}
+
+.site-main > :not(.hero-reference-bg) [class~="border-white/10"] {
+  border-color: rgb(255 255 255 / 14%);
+}
+
+.site-main > :not(.hero-reference-bg) [class~="bg-brand/5"] {
+  background: linear-gradient(145deg, rgb(249 91 52 / 14%), rgb(249 91 52 / 4%));
+}
+
+.inner-banner {
+  min-height: 27rem;
+  border-bottom: 1px solid rgb(249 91 52 / 20%);
+  background:
+    radial-gradient(ellipse 34rem 20rem at 76% 35%, rgb(249 91 52 / 22%), transparent 72%),
+    linear-gradient(180deg, rgb(8 4 4 / 72%), rgb(5 5 5 / 96%));
+}
+
+.inner-banner::after {
+  position: absolute;
+  right: -12%;
+  bottom: -42%;
+  z-index: -2;
+  width: 72%;
+  height: 70%;
+  border-top: 2px solid rgb(255 138 22 / 70%);
+  background: linear-gradient(170deg, transparent 20%, rgb(249 91 52 / 28%) 52%, transparent 74%);
+  content: "";
+  pointer-events: none;
+  transform: rotate(-6deg);
+}
+
 /*
  * Respect the OS reduced-motion setting. The kit animated everything on
  * scroll through WOW.js with no such guard.
@@ -127,6 +174,127 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Shared non-hero treatment: deep alternating bands, warm glow, and the
+ * rounded glass surfaces used throughout the Opzio reference. */
+.site-header {
+  background: linear-gradient(180deg, rgb(0 0 0 / 92%), rgb(0 0 0 / 72%)) !important;
+}
+
+.site-nav {
+  box-shadow: 0 .75rem 2rem rgb(0 0 0 / 22%);
+  transition: border-color .3s ease, background-color .3s ease, box-shadow .3s ease;
+}
+
+.site-nav:hover {
+  border-color: rgb(249 91 52 / 26%);
+  box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 30%);
+}
+
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  background-image: radial-gradient(ellipse 34rem 18rem at 86% 4%, rgb(249 91 52 / 7%), transparent 72%);
+}
+
+.site-section {
+  position: relative;
+  isolation: isolate;
+  border-top: 1px solid rgb(255 255 255 / 4%);
+  background-image: radial-gradient(ellipse 34rem 18rem at 92% 8%, rgb(249 91 52 / 7%), transparent 72%);
+}
+
+.site-section.bg-surface {
+  background-image:
+    radial-gradient(ellipse 32rem 20rem at 8% 50%, rgb(249 91 52 / 6%), transparent 72%),
+    linear-gradient(180deg, rgb(255 255 255 / 1.5%), transparent 25%);
+}
+
+.section-heading > img,
+.crm-reference-heading > img,
+.velocity-feature-mark {
+  filter: drop-shadow(0 0 .8rem rgb(249 91 52 / 45%));
+}
+
+.section-heading h2,
+.crm-reference-heading h2,
+.velocity-feature-copy h2 {
+  letter-spacing: -.035em;
+}
+
+.pricing-card,
+.article-card,
+.faq-item,
+.crm-reference-group,
+.site-section .rounded-3xl.border {
+  box-shadow: 0 .8rem 2.5rem rgb(0 0 0 / 16%);
+  transition: border-color .3s ease, background-color .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+
+.pricing-card:hover,
+.article-card:hover,
+.faq-item:hover,
+.crm-reference-group:hover,
+.site-section .rounded-3xl.border:hover {
+  box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 28%);
+  transform: translateY(-4px);
+}
+
+.pricing-card.is-featured {
+  background: linear-gradient(150deg, rgb(249 91 52 / 17%), rgb(255 255 255 / 5%) 48%, rgb(0 0 0 / 10%));
+  box-shadow: 0 1rem 3rem rgb(249 91 52 / 13%);
+}
+
+.pricing-card.is-featured:hover {
+  box-shadow: 0 1.5rem 3.5rem rgb(249 91 52 / 22%);
+}
+
+.article-card {
+  background: linear-gradient(145deg, rgb(255 255 255 / 8%), rgb(255 255 255 / 3%));
+}
+
+.article-card img {
+  filter: saturate(.86) contrast(1.04);
+}
+
+.cta-reference-panel {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 26rem 22rem at 8% 50%, rgb(249 91 52 / 30%), transparent 72%),
+    linear-gradient(135deg, #171014 0%, #0c0d13 62%);
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 30%);
+}
+
+.cta-reference-panel::after {
+  position: absolute;
+  right: -8rem;
+  bottom: -12rem;
+  width: 25rem;
+  height: 25rem;
+  border: 1px solid rgb(249 91 52 / 28%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2rem rgb(249 91 52 / 4%), 0 0 0 5rem rgb(249 91 52 / 3%);
+  content: "";
+  pointer-events: none;
+}
+
+.cta-reference-panel > * { position: relative; z-index: 1; }
+.cta-reference-panel > img { animation: nonhero-art-float 7s ease-in-out infinite; }
+
+.site-section .velocity-feature-grid,
+.site-section .crm-reference-heading,
+.site-section .crm-reference-groups { position: relative; z-index: 1; }
+
+@keyframes nonhero-art-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(.5deg); }
+}
+
+@media (max-width: 640px) {
+  .site-section { background-image: none; }
+  .cta-reference-panel::after { right: -13rem; }
 }
 
 /* Hero-only background treatment from the supplied Opzio reference. */
@@ -147,7 +315,6 @@
   height: 48%;
   content: "";
   pointer-events: none;
-  transform: rotate(-5deg);
 }
 
 .hero-reference-bg::before {
@@ -156,6 +323,8 @@
   border-top: 3px solid #ff8a16;
   background: linear-gradient(175deg, transparent 20%, rgb(255 89 0 / 70%) 54%, rgb(75 0 0 / 95%) 56%, transparent 75%);
   box-shadow: 0 -1rem 2rem rgb(255 70 0 / 28%);
+  transform: rotate(-5deg);
+  animation: hero-orange-wave 11s ease-in-out infinite;
 }
 
 .hero-reference-bg::after {
@@ -163,6 +332,18 @@
   top: 22%;
   border-bottom: 2px solid rgb(178 21 21 / 75%);
   background: linear-gradient(170deg, transparent 34%, rgb(81 0 0 / 85%) 48%, rgb(162 0 0 / 60%) 54%, transparent 67%);
+  transform: rotate(-5deg);
+  animation: hero-red-wave 14s ease-in-out infinite reverse;
+}
+
+@keyframes hero-orange-wave {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(-3deg) translate3d(-2.5%, -3%, 0) scale(1.035); }
+}
+
+@keyframes hero-red-wave {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(-7deg) translate3d(2%, 3%, 0) scale(1.04); }
 }
 
 .velocity-feature { overflow: hidden; background: radial-gradient(ellipse 42rem 32rem at 8% 50%, rgb(249 91 52 / 28%), transparent 70%), #000; }

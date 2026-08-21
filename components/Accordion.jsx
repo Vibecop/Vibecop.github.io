@@ -29,7 +29,7 @@ export default function Accordion({ items, defaultOpen = 0, className }) {
           <div
             key={item.question}
             className={cn(
-              "overflow-hidden rounded-2xl border transition-colors duration-200",
+              "faq-item overflow-hidden rounded-2xl border transition-colors duration-200",
               expanded ? "border-brand/60 bg-white/5" : "border-white/10 bg-white/[0.03]"
             )}
           >

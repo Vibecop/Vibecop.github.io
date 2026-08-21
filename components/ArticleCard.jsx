@@ -3,7 +3,7 @@ import Link from "next/link";
 /** The titled card used on the blog index. */
 export default function ArticleCard({ article, cta = "Read More" }) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 transition-colors duration-200 hover:border-brand/50">
+    <article className="article-card group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 transition-colors duration-200 hover:border-brand/50">
       <img
         src={article.image}
         alt=""

@@ -15,7 +15,7 @@ export default function Section({ as: Tag = "section", tone, bleed, className, c
 
   return (
     <Tag
-      className={cn("py-16 md:py-20 lg:py-25", tone && tones[tone], className)}
+      className={cn("site-section py-16 md:py-20 lg:py-25", tone && tones[tone], className)}
       {...props}
     >
       {bleed ? children : <Container>{children}</Container>}

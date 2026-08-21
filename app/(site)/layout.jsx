@@ -13,7 +13,7 @@ export default function SiteLayout({ children }) {
     <>
       {/* <PromotionalTopbar /> */}
       <Header />
-      <main>{children}</main>
+      <main className="site-main">{children}</main>
       <Footer />
       <BackToTop />
     </>

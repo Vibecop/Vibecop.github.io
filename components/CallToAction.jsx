@@ -14,9 +14,9 @@ export default function CallToAction({
   action = { href: "/contact", label: "Book an Automation Audit" },
 }) {
   return (
-    <section className="py-16 md:py-20 lg:py-25">
+    <section className="cta-reference py-16 md:py-20 lg:py-25">
       <Container>
-        <div className="grid items-center gap-10 rounded-3xl border border-white/10 bg-surface-2 p-8 md:p-12 lg:grid-cols-2 lg:p-16">
+        <div className="cta-reference-panel grid items-center gap-10 rounded-3xl border border-white/10 bg-surface-2 p-8 md:p-12 lg:grid-cols-2 lg:p-16">
           <img
             src="/assets/images/cta-img.png"
             alt=""

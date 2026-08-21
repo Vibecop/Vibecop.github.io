@@ -8,7 +8,7 @@ export default function SectionHeading({ mark = true, title, lede, align = "cent
   return (
     <div
       className={cn(
-        "flex flex-col gap-4",
+        "section-heading flex flex-col gap-4",
         align === "center" ? "items-center text-center" : "items-start text-left",
         className
       )}

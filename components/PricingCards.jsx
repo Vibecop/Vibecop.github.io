@@ -8,7 +8,7 @@ export default function PricingCards({ className }) {
       {PLANS.map((plan) => (
         <li
           key={plan.name}
-          className={cn("flex min-h-[23rem] flex-col rounded-xl border bg-white/5 p-6 transition-colors duration-200 hover:border-brand/50", plan.featured ? "border-brand" : "border-white/10")}
+          className={cn("pricing-card flex min-h-[23rem] flex-col rounded-xl border bg-white/5 p-6 transition-colors duration-200 hover:border-brand/50", plan.featured ? "is-featured border-brand" : "border-white/10")}
         >
           <img src={plan.icon} alt="" aria-hidden="true" className="mb-5 h-12 w-12 object-contain" />
           <h3 className="text-xl font-semibold text-white">

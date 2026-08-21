@@ -12,7 +12,7 @@ import Container from "@/components/ui/Container";
  */
 export default function PageBanner({ title, lede, breadcrumb }) {
   return (
-    <section className="relative isolate overflow-hidden">
+    <section className="inner-banner relative isolate overflow-hidden">
       <div
         aria-hidden="true"
         className="absolute inset-0 -z-10 bg-[url('/assets/images/sub-banner-image.jpg')] bg-cover bg-bottom bg-no-repeat"

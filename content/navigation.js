@@ -9,7 +9,6 @@
  */
 
 export const MAIN_NAV = [
-  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   {
     label: "Services",
@@ -49,9 +48,6 @@ export const MAIN_NAV = [
   },
   { label: "Pricing", href: "/pricing" },
 ];
-
-/** The theme vendor's checkout — the kit's own "Buy Now" target. */
-export const BUY_URL = "https://designingmedia.com/checkout/?add-to-cart=38423";
 
 export const FOOTER_NAV = [
   {
