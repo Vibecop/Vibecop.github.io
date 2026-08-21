@@ -1,234 +1,72 @@
 import Link from "next/link";
-import StaticForm from "@/components/StaticForm";
+import Container from "@/components/ui/Container";
+import NewsletterForm from "@/components/NewsletterForm";
+import { FOOTER_NAV, SOCIAL_LINKS } from "@/content/navigation";
 
 export default function Footer() {
   return (
-    <section className="footer-con position-relative float-left w-100 main-box">
-      {' '}
-      <div className="main-container">
-        {' '}
-        <div className="middle_portion">
-          {' '}
-          <div className="row">
-            {' '}
-            <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-              {' '}
-              <div className="logo-content">
-                {' '}
-                <Link href="/">
-                  {' '}
-                  <figure className="footer-logo">
-                    {' '}
-                    <img src="/assets/images/logo.png" alt="image" className="img-fluid" />
-                    {' '}
-                  </figure>
-                  {' '}
-                </Link>
-                {' '}
-                <p className="text-size-16 text">
-                  {' '}
-                  Practical, revenue-driven automation that quickly covers its own cost, built exclusively for scaling small & mid-sized businesses.
-                  {' '}
-                </p>
-                {' '}
-                <ul className="list-unstyled mb-0 social-icons">
-                  {' '}
-                  <li>
-                    {' '}
-                    <a href="https://www.facebook.com/" className="text-decoration-none">
-                      <i className="fa-brands fa-facebook-f social-networks"></i>
-                    </a>
-                    {' '}
-                  </li>
-                  {' '}
-                  <li>
-                    {' '}
-                    <a href="https://www.instagram.com/" className="text-decoration-none">
-                      <i className="fa-brands fa-instagram social-networks"></i>
-                    </a>
-                    {' '}
-                  </li>
-                  {' '}
-                  <li>
-                    {' '}
-                    <a href="https://www.linkedin.com/" className="text-decoration-none">
-                      <i className="fa-brands fa-linkedin-in social-networks"></i>
-                    </a>
-                    {' '}
-                  </li>
-                  {' '}
-                </ul>
-                {' '}
-              </div>
-              {' '}
-            </div>
-            {' '}
-            <div className="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6">
-              {' '}
-              <div className="links">
-                {' '}
-                <h2 className="heading text-size-24">
-                  Navigation
-                </h2>
-                {' '}
-                <ul className="list-unstyled mb-0">
-                  {' '}
-                  <li>
-                    {' '}
-                    <i className="fa-solid fa-arrow-right"></i>
-                    <Link href="/about" className="text-decoration-none">
-                      About
-                    </Link>
-                    {' '}
-                  </li>
-                  {' '}
-                  <li>
-                    {' '}
-                    <i className="fa-solid fa-arrow-right"></i>
-                    <Link href="/services" className="text-decoration-none">
-                      Services
-                    </Link>
-                    {' '}
-                  </li>
-                  {' '}
-                  <li>
-                    {' '}
-                    <i className="fa-solid fa-arrow-right"></i>
-                    <Link href="/case-studies" className="text-decoration-none">
-                      Case Studies
-                    </Link>
-                    {' '}
-                  </li>
-                  {' '}
-                  <li>
-                    {' '}
-                    <i className="fa-solid fa-arrow-right"></i>
-                    <Link href="/pricing" className="text-decoration-none">
-                      Pricing
-                    </Link>
-                    {' '}
-                  </li>
-                  {' '}
-                </ul>
-                {' '}
-              </div>
-              {' '}
-            </div>
-            {' '}
-            <div className="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6">
-              {' '}
-              <div className="links">
-                {' '}
-                <h2 className="heading text-size-24">
-                  Useful Links
-                </h2>
-                {' '}
-                <ul className="list-unstyled mb-0">
-                  {' '}
-                  <li>
-                    {' '}
-                    <i className="fa-solid fa-arrow-right"></i>
-                    <Link href="/process" className="text-decoration-none">
-                      Process
-                    </Link>
-                    {' '}
-                  </li>
-                  {' '}
-                  <li>
-                    {' '}
-                    <i className="fa-solid fa-arrow-right"></i>
-                    <Link href="/faq" className="text-decoration-none">
-                      FAQs
-                    </Link>
-                    {' '}
-                  </li>
-                  {' '}
-                  <li>
-                    {' '}
-                    <i className="fa-solid fa-arrow-right"></i>
-                    <Link href="/team" className="text-decoration-none">
-                      Team
-                    </Link>
-                    {' '}
-                  </li>
-                  {' '}
-                  <li>
-                    {' '}
-                    <i className="fa-solid fa-arrow-right"></i>
-                    <Link href="/single-services" className="text-decoration-none">
-                      Single Services
-                    </Link>
-                    {' '}
-                  </li>
-                  {' '}
-                </ul>
-                {' '}
-              </div>
-              {' '}
-            </div>
-            {' '}
-            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-              {' '}
-              <div className="email-form">
-                {' '}
-                <h2 className="heading text-size-24">
-                  Newsletter Signup
-                </h2>
-                {' '}
-                <StaticForm>
-                  {' '}
-                  <div className="form-group position-relative mb-0">
-                    {' '}
-                    <input
-                      type="text"
-                      className="form_style"
-                      placeholder="Enter Your Email Address"
-                      name="email"
-                    />
-                    {' '}
-                    <button>
-                      {' '}
-                      <i className="send fa-sharp fa-solid fa-paper-plane"></i>
-                      {' '}
-                    </button>
-                    {' '}
-                  </div>
-                  {' '}
-                  <div className="form-group check-box mb-0">
-                    {' '}
-                    <input type="checkbox" id="term" />
-                    {' '}
-                    <label htmlFor="term">
-                      I agree to the
-                      {' '}
-                      <Link href="/privacy-policy">
-                        Privacy Policy
-                      </Link>
-                      .
-                    </label>
-                    {' '}
-                  </div>
-                  {' '}
-                </StaticForm>
-                {' '}
-              </div>
-              {' '}
-            </div>
-            {' '}
+    <footer className="border-t border-white/10 bg-surface pt-16 md:pt-20">
+      <Container>
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <Link href="/" aria-label="Vibecop — home">
+              <img src="/assets/images/logo.png" alt="Vibecop" className="h-9 w-auto" />
+            </Link>
+            <p className="mt-6 max-w-sm text-base text-muted">
+              Practical, revenue-driven automation that quickly covers its own cost, built
+              exclusively for scaling small &amp; mid-sized businesses.
+            </p>
+            <ul className="mt-6 flex list-none gap-3 p-0">
+              {SOCIAL_LINKS.map(({ label, href, icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white no-underline transition-colors duration-200 hover:border-brand hover:bg-brand"
+                  >
+                    <i className={icon} aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-          {' '}
+
+          {FOOTER_NAV.map(({ heading, links }) => (
+            <nav key={heading} aria-label={heading} className="lg:col-span-2">
+              <h2 className="text-h3">{heading}</h2>
+              <ul className="mt-5 list-none space-y-3 p-0">
+                {links.map(({ label, href }) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      className="group inline-flex items-center gap-2 text-base text-muted no-underline transition-colors duration-200 hover:text-brand"
+                    >
+                      <i
+                        className="fa-solid fa-arrow-right text-xs text-brand transition-transform duration-200 group-hover:translate-x-0.5"
+                        aria-hidden="true"
+                      />
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+
+          <div className="lg:col-span-4">
+            <h2 className="text-h3">Newsletter Signup</h2>
+            <NewsletterForm />
+          </div>
         </div>
-        {' '}
-        <div className="copyright">
-          {' '}
-          <p className="mb-0">
-            Copyright © 2026 Opzio. All Rights Reserved.
+
+        <div className="mt-14 border-t border-white/10 py-7 text-center">
+          <p className="m-0 text-base text-muted">
+            Copyright © {new Date().getFullYear()} Vibecop. All Rights Reserved.
           </p>
-          {' '}
         </div>
-        {' '}
-      </div>
-      {' '}
-    </section>
+      </Container>
+    </footer>
   );
 }

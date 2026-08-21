@@ -1,9 +1,10 @@
 import fs from 'node:fs';
 import { parse } from 'parse5';
 import { nodesToJsx } from './convert.mjs';
+import { sourceOf } from './routes.mjs';
 
-const html = fs.readFileSync('../contact.html', 'utf8'); // superset header (has Contact item)
-const doc = parse(html);
+// /contact carries the superset header -- it is the only page with a Contact item
+const doc = parse(fs.readFileSync(sourceOf('/contact'), 'utf8'));
 
 function find(node, pred, out = []) {
   if (pred(node)) out.push(node);

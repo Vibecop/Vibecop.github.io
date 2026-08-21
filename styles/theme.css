@@ -1,0 +1,118 @@
+/*
+ * Tailwind v4 — the whole design system.
+ *
+ * This replaces the kit's Bootstrap 4 + 10k-line style.css. Because Bootstrap
+ * is gone there is no longer a name collision to dodge, so utilities are
+ * unprefixed and preflight is on: `flex`, `bg-surface-2`, `rounded-3xl`.
+ *
+ * Everything the design needs is a token below. Reach for a raw value in a
+ * page only when it is genuinely one-off — if it shows up twice, it belongs
+ * here.
+ */
+@import "tailwindcss";
+@import "./fonts.css";
+
+@theme {
+  /* ---- brand ------------------------------------------------------- */
+  --color-brand: #f95b34;
+  --color-brand-soft: #d76666;
+  --color-brand-dim: #b53d1e;
+
+  /* ---- surfaces, darkest to lightest ------------------------------- */
+  --color-ink: #000000;
+  --color-surface: #0c0d13;
+  --color-surface-2: #14151e;
+  --color-surface-3: #191b26;
+
+  /* ---- text -------------------------------------------------------- */
+  --color-muted: #bababa;
+  --color-muted-2: #a6a9b9;
+  --color-muted-3: #8e8ca9;
+
+  /* ---- accents the cards and charts use ---------------------------- */
+  --color-purple: #a97ad5;
+  --color-apricot: #efb664;
+  --color-yellow: #ffc045;
+  --color-pink: #c291ac;
+  --color-cool: #4a41ec;
+
+  /* ---- type -------------------------------------------------------- */
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+
+  /*
+   * Display sizes. The kit's headings run very large and very tight; these
+   * are the four steps it actually used, as clamps so they stop overflowing
+   * on narrow screens the way the fixed px sizes did.
+   */
+  --text-display: clamp(2rem, 1.2rem + 5.6vw, 5rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.03em;
+  --text-h1: clamp(2.25rem, 1.4rem + 3.6vw, 4.25rem);
+  --text-h1--line-height: 1.06;
+  --text-h1--letter-spacing: -0.025em;
+  --text-h2: clamp(1.875rem, 1.3rem + 2.2vw, 3rem);
+  --text-h2--line-height: 1.12;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h3: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.01em;
+
+  /* the kit's content width */
+  --container-page: 1417px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-muted);
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /*
+   * Preflight unstyles headings to inherit. The design wants them white and
+   * bold everywhere, so set that once rather than on every element.
+   */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #fff;
+    font-weight: 700;
+    text-wrap: balance;
+  }
+
+  /* the orange ring the design uses for keyboard focus */
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-brand);
+    color: #fff;
+  }
+}
+
+/*
+ * Respect the OS reduced-motion setting. The kit animated everything on
+ * scroll through WOW.js with no such guard.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

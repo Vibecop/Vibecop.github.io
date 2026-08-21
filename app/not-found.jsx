@@ -1,101 +1,26 @@
-import Link from "next/link";
+import Container from "@/components/ui/Container";
+import Button from "@/components/ui/Button";
 
-export const metadata = {
-  title: "404 | Opzio — SaaS & AI Startup Solutions for Smart Businesses",
-};
+export const metadata = { title: "404" };
 
 export default function NotFound() {
   return (
-    <>
-      {' '}
-      {/* 404 section start */}
-      {' '}
-      <section className="error-section w-100 float-left position-relative">
-        {' '}
-        <div className="container">
-          {' '}
-          <div className="row">
-            {' '}
-            <div className="col-xl-8 col-lg-10 col-12 mx-auto">
-              {' '}
-              <div
-                className="error-con wow fadeInUp"
-                data-wow-duration="3s"
-                data-wow-delay="0.2s"
-              >
-                {' '}
-                <figure>
-                  <img
-                    src="/assets/images/error-img.png"
-                    alt="404"
-                    className="img-fluid wow bounceIn"
-                    data-wow-duration="3s"
-                    data-wow-delay="0.05s"
-                  />
-                </figure>
-                {' '}
-                <h1
-                  className="text-size-28 text-white wow fadeInLeft"
-                  data-wow-duration="3s"
-                  data-wow-delay="0.05s"
-                >
-                  We Could Not Find Page You’re Looking
-                </h1>
-                {' '}
-                <p className="wow fadeInRight" data-wow-duration="3s" data-wow-delay="0.05s">
-                  The link you’re trying to access is probably broken, or the page has been removed.
-                  {' '}
-                </p>
-                {' '}
-                <Link
-                  href="/"
-                  className="text-decoration-none primary_btn d-inline-block wow fadeInDown"
-                  data-wow-duration="3s"
-                  data-wow-delay="0.3s"
-                >
-                  {' '}
-                  Back to Home
-                  {' '}
-                </Link>
-                {' '}
-              </div>
-              {' '}
-              {/* col */}
-              {' '}
-            </div>
-            {' '}
-            {/* row */}
-            {' '}
-          </div>
-          {' '}
-        </div>
-        {' '}
-      </section>
-      {' '}
-      {/* PRE LOADER */}
-      {' '}
-      <div className="loader-mask">
-        {' '}
-        <div className="loader">
-          {' '}
-          <div></div>
-          {' '}
-          <div></div>
-          {' '}
-        </div>
-        {' '}
-      </div>
-      {' '}
-      {/* Latest compiled JavaScript */}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-    </>
+    <main className="flex min-h-screen items-center justify-center py-16">
+      <Container className="flex flex-col items-center gap-8 text-center">
+        <img
+          src="/assets/images/error-img.png"
+          alt=""
+          aria-hidden="true"
+          className="w-full max-w-lg"
+        />
+        <h1 className="text-h1 max-w-3xl">We Could Not Find Page You’re Looking</h1>
+        <p className="max-w-xl text-base text-muted">
+          The link you’re trying to access is probably broken, or the page has been removed.
+        </p>
+        <Button href="/" size="lg">
+          Back to Home
+        </Button>
+      </Container>
+    </main>
   );
 }

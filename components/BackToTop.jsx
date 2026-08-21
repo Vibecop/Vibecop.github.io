@@ -1,30 +1,35 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/cn";
 
-/* Port of assets/js/back-to-top-button.js — same markup, same `show` class,
- * same 300px threshold and 300ms scroll. */
+/**
+ * Appears past 300px of scroll, as the kit's back-to-top-button.js did —
+ * but as ordinary React state rather than a class toggled onto a bare
+ * `<a id="button">` from an effect.
+ */
 export default function BackToTop() {
+  const [shown, setShown] = useState(false);
+
   useEffect(() => {
-    const btn = document.getElementById("button");
-    if (!btn) return undefined;
-
-    const onScroll = () => {
-      btn.classList.toggle("show", window.scrollY > 300);
-    };
-    const onClick = (e) => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
+    const onScroll = () => setShown(window.scrollY > 300);
     onScroll();
-    window.addEventListener("scroll", onScroll);
-    btn.addEventListener("click", onClick);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      btn.removeEventListener("click", onClick);
-    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return <a id="button"></a>;
+  return (
+    <button
+      type="button"
+      aria-label="Back to top"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className={cn(
+        "fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full",
+        "bg-brand text-white shadow-lg transition-all duration-200 hover:bg-brand-dim",
+        shown ? "opacity-100" : "pointer-events-none translate-y-3 opacity-0"
+      )}
+    >
+      <i className="fa-solid fa-arrow-up" aria-hidden="true" />
+    </button>
+  );
 }

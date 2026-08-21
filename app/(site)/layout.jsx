@@ -1,15 +1,21 @@
 import PromotionalTopbar from "@/components/PromotionalTopbar";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 
-/* Every content page in the kit opens with the promo bar and the back-to-top
- * anchor, in this order, before its own outer wrapper. */
+/*
+ * The chrome every content page carries. It lives here rather than in each
+ * page — the converted pages each rendered their own <Header/> and <Footer/>,
+ * which is 23 copies of the same three lines.
+ */
 export default function SiteLayout({ children }) {
   return (
     <>
       <PromotionalTopbar />
-      {/* Back to top button */}
+      <Header />
+      <main>{children}</main>
+      <Footer />
       <BackToTop />
-      {children}
     </>
   );
 }

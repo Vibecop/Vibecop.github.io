@@ -1,20 +1,11 @@
 import { parse } from 'parse5';
 import fs from 'node:fs';
+import { PAGES, sourceOf } from './routes.mjs';
 
 const BASE = process.env.BASE_URL || 'http://localhost:3118';
 
-const MAP = {
-  'index.html': '/', 'about.html': '/about', 'services.html': '/services',
-  'single-services.html': '/single-services', 'case-studies.html': '/case-studies',
-  'pricing.html': '/pricing', 'faq.html': '/faq', 'team.html': '/team',
-  'process.html': '/process', 'contact.html': '/contact', 'blog.html': '/blog',
-  'single-blog.html': '/single-blog', 'one-column.html': '/one-column',
-  'two-column.html': '/two-column', 'three-column.html': '/three-column',
-  'three-column-sidebar.html': '/three-column-sidebar',
-  'four-column.html': '/four-column', 'six-column-full-width.html': '/six-column-full-width',
-  'privacy-policy.html': '/privacy-policy', 'cookie-policy.html': '/cookie-policy',
-  'term-of-use.html': '/term-of-use', 'coming-soon.html': '/coming-soon',
-};
+// /404 has no route to fetch -- visual-check.mjs covers not-found.jsx instead
+const CHECKED = PAGES.filter((p) => p.route !== '/404');
 
 const SKIP_TAGS = new Set(['script', 'noscript', 'template']);
 
@@ -57,8 +48,8 @@ function bodyOf(html) {
 }
 
 let failures = 0;
-for (const [file, route] of Object.entries(MAP)) {
-  const original = fs.readFileSync('../' + file, 'utf8');
+for (const { route } of CHECKED) {
+  const original = fs.readFileSync(sourceOf(route), 'utf8');
   const rendered = await fetch(BASE + route).then((r) => r.text());
 
   const a = walk(bodyOf(original), []);

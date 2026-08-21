@@ -1,167 +1,57 @@
 import Link from "next/link";
+import Countdown from "@/components/Countdown";
+import Container from "@/components/ui/Container";
+import Button from "@/components/ui/Button";
 
 export const metadata = {
-  title: "Coming Soon | Opzio — SaaS & AI Startup Solutions for Smart Businesses",
+  title: "Coming Soon",
+  description: "The website is under construction. Subscribe to stay with us.",
 };
 
 export default function ComingSoonPage() {
   return (
-    <>
-      {' '}
-      {/* SUB BANNER SECTION */}
-      {' '}
-      <section
-        className="float-left w-100 coming-soon-con d-flex flex-column justify-content-center position-relative main-box"
-      >
-        {' '}
-        <div className="container">
-          {' '}
-          <div className="row">
-            {' '}
-            <div className="col-xl-12 mx-auto">
-              {' '}
-              <div className="sub-content-con position-relative">
-                {' '}
-                <Link href="/" className="d-block">
-                  {' '}
-                  <img
-                    src="/assets/images/logo.png"
-                    alt="logo-icon"
-                    className="img-fluid new-logo wow fadeInUp"
-                    data-wow-duration="3s"
-                    data-wow-delay="0.4s"
-                  />
-                </Link>
-                {' '}
-                <div className="position-relative coming-content-con">
-                  {' '}
-                  <h1
-                    className="text-size-28 font-weight-600 text-white wow fadeInLeft"
-                    data-wow-duration="3s"
-                    data-wow-delay="0.5s"
-                  >
-                    The Website is under construction
-                  </h1>
-                  {' '}
-                  <h2
-                    className="text-size-160 wow fadeInRight"
-                    data-wow-duration="3s"
-                    data-wow-delay="0.6s"
-                  >
-                    Coming
-                    {' '}
-                    <br />
-                    {' '}
-                    Soon
-                  </h2>
-                  {' '}
-                  <p
-                    className="font-weight-600 text-size-20 text-white wow fadeInLeft"
-                    data-wow-duration="2s"
-                    data-wow-delay="0.5s"
-                  >
-                    Subscribe to the newsletter to stay with us.
-                  </p>
-                  {' '}
-                  <div
-                    className="check-mail-box d-flex wow fadeInDown"
-                    data-wow-duration="2s"
-                    data-wow-delay="0.6s"
-                  >
-                    {' '}
-                    <input type="email" id="mail" placeholder="Enter Your Email Address" />
-                    {' '}
-                    <Link href="/contact" className="primary_btn d-inline-block">
-                      {' '}
-                      Subscribe
-                      {' '}
-                    </Link>
-                    {' '}
-                  </div>
-                  {' '}
-                  <div
-                    id="compaign_countdown2"
-                    className="compaign_countdown wow fadeInDown"
-                    data-wow-duration="3s"
-                    data-wow-delay="0.7s"
-                  >
-                    {' '}
-                    <ul className="p-0 d-flex justify-content-around align-items-center">
-                      {' '}
-                      <li>
-                        <span id="days" className="days"></span>
-                        {' '}
-                        Days
-                      </li>
-                      {' '}
-                      <li>
-                        <span id="hours" className="hours"></span>
-                        Hours
-                      </li>
-                      {' '}
-                      <li>
-                        <span id="minutes" className="minutes"></span>
-                        Minutes
-                      </li>
-                      {' '}
-                      <li>
-                        <span id="seconds" className="seconds"></span>
-                        Seconds
-                      </li>
-                      {' '}
-                    </ul>
-                    {' '}
-                  </div>
-                  {' '}
-                  {/* coming-content-con */}
-                  {' '}
-                </div>
-                {' '}
-                {/* sub content con */}
-                {' '}
-              </div>
-              {' '}
-              {/* col */}
-              {' '}
-            </div>
-            {' '}
-            {/* row */}
-            {' '}
-          </div>
-          {' '}
-          {/* container */}
-          {' '}
+    <section className="flex min-h-screen flex-col items-center justify-center py-16 text-center">
+      <Container className="flex flex-col items-center gap-10">
+        <Link href="/" aria-label="Vibecop — home">
+          <img src="/assets/images/logo.png" alt="Vibecop" className="h-10 w-auto" />
+        </Link>
+
+        <div>
+          <p className="m-0 text-lg font-medium text-brand">The Website is under construction</p>
+          <h1 className="text-display mt-3">Coming Soon</h1>
         </div>
-        {' '}
-        {/* coming soon con */}
-        {' '}
-      </section>
-      {' '}
-      {/* PRE LOADER */}
-      {' '}
-      <div className="loader-mask">
-        {' '}
-        <div className="loader">
-          {' '}
-          <div></div>
-          {' '}
-          <div></div>
-          {' '}
+
+        <Countdown />
+
+        <div className="w-full max-w-md">
+          <p className="text-base text-muted">Subscribe to the newsletter to stay with us.</p>
+          {/* No backend exists for this in the kit, so the submit goes nowhere. */}
+          <form className="mt-4 flex flex-col gap-3 sm:flex-row" action="/contact">
+            <label htmlFor="notify-email" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="notify-email"
+              type="email"
+              name="email"
+              required
+              autoComplete="email"
+              placeholder="Enter Your Email Address"
+              className="min-w-0 flex-1 rounded-full border border-white/15 bg-white/5 px-5 py-3.5 text-base text-white placeholder:text-muted-3 focus:border-brand focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="rounded-full bg-brand px-7 py-3.5 font-semibold text-white transition-colors duration-200 hover:bg-brand-dim"
+            >
+              Subscribe
+            </button>
+          </form>
         </div>
-        {' '}
-      </div>
-      {' '}
-      {/* Latest compiled JavaScript */}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-      {' '}
-    </>
+
+        <Button href="/contact" variant="outline">
+          Contact Us
+        </Button>
+      </Container>
+    </section>
   );
 }

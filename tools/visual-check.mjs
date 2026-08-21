@@ -16,28 +16,24 @@
 import puppeteer from 'puppeteer-core';
 import { PNG } from 'pngjs';
 import fs from 'node:fs';
+import { NOT_FOUND_URL, slugOf, sourceOf } from './routes.mjs';
 
 const BASE = process.env.BASE_URL || 'http://localhost:3118';
 
 const OUT = '/tmp/claude-1000/shots';
 fs.mkdirSync(OUT, { recursive: true });
 
-const PAGES = [
-  ['index.html', '/'],
-  ['about.html', '/about'],
-  ['services.html', '/services'],
-  ['pricing.html', '/pricing'],
-  ['contact.html', '/contact'],
-  ['faq.html', '/faq'],
-  ['team.html', '/team'],
-  ['blog.html', '/blog'],
-  ['single-blog.html', '/single-blog'],
-  ['three-column-sidebar.html', '/three-column-sidebar'],
-  ['six-column-full-width.html', '/six-column-full-width'],
-  ['case-studies.html', '/case-studies'],
-  ['coming-soon.html', '/coming-soon'],
-  ['404.html', '/nope'],
-];
+// a spread of the kit rather than all of it: one of each layout, plus the two
+// pages that ship without chrome
+const CHECKED = [
+  '/', '/about', '/services', '/pricing', '/contact', '/faq', '/team', '/blog',
+  '/single-blog', '/three-column-sidebar', '/six-column-full-width',
+  '/case-studies', '/coming-soon', '/404',
+].map((route) => ({
+  name: slugOf(route),
+  source: 'file://' + sourceOf(route),
+  url: BASE + (route === '/404' ? NOT_FOUND_URL : route),
+}));
 
 const browser = await puppeteer.launch({
   executablePath: '/usr/bin/google-chrome',
@@ -65,21 +61,21 @@ const shoot = async (url, file) => {
   return h;
 };
 
-for (const [file, route] of PAGES) {
-  const a = await shoot('file:///home/dev/Office-forrentech/vibecop/' + file, `${OUT}/${file}.orig.png`);
-  const b = await shoot(BASE + route, `${OUT}/${file}.next.png`);
+for (const { name, source, url } of CHECKED) {
+  const a = await shoot(source, `${OUT}/${name}.orig.png`);
+  const b = await shoot(url, `${OUT}/${name}.next.png`);
   const delta = Math.abs(a - b);
-  console.log(`${file.padEnd(28)} orig=${a}px next=${b}px  Δ=${delta}px ${delta <= 2 ? 'OK' : delta / a < 0.01 ? 'ok(<1%)' : '** CHECK **'}`);
+  console.log(`${name.padEnd(28)} orig=${a}px next=${b}px  Δ=${delta}px ${delta <= 2 ? 'OK' : delta / a < 0.01 ? 'ok(<1%)' : '** CHECK **'}`);
 }
 await browser.close();
 
 // ---- pixel diff ----------------------------------------------------------
 console.log('');
-for (const [file] of PAGES) {
-  const a = PNG.sync.read(fs.readFileSync(`${OUT}/${file}.orig.png`));
-  const b = PNG.sync.read(fs.readFileSync(`${OUT}/${file}.next.png`));
+for (const { name } of CHECKED) {
+  const a = PNG.sync.read(fs.readFileSync(`${OUT}/${name}.orig.png`));
+  const b = PNG.sync.read(fs.readFileSync(`${OUT}/${name}.next.png`));
   if (a.width !== b.width || a.height !== b.height) {
-    console.log(`${file.padEnd(28)} SIZE MISMATCH ${a.width}x${a.height} vs ${b.width}x${b.height}`);
+    console.log(`${name.padEnd(28)} SIZE MISMATCH ${a.width}x${a.height} vs ${b.width}x${b.height}`);
     continue;
   }
   let diff = 0;
@@ -92,6 +88,6 @@ for (const [file] of PAGES) {
   }
   const total = a.width * a.height;
   console.log(
-    `${file.padEnd(28)} ${a.width}x${a.height}  differing px: ${diff} (${((diff / total) * 100).toFixed(4)}%)`
+    `${name.padEnd(28)} ${a.width}x${a.height}  differing px: ${diff} (${((diff / total) * 100).toFixed(4)}%)`
   );
 }

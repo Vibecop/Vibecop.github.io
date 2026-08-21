@@ -10,17 +10,11 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
-    "bootstrap": "^4.6.2",
-    "jquery": "^3.7.1",
-    "jquery-ui-dist": "^1.13.2",
     "next": "16.3.1",
-    "owl.carousel": "^2.3.4",
     "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "wowjs": "^1.1.3"
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@fontsource-variable/inter-tight": "^5.3.0",
     "@tailwindcss/postcss": "^4.3.3",
     "parse5": "^7.2.1",
     "pngjs": "^7.0.0",

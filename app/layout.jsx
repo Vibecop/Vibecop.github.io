@@ -1,71 +1,46 @@
 /*
- * Global stylesheets, imported in the exact order the static pages linked
- * them, so the cascade is unchanged. Everything is bundled by Next -- nothing
- * is served as a loose file from /public and nothing comes from a CDN.
+ * One stylesheet. styles/theme.css is the whole design system — Tailwind v4
+ * plus the design's tokens — and it pulls in the self-hosted Inter Tight faces.
  *
- * Bootstrap, Owl Carousel and Font Awesome come from npm (the kit's local
- * copies were byte-identical). styles/style.css holds all of this site's own
- * CSS; styles/animate.css stays local because the kit shipped a customised
- * build of it -- its fades travel 20px, where stock animate.css travels 100%.
- *
- * blog.css is deliberately absent: it is scoped to the blog-layout routes in
- * app/(site)/(blog)/layout.jsx, because it restyles bare `a` and
- * `.sub-banner li`, which would change every other page.
- *
- * tailwind.css comes last so utilities win at equal specificity. It ships
- * without preflight and on Bootstrap's breakpoints -- see the file for why.
+ * Bootstrap 4, the kit's 10k-line style.css, animate.css, Owl Carousel and
+ * jQuery UI are all gone: the pages are Tailwind now and the behaviour those
+ * bundles provided is React. Font Awesome stays, because the design uses its
+ * glyphs throughout.
  */
-import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "@/styles/style.css";
-import "owl.carousel/dist/assets/owl.carousel.min.css";
-import "owl.carousel/dist/assets/owl.theme.default.min.css";
-import "@/styles/animate.css";
-import "jquery-ui-dist/jquery-ui.css";
-
-/* last, so a Tailwind utility beats the kit's CSS at equal specificity */
-import "@/styles/tailwind.css";
-
-import VendorScripts from "@/components/VendorScripts";
+import "@/styles/theme.css";
 
 export const metadata = {
+  metadataBase: new URL("https://vibecop.io"),
   title: {
-    default: "Opzio — SaaS & AI Startup Solutions for Smart Businesses",
-    template: "%s",
+    default: "Vibecop — Senior Supervision for Products built with AI",
+    template: "%s | Vibecop",
   },
+  description:
+    "Practical, revenue-driven automation that quickly covers its own cost, built exclusively for scaling small & mid-sized businesses.",
   icons: {
-    icon: [
-      { url: "/assets/images/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/assets/images/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/assets/images/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
-      { url: "/assets/images/favicon/android-icon-192x192.png", sizes: "192x192", type: "image/png" },
-    ],
+    icon: [16, 32, 96].map((s) => ({
+      url: `/assets/images/favicon/favicon-${s}x${s}.png`,
+      sizes: `${s}x${s}`,
+      type: "image/png",
+    })),
     apple: [57, 60, 72, 76, 114, 120, 144, 152, 180].map((s) => ({
       url: `/assets/images/favicon/apple-icon-${s}x${s}.png`,
       sizes: `${s}x${s}`,
     })),
-  },
-  other: {
-    "msapplication-TileColor": "#ffffff",
-    "msapplication-TileImage": "/ms-icon-144x144.png",
   },
 };
 
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  themeColor: "#ffffff",
+  themeColor: "#0c0d13",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="zxx">
-      <body>
-        {children}
-        <VendorScripts />
-      </body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }

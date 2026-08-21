@@ -1,38 +1,5 @@
 import { parse, parseFragment } from 'parse5';
-import fs from 'node:fs';
-import path from 'node:path';
-
-const SRC = path.resolve('..');
-const OUT = path.resolve('.');
-
-// ---- html file -> next route ---------------------------------------------
-const ROUTES = {
-  'index.html': '/',
-  'about.html': '/about',
-  'services.html': '/services',
-  'single-services.html': '/single-services',
-  'case-studies.html': '/case-studies',
-  'pricing.html': '/pricing',
-  'faq.html': '/faq',
-  'team.html': '/team',
-  'process.html': '/process',
-  'contact.html': '/contact',
-  'blog.html': '/blog',
-  'single-blog.html': '/single-blog',
-  'one-column.html': '/one-column',
-  'two-column.html': '/two-column',
-  'three-column.html': '/three-column',
-  'three-column-sidebar.html': '/three-column-sidebar',
-  'four-column.html': '/four-column',
-  'six-column-full-width.html': '/six-column-full-width',
-  'privacy-policy.html': '/privacy-policy',
-  'cookie-policy.html': '/cookie-policy',
-  'term-of-use.html': '/term-of-use',
-  'coming-soon.html': '/coming-soon',
-  '404.html': '/404',
-  // typo in the original markup -> real page
-  'six-colum-full-wide.html': '/six-column-full-width',
-};
+import { ROUTE_BY_SLUG } from './routes.mjs';
 
 // ---- attribute name mapping ----------------------------------------------
 const ATTR_MAP = {
@@ -111,15 +78,21 @@ function resolveHref(href) {
   if (/^(https?:|mailto:|tel:|#|javascript:)/i.test(clean)) {
     return { href: clean, internal: false };
   }
-  const [file, hash = ''] = clean.split('#');
-  if (ROUTES[file]) {
-    return { href: ROUTES[file] + (hash ? '#' + hash : ''), internal: true };
-  }
-  if (/\.html$/.test(file)) {
-    // page that does not exist in the source kit -> keep as a plain link
-    return { href: '/' + file.replace(/\.html$/, '') + (hash ? '#' + hash : ''), internal: false };
-  }
   if (clean === '') return { href: '', internal: false };
+
+  const [file, hash = ''] = clean.split('#');
+  const fragment = hash ? '#' + hash : '';
+  const page = /^(.*)\.html$/.exec(file);
+
+  if (page) {
+    const route = ROUTE_BY_SLUG.get(page[1]);
+    // a page the kit linked but never shipped stays a plain link, so it 404s
+    // exactly as it did before
+    return route
+      ? { href: route + fragment, internal: true }
+      : { href: '/' + page[1] + fragment, internal: false };
+  }
+
   return { href: clean.startsWith('/') ? clean : '/' + clean, internal: false };
 }
 
@@ -296,4 +269,4 @@ export function nodesToJsx(nodes, indent = 2, ctx = {}) {
   return { jsx, usesLink: ctx.usesLink, ctx };
 }
 
-export { ROUTES, parse, parseFragment };
+export { parse, parseFragment };
