@@ -6,14 +6,15 @@ import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
+import PricingCards from "@/components/PricingCards";
 import { FAQS } from "@/content/faqs";
+import { TIMELINE } from "@/content/process";
 import {
   DASHBOARD_STATS,
   HERO,
   HOME_FAQ_OVERRIDE,
   PIPELINE_STAGES,
   RESULT,
-  VOLUME_PLANS,
 } from "@/content/home";
 
 export const metadata = {
@@ -29,7 +30,7 @@ const HOME_FAQS = FAQS.map((faq, i) => (i === 1 ? HOME_FAQ_OVERRIDE : faq));
 export default function IndexPage() {
   return (
     <>
-      <section className="pb-16 pt-12 md:pb-20 lg:pb-25">
+      <section className="hero-reference-bg pb-16 pt-12 md:pb-20 lg:pb-25">
         <Container>
           <div className="grid items-center gap-14 lg:grid-cols-2">
             <div>
@@ -93,102 +94,63 @@ export default function IndexPage() {
         </ol>
       </Section>
 
-      <Section>
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div>
-            <p className="m-0 text-6xl font-bold leading-none text-brand">{RESULT.metric}</p>
-            <h2 className="text-h1 mt-4">{RESULT.title}</h2>
-            <p className="mt-6 text-base text-muted">{RESULT.body}</p>
+      <Section className="velocity-feature">
+        <div className="velocity-feature-grid">
+          <div className="velocity-feature-art">
+            <img src="/assets/images/velocity-plan-img.png" alt="Automation workflow dashboard" />
           </div>
-
-          <ul className="m-0 grid list-none gap-6 p-0 sm:grid-cols-2">
-            {[RESULT.before, RESULT.after].map((item, i) => (
-              <li
-                key={item.label}
-                className={
-                  i === 1
-                    ? "rounded-3xl border border-brand/40 bg-brand/5 p-8"
-                    : "rounded-3xl border border-white/10 bg-white/5 p-8"
-                }
-              >
-                <p className="m-0 text-sm font-semibold uppercase tracking-wide text-muted">
-                  {item.label}
-                </p>
-                <p className="m-0 mt-3 text-4xl font-bold text-white">{item.value}</p>
-                <p className="m-0 mt-2 text-base text-muted">{item.caption}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="velocity-feature-copy">
+            <img src="/assets/images/special-img.png" alt="" aria-hidden="true" className="velocity-feature-mark" />
+            <h2 className="text-h1">The 14-Day Velocity<br className="hidden sm:block" /> Plan of Us</h2>
+            <ol className="velocity-timeline">
+              {TIMELINE.map((step, i) => (
+                <li key={step.title} className={i === TIMELINE.length - 1 ? "is-final" : undefined}>
+                  <span className="velocity-timeline-dot" aria-hidden="true">{i === TIMELINE.length - 1 ? "✓" : ""}</span>
+                  <div>
+                    <h3>{step.when}: {step.title}</h3>
+                    <p>{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </Section>
 
       <Section tone="surface">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <img
-            src="/assets/images/stack-img.png"
-            alt=""
-            aria-hidden="true"
-            className="w-full max-w-lg"
-          />
-          <div>
-            <h2 className="text-h1">Which CRM Do You Use?</h2>
-            <p className="mt-6 text-base text-muted">
-              We connect directly to your existing CRM setup — no rip-and-replace required. Our
-              automation pipelines are designed to integrate seamlessly with the tools you already
-              rely on, whether that’s your sales CRM, marketing platform, or customer support
-              system.
-            </p>
-            <Button href="/contact" size="lg" className="mt-8">
-              Book an Automation Audit
-            </Button>
-          </div>
+        <div className="crm-reference-heading">
+          <img src="/assets/images/special-img.png" alt="" aria-hidden="true" />
+          <h2 className="text-h1">Which CRM Do You Use?</h2>
+          <p>We connect directly to your existing CRM setup — no rip-and-replace required.</p>
+        </div>
+
+        <div className="crm-reference-groups">
+          {[
+            { title: "Sales CRM", tools: ["HubSpot", "Salesforce", "Pipedrive"] },
+            { title: "Marketing & Automation", tools: ["Zapier", "Make", "Calendly"] },
+            { title: "Support & Operations", tools: ["Slack", "Teams", "Zoho"] },
+          ].map((group) => (
+            <div key={group.title} className="crm-reference-group">
+              <h3>{group.title}</h3>
+              <ul>
+                {group.tools.map((tool, i) => (
+                  <li key={tool}>
+                    <span aria-hidden="true"><i className={["fa-solid fa-circle-nodes", "fa-solid fa-bolt", "fa-solid fa-comments"][i]} /></span>
+                    <strong>{tool}</strong>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </Section>
 
       <Section>
         <SectionHeading
-          title="Pricing By Leads or Seats"
-          lede="Scale with your pipeline as your business grows."
+          title="Investment Built on ROI"
+          lede="Fixed-scope projects. No monthly fees. You own the code."
         />
-
-        <ul className="m-0 mt-12 grid list-none gap-6 p-0 lg:grid-cols-3">
-          {VOLUME_PLANS.map((plan) => (
-            <li
-              key={plan.name}
-              className="flex flex-col rounded-3xl border border-white/10 bg-white/5 p-8 transition-colors duration-200 hover:border-brand/50"
-            >
-              <img src={plan.icon} alt="" aria-hidden="true" className="h-14 w-14" />
-              <h3 className="mt-5 text-h3">{plan.name}</h3>
-
-              <p className="mt-4 flex items-start gap-1 text-white">
-                {plan.price === "Custom" ? (
-                  <span className="text-4xl font-bold tracking-tight">Custom</span>
-                ) : (
-                  <>
-                    <span className="mt-2 text-2xl font-semibold">$</span>
-                    <span className="text-5xl font-bold tracking-tight">{plan.price}</span>
-                  </>
-                )}
-              </p>
-
-              <p className="mt-3 text-base text-muted">{plan.summary}</p>
-
-              <ul className="my-8 list-none space-y-3 border-t border-white/10 p-0 pt-8">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-3 text-base text-muted">
-                    <i className="fa-solid fa-check text-sm text-brand" aria-hidden="true" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              <Button href="/contact" className="mt-auto w-full">
-                Get Started
-                <span className="sr-only"> with {plan.name}</span>
-              </Button>
-            </li>
-          ))}
-        </ul>
+        <PricingCards className="mt-12" />
       </Section>
 
       <Section tone="surface">

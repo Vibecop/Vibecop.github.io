@@ -11,7 +11,7 @@ import BackToTop from "@/components/BackToTop";
 export default function SiteLayout({ children }) {
   return (
     <>
-      <PromotionalTopbar />
+      {/* <PromotionalTopbar /> */}
       <Header />
       <main>{children}</main>
       <Footer />

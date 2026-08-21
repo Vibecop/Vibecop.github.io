@@ -23,7 +23,7 @@ export default function PageBanner({ title, lede, breadcrumb }) {
         <h1 className="text-display mx-auto max-w-5xl">{title}</h1>
 
         {lede && (
-          <p className="mx-auto mt-6 max-w-3xl text-balance text-xl font-medium text-white/90 md:text-[1.375rem]">
+          <p className="mx-auto mt-6 max-w-3xl text-balance text-base font-medium text-white/90">
             {lede}
           </p>
         )}

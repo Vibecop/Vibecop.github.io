@@ -47,15 +47,27 @@
   --text-display: clamp(2rem, 1.2rem + 5.6vw, 5rem);
   --text-display--line-height: 1.02;
   --text-display--letter-spacing: -0.03em;
-  --text-h1: clamp(2.25rem, 1.4rem + 3.6vw, 4.25rem);
-  --text-h1--line-height: 1.06;
+  --text-h1: clamp(1.875rem, 1.3rem + 2.2vw, 3rem);
+  --text-h1--line-height: 1.12;
   --text-h1--letter-spacing: -0.025em;
   --text-h2: clamp(1.875rem, 1.3rem + 2.2vw, 3rem);
   --text-h2--line-height: 1.12;
   --text-h2--letter-spacing: -0.02em;
-  --text-h3: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem);
-  --text-h3--line-height: 1.25;
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.5rem;
   --text-h3--letter-spacing: -0.01em;
+
+  /* Readable app-wide copy scale, matching the pricing section's body text. */
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.25rem;
+  --text-sm: 1rem;
+  --text-sm--line-height: 1.5rem;
+  --text-base: 1.125rem;
+  --text-base--line-height: 1.75rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.5rem;
 
   /* the kit's content width */
   --container-page: 1417px;
@@ -115,4 +127,132 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Hero-only background treatment from the supplied Opzio reference. */
+.hero-reference-bg {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 55% 70% at 55% 0%, rgb(118 39 20 / 70%), transparent 72%),
+    linear-gradient(180deg, #080303 0%, #170505 58%, #050000 100%);
+}
+
+.hero-reference-bg::before,
+.hero-reference-bg::after {
+  position: absolute;
+  z-index: -1;
+  width: 125%;
+  height: 48%;
+  content: "";
+  pointer-events: none;
+  transform: rotate(-5deg);
+}
+
+.hero-reference-bg::before {
+  right: -15%;
+  bottom: -12%;
+  border-top: 3px solid #ff8a16;
+  background: linear-gradient(175deg, transparent 20%, rgb(255 89 0 / 70%) 54%, rgb(75 0 0 / 95%) 56%, transparent 75%);
+  box-shadow: 0 -1rem 2rem rgb(255 70 0 / 28%);
+}
+
+.hero-reference-bg::after {
+  right: -18%;
+  top: 22%;
+  border-bottom: 2px solid rgb(178 21 21 / 75%);
+  background: linear-gradient(170deg, transparent 34%, rgb(81 0 0 / 85%) 48%, rgb(162 0 0 / 60%) 54%, transparent 67%);
+}
+
+.velocity-feature { overflow: hidden; background: radial-gradient(ellipse 42rem 32rem at 8% 50%, rgb(249 91 52 / 28%), transparent 70%), #000; }
+.velocity-feature-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(26rem, .95fr); align-items: center; gap: clamp(3rem, 7vw, 7rem); }
+.velocity-feature-art img { display: block; width: 100%; max-width: 51rem; filter: drop-shadow(0 1.5rem 2.5rem rgb(0 0 0 / 35%)); animation: velocity-art-float 7s ease-in-out infinite; }
+.velocity-feature-mark { width: 2rem; height: 2rem; object-fit: contain; margin-bottom: 1.1rem; }
+.velocity-feature-copy h2 { margin: 0; font-size: var(--text-h2); line-height: var(--text-h2--line-height); }
+.velocity-timeline { position: relative; display: grid; gap: 1.35rem; margin: 2.2rem 0 0; padding: 0; list-style: none; }
+.velocity-timeline::before { position: absolute; top: 1rem; bottom: 1rem; left: 1rem; border-left: 1px dotted rgb(255 255 255 / 40%); content: ""; }
+.velocity-timeline li { position: relative; display: grid; grid-template-columns: 2rem 1fr; gap: 1.25rem; align-items: start; }
+.velocity-timeline-dot { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: 50%; background: rgb(40 40 40 / 95%); box-shadow: 0 0 0 .35rem rgb(0 0 0 / 60%); color: #fff; font-size: .85rem; font-weight: 800; }
+.velocity-timeline .is-final .velocity-timeline-dot { background: var(--color-brand); }
+.velocity-timeline h3 { margin: 0; color: #fff; font-size: var(--text-h3); line-height: var(--text-h3--line-height); }
+.velocity-timeline p { max-width: 32rem; margin: .55rem 0 0; color: var(--color-muted); font-size: var(--text-base); line-height: var(--text-base--line-height); }
+@keyframes velocity-art-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@media (max-width: 900px) { .velocity-feature-grid { grid-template-columns: 1fr; } .velocity-feature-copy { max-width: 40rem; } }
+
+/* CRM section restyled to match the centered grouped-card reference layout. */
+.crm-reference-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.crm-reference-heading > img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.crm-reference-heading h2 { max-width: 42rem; margin: 0; }
+.crm-reference-heading p { margin: 1rem 0 0; color: var(--color-muted); }
+
+.crm-reference-groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+
+.crm-reference-group {
+  padding: 1.5rem 1.5rem 1.35rem;
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: 1.8rem;
+  background: rgb(0 0 0 / 32%);
+}
+
+.crm-reference-group h3 {
+  margin: 0 0 1.2rem;
+  text-align: center;
+  font-size: var(--text-h3);
+  line-height: var(--text-h3--line-height);
+}
+
+.crm-reference-group ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.crm-reference-group li {
+  display: flex;
+  min-height: 7.2rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .7rem;
+  border-radius: .7rem;
+  background: rgb(255 255 255 / 10%);
+  color: #fff;
+  text-align: center;
+  transition: background .25s ease, transform .25s ease;
+}
+
+.crm-reference-group li:hover { background: rgb(249 91 52 / 20%); transform: translateY(-4px); }
+.crm-reference-group li span { font-size: 1.75rem; color: #fff; }
+.crm-reference-group li strong { font-size: .95rem; }
+
+@media (max-width: 900px) {
+  .crm-reference-groups { grid-template-columns: 1fr; max-width: 42rem; margin-right: auto; margin-left: auto; }
+}
+
+@media (max-width: 520px) {
+  .crm-reference-group ul { gap: .6rem; }
+  .crm-reference-group { padding: 1.15rem; }
+  .crm-reference-group li { min-height: 6rem; }
+  .crm-reference-group li strong { font-size: .8rem; }
 }

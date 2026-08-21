@@ -115,7 +115,7 @@ export default function Header() {
   useEffect(() => setMenuOpen(false), [pathname]);
 
   return (
-    <header className="relative z-50 pt-4">
+    <header className="sticky top-0 z-50 bg-black/80 pt-4 backdrop-blur-md">
       <Container>
         <nav
           aria-label="Main"
