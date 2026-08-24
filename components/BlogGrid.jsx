@@ -16,7 +16,7 @@ const COLUMNS = {
 
 export default function BlogGrid({ posts, columns = 3, className }) {
   return (
-    <div className={cn("grid gap-6", COLUMNS[columns], className)}>
+    <div data-stagger className={cn("grid gap-6", COLUMNS[columns], className)}>
       {posts.map((post) => (
         <BlogCard key={post.slug} post={post} layout={columns === 1 ? "wide" : "stacked"} />
       ))}

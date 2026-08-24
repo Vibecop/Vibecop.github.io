@@ -3,7 +3,7 @@ import TeamGrid from "@/components/TeamGrid";
 import CallToAction from "@/components/CallToAction";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
-import Button from "@/components/ui/Button";
+import AuditButton from "@/components/AuditButton";
 import { cn } from "@/lib/cn";
 import { PRINCIPLES, SHIFT, STORY } from "@/content/about";
 
@@ -26,18 +26,19 @@ export default function AboutPage() {
             src="/assets/images/story-img.jpg"
             alt=""
             aria-hidden="true"
-            className="w-full rounded-3xl object-cover"
+            data-reveal="left"
+            className="w-full rounded-3xl object-cover shadow-[0_1.5rem_3.5rem_rgb(0_0_0/45%)]"
           />
-          <div>
+          <div data-reveal="right">
             <SectionHeading title="Our Story" align="left" mark={false} />
             {STORY.map((paragraph) => (
               <p key={paragraph} className="mt-5 text-base text-muted">
                 {paragraph}
               </p>
             ))}
-            <Button href="/contact" size="lg" className="mt-8">
+            <AuditButton size="lg" className="mt-8">
               Book an Automation Audit
-            </Button>
+            </AuditButton>
           </div>
         </div>
       </Section>
@@ -48,10 +49,10 @@ export default function AboutPage() {
           lede="Our pipelines focus on tangible improvements like time saved, errors reduced, and faster response times."
         />
 
-        <ul className="m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-3">
+        <ul data-stagger className="m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-3">
           {PRINCIPLES.map((item) => (
-            <li key={item.title} className="rounded-3xl border border-white/10 bg-white/5 p-8">
-              <img src={item.icon} alt="" aria-hidden="true" className="h-14 w-14" />
+            <li key={item.title} className="vc-card vc-card-hover p-8">
+              <img src={item.icon} alt="" aria-hidden="true" className="vc-card-art h-14 w-14" />
               <h3 className="mt-5 text-h3">{item.title}</h3>
               <p className="mt-3 text-base text-muted">{item.body}</p>
             </li>
@@ -59,14 +60,13 @@ export default function AboutPage() {
         </ul>
       </Section>
 
-      <Section>
+      {/* <Section>
         <SectionHeading
           title="Meet the Team"
           lede="The people designing smarter systems to remove busy work from your operations."
         />
-        {/* /about shows the first four; /team shows all eight. */}
         <TeamGrid className="mt-12" limit={4} />
-      </Section>
+      </Section> */}
 
       <Section tone="surface">
         <SectionHeading
@@ -74,19 +74,18 @@ export default function AboutPage() {
           lede="We don’t just “help” — we replace high-friction manual steps with low-maintenance digital pipes."
         />
 
-        <ul className="m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-2">
+        <ul data-stagger className="m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-2">
           {SHIFT.map((item) => (
             <li
               key={item.title}
-              className={cn(
-                "rounded-3xl border p-8",
-                item.tone === "after" ? "border-brand/40 bg-brand/5" : "border-white/10 bg-white/5"
-              )}
+              className={cn("vc-card vc-card-hover p-8", item.tone === "after" && "vc-card-accent")}
             >
               <span
                 className={cn(
                   "inline-block rounded-full px-3 py-1 text-sm font-semibold",
-                  item.tone === "after" ? "bg-brand text-white" : "border border-white/20 text-muted"
+                  item.tone === "after"
+                    ? "vc-btn vc-btn-primary text-white"
+                    : "border border-white/20 text-muted"
                 )}
               >
                 {item.label}

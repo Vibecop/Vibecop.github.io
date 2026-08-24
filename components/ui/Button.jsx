@@ -1,15 +1,20 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 
+/*
+ * The chrome lives in theme.css (`.vc-btn-*`) rather than in utilities: the
+ * gradient fill, the glow and the hover sheen are all multi-property and one
+ * of them is a pseudo-element, none of which a class list expresses well.
+ */
 const VARIANTS = {
   /* the solid orange call to action */
-  primary: "bg-brand text-white hover:bg-brand-dim",
-  /* outlined pill, used on dark panels */
-  outline: "border border-white/25 text-white hover:border-brand hover:bg-brand",
+  primary: "vc-btn vc-btn-primary text-white",
+  /* glass pill with a hairline border, used on dark panels */
+  outline: "vc-btn vc-btn-outline text-white",
   /* white pill, used inside the orange promo bar */
-  invert: "bg-white text-ink hover:bg-white/85",
+  invert: "vc-btn bg-white text-ink hover:bg-white/85",
   /* text + arrow, no chrome */
-  ghost: "text-white hover:text-brand",
+  ghost: "vc-btn vc-btn-ghost text-white hover:text-brand",
 };
 
 const SIZES = {
@@ -32,7 +37,7 @@ export default function Button({
 }) {
   const classes = cn(
     "inline-flex items-center justify-center gap-2 rounded-full font-semibold",
-    "transition-colors duration-200 no-underline",
+    "no-underline",
     VARIANTS[variant],
     variant === "ghost" ? "px-0 py-0 text-base" : SIZES[size],
     className

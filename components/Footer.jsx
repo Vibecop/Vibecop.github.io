@@ -5,9 +5,9 @@ import { FOOTER_NAV, SOCIAL_LINKS } from "@/content/navigation";
 
 export default function Footer() {
   return (
-    <footer className="site-footer border-t border-white/10 bg-surface pt-16 md:pt-20">
+    <footer className="site-footer pt-16 md:pt-20">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-12">
+        <div className="grid gap-12 lg:grid-cols-12" data-stagger>
           <div className="lg:col-span-4">
             <Link href="/" aria-label="Vibecop — home">
               <img src="/assets/images/logo.png" alt="Vibecop" className="h-9 w-auto" />
@@ -24,7 +24,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white no-underline transition-colors duration-200 hover:border-brand hover:bg-brand"
+                    className="social-dot flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white no-underline"
                   >
                     <i className={icon} aria-hidden="true" />
                   </a>
@@ -56,12 +56,16 @@ export default function Footer() {
           ))}
 
           <div className="lg:col-span-4">
-            <h2 className="text-h3">Newsletter Signup</h2>
-            <NewsletterForm />
+            {/* the one panel in the footer, so the band ends on a surface
+                rather than trailing off into bare text */}
+            <div className="footer-newsletter p-7">
+              <h2 className="text-h3">Newsletter Signup</h2>
+              <NewsletterForm />
+            </div>
           </div>
         </div>
 
-        <div className="mt-14 border-t border-white/10 py-7 text-center">
+        <div className="mt-14 border-t border-white/8 py-7 text-center">
           <p className="m-0 text-base text-muted">
             Copyright © {new Date().getFullYear()} Vibecop. All Rights Reserved.
           </p>

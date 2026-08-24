@@ -42,3 +42,40 @@ export const BLUEPRINTS = [
     kpi: "Real-time Data",
   },
 ];
+
+/**
+ * The "What We Review" grid — the six areas every audit covers.
+ * Icons are Font Awesome solid names, resolved at render.
+ */
+export const REVIEW_AREAS = [
+  {
+    icon: "fa-shield-halved",
+    title: "Architectural Risk Audit",
+    body: "Full review of your system design, data flows, and structural weaknesses — identified before they become expensive to fix.",
+  },
+  {
+    icon: "fa-chart-simple",
+    title: "Production Readiness Review",
+    body: "Observability, incident response, deployment pipelines, and operational maturity — assessed, scored, and prioritized.",
+  },
+  {
+    icon: "fa-lock",
+    title: "Security & Scaling Analysis",
+    body: "Threat surface mapping, auth hardening, load strategy, and database optimization — AI-powered analysis, engineer-verified.",
+  },
+  {
+    icon: "fa-bolt",
+    title: "AI-Built Product Review",
+    body: "Designed for products built with Cursor, Claude Code, Lovable, Bolt, and Copilot. We find what the AI didn’t catch.",
+  },
+  {
+    icon: "fa-user-group",
+    title: "CTO Advisory for Founders",
+    body: "Senior engineering judgment on demand. Make the right architecture decisions without the cost of a full-time CTO hire.",
+  },
+  {
+    icon: "fa-clock",
+    title: "Ongoing Engineering Oversight",
+    body: "Continuous senior review of architecture decisions, codebase health, and security posture as your product evolves.",
+  },
+];

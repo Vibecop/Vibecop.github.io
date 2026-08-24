@@ -5,7 +5,7 @@ import CallToAction from "@/components/CallToAction";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
-import { BLUEPRINTS } from "@/content/services";
+import { BLUEPRINTS, REVIEW_AREAS } from "@/content/services";
 
 export const metadata = {
   title: "Services",
@@ -22,22 +22,44 @@ export default function ServicesPage() {
 
       <Section>
         <SectionHeading
+          mark={false}
+          eyebrow="Services"
+          align="left"
+          title="What We Review"
+          lede="Every audit covers the areas that determine whether your product survives production."
+        />
+
+        <ul
+          data-stagger
+          className="m-0 mt-12 grid list-none gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {REVIEW_AREAS.map((area) => (
+            <li key={area.title} className="vc-card vc-card-hover p-8">
+              <span className="vc-card-art inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5">
+                <i className={`fa-solid ${area.icon} text-lg text-brand`} aria-hidden="true" />
+              </span>
+              <h3 className="mt-5 text-h3">{area.title}</h3>
+              <p className="mt-3 text-base text-muted">{area.body}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section tone="surface">
+        <SectionHeading
           title="Find Your Fit"
           lede="Discover the automation solutions that match your team’s workflow and goals."
         />
         <FitFinder />
       </Section>
 
-      <Section tone="surface">
+      <Section>
         <SectionHeading title="Core Vibecop Blueprints" />
 
-        <ul className="m-0 mt-12 grid list-none gap-6 p-0 sm:grid-cols-2 xl:grid-cols-4">
+        <ul data-stagger className="m-0 mt-12 grid list-none gap-6 p-0 sm:grid-cols-2 xl:grid-cols-4">
           {BLUEPRINTS.map((bp) => (
-            <li
-              key={bp.name}
-              className="flex flex-col rounded-3xl border border-white/10 bg-white/5 p-8 transition-colors duration-200 hover:border-brand/50"
-            >
-              <span className="self-start rounded-full bg-brand/15 px-3 py-1 text-sm font-semibold text-brand">
+            <li key={bp.name} className="vc-card vc-card-hover flex flex-col p-8">
+              <span className="vc-delta self-start rounded-full px-3 py-1 text-sm font-semibold text-brand">
                 {bp.saved}
               </span>
               <h3 className="mt-4 text-h3">{bp.name}</h3>
@@ -64,7 +86,7 @@ export default function ServicesPage() {
         </ul>
       </Section>
 
-      <Section>
+      <Section tone="surface">
         <SectionHeading
           title="Investment Built on ROI"
           lede="Fixed-scope projects. No monthly fees. You own the code."

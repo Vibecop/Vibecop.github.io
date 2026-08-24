@@ -16,7 +16,7 @@ export default function CommentForm() {
   const [sent, setSent] = useState(false);
 
   const inputClass =
-    "mt-2 w-full rounded-xl border border-white/15 bg-surface-2 px-4 py-3 text-base text-white placeholder:text-muted-3 focus:border-brand focus:outline-none";
+    "vc-field mt-2 w-full rounded-xl px-4 py-3 text-base text-white placeholder:text-muted-3";
 
   return (
     <form
@@ -58,7 +58,7 @@ export default function CommentForm() {
 
       <button
         type="submit"
-        className="mt-7 rounded-full bg-brand px-8 py-3.5 font-semibold text-white transition-colors duration-200 hover:bg-brand-dim"
+        className="vc-btn vc-btn-primary mt-7 rounded-full px-8 py-3.5 font-semibold text-white"
       >
         Post Comment
       </button>

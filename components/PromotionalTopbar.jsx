@@ -1,4 +1,4 @@
-import { BUY_URL } from "@/content/navigation";
+// import { BUY_URL } from "@/content/navigation";
 import Button from "@/components/ui/Button";
 
 /** The orange strip above the header. */

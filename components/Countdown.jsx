@@ -46,7 +46,7 @@ export default function Countdown() {
       {(parts ?? UNITS.map(([label]) => ({ label, value: null }))).map(({ label, value }) => (
         <li
           key={label}
-          className="min-w-24 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-center"
+          className="vc-card min-w-24 px-5 py-4 text-center"
         >
           <span className="block text-3xl font-bold tabular-nums text-white sm:text-4xl">
             {value === null ? "--" : String(value).padStart(2, "0")}

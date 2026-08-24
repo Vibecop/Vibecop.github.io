@@ -10,11 +10,11 @@ export const HERO = {
 
 /** The five pipeline stages, each with the automation plugged into it. */
 export const PIPELINE_STAGES = [
-  { stage: "New", label: "Inbound", automation: "Auto-assign owner", icon: "/assets/images/pipeline-icon1.png" },
-  { stage: "Qualified", label: "Scored", automation: "Enrichment + score", icon: "/assets/images/pipeline-icon2.png" },
-  { stage: "Follow-up", label: "SLA", automation: "SLA timer + sequences", icon: "/assets/images/pipeline-icon3.png" },
-  { stage: "Booked", label: "Calls", automation: "Calendar sync", icon: "/assets/images/pipeline-icon4.png" },
-  { stage: "Won", label: "Closed", automation: "Attribution", icon: "/assets/images/pipeline-icon5.png" },
+  { stage: "Intake", label: "Day 0", automation: "Scope & Access", icon: "/assets/images/pipeline-icon1.png", detail: "You share the repo, the stack, and what ships next. We scope the audit against your actual launch risk, not a generic checklist." },
+  { stage: "Analysis", label: "Automated", automation: "AI-Powered Codebase Analysis", icon: "/assets/images/pipeline-icon2.png", detail: "Intelligent automated analysis across your architecture, codebase, infrastructure config, and security posture, surfacing patterns, risks, and structural issues at machine speed." },
+  { stage: "Verification", label: "Human", automation: "Senior Engineer Review", icon: "/assets/images/pipeline-icon3.png", detail: "Every finding is reviewed and validated by senior engineers. Context matters. We separate critical risks from noise, turning automated signals into decisions you can trust." },
+  { stage: "Roadmap", label: "Delivered", automation: "Prioritized Risk Roadmap", icon: "/assets/images/pipeline-icon4.png", detail: "A clear, actionable plan ordered by severity and business impact. No vague recommendations. Specific fixes your team can execute immediately." },
+  { stage: "Support", label: "Ongoing", automation: "Strategic Implementation Support", icon: "/assets/images/pipeline-icon5.png", detail: "We stay on to oversee execution, advise on architecture decisions, or provide CTO-level oversight as your product scales." },
 ];
 
 export const RESULT = {
@@ -27,7 +27,7 @@ export const RESULT = {
 
 /**
  * The home page's plans are volume-based and differ from the fixed-scope ones
- * on /pricing — same design, different offer, so they are separate data.
+ * on /pricing  same design, different offer, so they are separate data.
  */
 export const VOLUME_PLANS = [
   {
@@ -54,9 +54,9 @@ export const VOLUME_PLANS = [
 ];
 
 export const DASHBOARD_STATS = [
-  { label: "Leads this week", delta: "+18%", value: "128" },
-  { label: "Booked calls", delta: "+32%", value: "47" },
-  { label: "Missed follow-ups", delta: "Automation", value: "23" },
+   { label: "Critical issues caught", delta: "Before deploy", value: "214" },
+  { label: "AI-built codebases audited", delta: "Since 2025", value: "37" },
+  { label: "False positives filtered out", delta: "Human review", value: "61%" },
 ];
 
 /** The home page swaps in an attribution question for the second FAQ. */

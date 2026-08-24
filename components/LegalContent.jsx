@@ -6,11 +6,11 @@ import Container from "@/components/ui/Container";
  */
 export default function LegalContent({ sections }) {
   return (
-    <section className="py-16 md:py-20 lg:py-25">
+    <section className="site-section py-16 md:py-20 lg:py-25">
       <Container>
         <div className="mx-auto max-w-4xl">
           {sections.map(({ heading, blocks }) => (
-            <section key={heading} className="mb-12 last:mb-0">
+            <section key={heading} data-reveal className="mb-12 last:mb-0">
               <h2 className="text-h2 mb-5">{heading}</h2>
               {blocks.map((block, i) =>
                 block.list ? (

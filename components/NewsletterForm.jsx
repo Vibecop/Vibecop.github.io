@@ -26,12 +26,12 @@ export default function NewsletterForm() {
           required
           autoComplete="email"
           placeholder="Enter Your Email Address"
-          className="w-full rounded-full border border-white/15 bg-white/5 py-3.5 pl-5 pr-14 text-base text-white placeholder:text-muted-3 focus:border-brand focus:outline-none"
+          className="vc-field w-full rounded-full py-3.5 pl-5 pr-14 text-base text-white placeholder:text-muted-3"
         />
         <button
           type="submit"
           aria-label="Subscribe"
-          className="absolute right-1.5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-brand text-white transition-colors duration-200 hover:bg-brand-dim"
+          className="vc-btn vc-btn-primary absolute right-1.5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-white"
         >
           <i className="fa-solid fa-paper-plane" aria-hidden="true" />
         </button>

@@ -13,7 +13,7 @@ export default function Pagination({ pages, current, prev, next }) {
         <Link
           href={href}
           aria-label={label}
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white no-underline transition-colors duration-200 hover:border-brand hover:bg-brand"
+          className="vc-btn vc-btn-outline flex h-11 w-11 items-center justify-center rounded-full text-white no-underline"
         >
           <i className={icon} aria-hidden="true" />
         </Link>
@@ -35,8 +35,8 @@ export default function Pagination({ pages, current, prev, next }) {
                 className={cn(
                   "flex h-11 w-11 items-center justify-center rounded-full text-base font-semibold no-underline transition-colors duration-200",
                   active
-                    ? "bg-brand text-white"
-                    : "border border-white/15 text-white hover:border-brand hover:bg-brand"
+                    ? "vc-btn vc-btn-primary text-white"
+                    : "vc-btn vc-btn-outline text-white"
                 )}
               >
                 {label}

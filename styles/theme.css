@@ -1,13 +1,20 @@
 /*
  * Tailwind v4 — the whole design system.
  *
- * This replaces the kit's Bootstrap 4 + 10k-line style.css. Because Bootstrap
- * is gone there is no longer a name collision to dodge, so utilities are
- * unprefixed and preflight is on: `flex`, `bg-surface-2`, `rounded-3xl`.
+ * The visual target is the Opzio "home 02" reference: orange on near-black,
+ * one continuous atmosphere rather than a stack of flat bands. Three layers
+ * do the heavy lifting and nothing below them needs to repeat the work:
  *
- * Everything the design needs is a token below. Reach for a raw value in a
- * page only when it is genuinely one-off — if it shows up twice, it belongs
- * here.
+ *   .site-atmosphere   fixed glows + grid + grain, behind everything
+ *   .site-section      per-band radial wash that alternates side and blends
+ *   .vc-card           the one glass treatment every panel shares
+ *
+ * Motion is opt-in through data attributes (`data-reveal`, `data-parallax`,
+ * `data-count`) that components/MotionRuntime.jsx wires up, so pages stay
+ * server components. Every animation is transform/opacity only.
+ *
+ * Reach for a raw value in a page only when it is genuinely one-off — if it
+ * shows up twice, it belongs here.
  */
 @import "tailwindcss";
 @import "./fonts.css";
@@ -17,6 +24,10 @@
   --color-brand: #f95b34;
   --color-brand-soft: #d76666;
   --color-brand-dim: #b53d1e;
+
+  /* the reference's warm decorative range: ember → brand → crimson */
+  --color-ember: #ff8a16;
+  --color-crimson: #b21515;
 
   /* ---- surfaces, darkest to lightest ------------------------------- */
   --color-ink: #000000;
@@ -73,13 +84,50 @@
   --container-page: 1417px;
 }
 
+/*
+ * Design constants that are not Tailwind utilities — the glass recipe, the
+ * glow stops and the one easing curve every entrance shares. Kept on :root
+ * rather than in @theme because nothing needs a `bg-glass-*` class generated
+ * for them.
+ */
+:root {
+  --glass-fill: linear-gradient(155deg, rgb(255 255 255 / 7%), rgb(255 255 255 / 2.5%));
+  --glass-fill-hover: linear-gradient(155deg, rgb(255 255 255 / 11%), rgb(255 255 255 / 4%));
+  --glass-border: rgb(255 255 255 / 11%);
+  --glass-border-hover: rgb(249 91 52 / 45%);
+  --glass-blur: 18px;
+  --glass-radius: 1.5rem;
+  --glass-shadow: 0 1rem 2.5rem rgb(0 0 0 / 35%);
+  --glass-shadow-hover: 0 1.5rem 3.25rem rgb(0 0 0 / 45%), 0 0 2.5rem rgb(249 91 52 / 14%);
+
+  --glow-brand: rgb(249 91 52 / 26%);
+  --glow-ember: rgb(255 138 22 / 20%);
+  --glow-crimson: rgb(178 21 21 / 22%);
+
+  --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* set by MotionRuntime; 0 until the first scroll frame lands */
+  --scroll-y: 0px;
+
+  /*
+   * The header's flow height: 1rem of top padding + the nav's 0.75rem
+   * padding either side of a 3.25rem row (a `md` button: 1.75rem line box +
+   * 0.75rem padding twice). The hero pulls itself up by exactly this so its
+   * gradient starts at the top of the document instead of below the bar.
+   */
+  --header-height: 5.75rem;
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
   }
 
   body {
-    background-color: #050505;
+    /* the atmosphere sits on .site-atmosphere; this is only the floor */
+    background-color: #030202;
     color: var(--color-muted);
     font-family: var(--font-sans);
     font-size: 1.125rem;
@@ -114,58 +162,144 @@
   }
 }
 
-.site-main {
-  background:
-    radial-gradient(ellipse 44rem 22rem at 96% 12%, rgb(249 91 52 / 5%), transparent 72%),
-    radial-gradient(ellipse 38rem 22rem at 2% 46%, rgb(124 24 16 / 6%), transparent 72%),
-    #050505;
+/* ==================================================================
+ * 1. Motion primitives
+ * ================================================================== */
+
+/*
+ * Scroll reveal. Elements opt in with `data-reveal`; MotionRuntime adds
+ * `data-revealed` when they cross into the viewport — an attribute rather than
+ * a class, because React rewrites `className` on re-render and would drop it.
+ * The initial state is only
+ * applied once JS has confirmed it can run (`.motion-ready` on <html>), so
+ * with JS disabled or broken the content is simply visible rather than
+ * permanently transparent.
+ */
+/*
+ * Entrances move the element with the standalone `translate`/`scale`
+ * properties rather than with `transform`.
+ *
+ * That is not a style preference: the reveal's end state (`translate: none`)
+ * and a card's hover lift both have to be live at once, and as `transform`
+ * they collide — the reveal selector is the more specific of the two, so it
+ * won every hover and the lift silently did nothing. `translate` and
+ * `transform` are separate properties that compose, so hover can keep using
+ * `transform` and neither has to know about the other.
+ */
+.motion-ready [data-reveal] {
+  opacity: 0;
+  translate: 0 30px;
+  transition:
+    opacity 0.75s var(--ease-entrance),
+    translate 0.75s var(--ease-entrance),
+    scale 0.75s var(--ease-entrance),
+    filter 0.75s var(--ease-entrance);
+  will-change: opacity, translate;
 }
 
-/* Match the reference's orange-on-black panel system everywhere below the
- * Hero, without applying these overrides to the untouched Hero section. */
-.site-main > :not(.hero-reference-bg) [class~="bg-white/5"] {
-  background: linear-gradient(145deg, rgb(255 255 255 / 7%), rgb(255 255 255 / 2%));
+.motion-ready [data-reveal="blur"] {
+  filter: blur(10px);
 }
 
-.site-main > :not(.hero-reference-bg) [class~="bg-white/[0.03]"] {
-  background: rgb(255 255 255 / 2%);
+.motion-ready [data-reveal="scale"] {
+  translate: 0 24px;
+  scale: 0.96;
 }
 
-.site-main > :not(.hero-reference-bg) [class~="border-white/10"] {
-  border-color: rgb(255 255 255 / 14%);
+.motion-ready [data-reveal="left"] {
+  translate: -32px 0;
 }
 
-.site-main > :not(.hero-reference-bg) [class~="bg-brand/5"] {
-  background: linear-gradient(145deg, rgb(249 91 52 / 14%), rgb(249 91 52 / 4%));
+.motion-ready [data-reveal="right"] {
+  translate: 32px 0;
 }
 
-.inner-banner {
-  min-height: 27rem;
-  border-bottom: 1px solid rgb(249 91 52 / 20%);
-  background:
-    radial-gradient(ellipse 34rem 20rem at 76% 35%, rgb(249 91 52 / 22%), transparent 72%),
-    linear-gradient(180deg, rgb(8 4 4 / 72%), rgb(5 5 5 / 96%));
+.motion-ready [data-reveal][data-revealed] {
+  opacity: 1;
+  filter: blur(0);
+  translate: none;
+  scale: none;
+  will-change: auto;
 }
 
-.inner-banner::after {
-  position: absolute;
-  right: -12%;
-  bottom: -42%;
-  z-index: -2;
-  width: 72%;
-  height: 70%;
-  border-top: 2px solid rgb(255 138 22 / 70%);
-  background: linear-gradient(170deg, transparent 20%, rgb(249 91 52 / 28%) 52%, transparent 74%);
-  content: "";
-  pointer-events: none;
-  transform: rotate(-6deg);
+/*
+ * Staggered children. The parent carries `data-stagger`; each direct child
+ * inherits the reveal and waits its turn. Capped at 10 so a long grid does
+ * not end up with a two-second tail.
+ */
+.motion-ready [data-stagger] > * {
+  opacity: 0;
+  translate: 0 26px;
+  transition:
+    opacity 0.7s var(--ease-entrance),
+    translate 0.7s var(--ease-entrance);
+}
+
+.motion-ready [data-stagger][data-revealed] > * {
+  opacity: 1;
+  translate: none;
+}
+
+.motion-ready [data-stagger][data-revealed] > *:nth-child(1) { transition-delay: 0.04s; }
+.motion-ready [data-stagger][data-revealed] > *:nth-child(2) { transition-delay: 0.12s; }
+.motion-ready [data-stagger][data-revealed] > *:nth-child(3) { transition-delay: 0.2s; }
+.motion-ready [data-stagger][data-revealed] > *:nth-child(4) { transition-delay: 0.28s; }
+.motion-ready [data-stagger][data-revealed] > *:nth-child(5) { transition-delay: 0.36s; }
+.motion-ready [data-stagger][data-revealed] > *:nth-child(6) { transition-delay: 0.44s; }
+.motion-ready [data-stagger][data-revealed] > *:nth-child(7) { transition-delay: 0.52s; }
+.motion-ready [data-stagger][data-revealed] > *:nth-child(8) { transition-delay: 0.6s; }
+.motion-ready [data-stagger][data-revealed] > *:nth-child(n + 9) { transition-delay: 0.66s; }
+
+/* Hero entrance — runs on load rather than on scroll, staggered by depth. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+}
+
+.hero-rise {
+  animation: rise-in 0.9s var(--ease-entrance) both;
+}
+
+.hero-rise-1 { animation-delay: 0.05s; }
+.hero-rise-2 { animation-delay: 0.17s; }
+.hero-rise-3 { animation-delay: 0.29s; }
+.hero-rise-4 { animation-delay: 0.41s; }
+.hero-rise-5 { animation-delay: 0.53s; }
+
+/* The idle float the reference gives its loose dashboard cards. */
+/* `translate` again, so a floating card can still take the hover lift on top */
+@keyframes drift {
+  0%, 100% { translate: 0 -6px; }
+  50% { translate: 0 6px; }
+}
+
+.vc-float { animation: drift 6s var(--ease-soft) infinite; }
+.vc-float-slow { animation: drift 8.5s var(--ease-soft) infinite; }
+.vc-float-delay { animation-delay: -2.5s; }
+.vc-float-delay-2 { animation-delay: -4.5s; }
+
+/* Ambient pulse for the big background glows. */
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
 }
 
 /*
  * Respect the OS reduced-motion setting. The kit animated everything on
- * scroll through WOW.js with no such guard.
+ * scroll through WOW.js with no such guard. Reveals still need their end
+ * state applied, so they are reset rather than merely shortened.
  */
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
   *,
   *::before,
   *::after {
@@ -174,139 +308,521 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  .motion-ready [data-reveal],
+  .motion-ready [data-stagger] > * {
+    opacity: 1 !important;
+    filter: none !important;
+    translate: none !important;
+    scale: none !important;
+  }
+
+  .atmo-glow { animation: none !important; }
 }
 
-/* Shared non-hero treatment: deep alternating bands, warm glow, and the
- * rounded glass surfaces used throughout the Opzio reference. */
-.site-header {
-  background: linear-gradient(180deg, rgb(0 0 0 / 92%), rgb(0 0 0 / 72%)) !important;
-}
+/* ==================================================================
+ * 2. The global atmosphere
+ * ================================================================== */
 
-.site-nav {
-  box-shadow: 0 .75rem 2rem rgb(0 0 0 / 22%);
-  transition: border-color .3s ease, background-color .3s ease, box-shadow .3s ease;
-}
-
-.site-nav:hover {
-  border-color: rgb(249 91 52 / 26%);
-  box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 30%);
-}
-
-.site-footer {
-  position: relative;
+/*
+ * One fixed layer behind the whole document: two large soft orange glows, a
+ * faded technical grid and a grain wash. Fixed rather than per-section so the
+ * page reads as a single environment while scrolling — and so none of it can
+ * push layout around or intercept a click.
+ */
+.site-atmosphere {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
   overflow: hidden;
-  background-image: radial-gradient(ellipse 34rem 18rem at 86% 4%, rgb(249 91 52 / 7%), transparent 72%);
+  pointer-events: none;
 }
 
+.atmo-glow {
+  position: absolute;
+  border-radius: 50%;
+  animation: glow-breathe 14s ease-in-out infinite;
+  /* MotionRuntime drives --parallax; the fallback keeps it still */
+  translate: 0 var(--parallax, 0px);
+  will-change: translate;
+}
+
+/* top-right: the reference's `home2-banner-vector` glow, as gradient */
+.atmo-glow--one {
+  top: -22rem;
+  right: -14rem;
+  width: 62rem;
+  height: 62rem;
+  background: radial-gradient(circle, var(--glow-brand), rgb(249 91 52 / 8%) 42%, transparent 66%);
+}
+
+/* mid-left: the cooler crimson counterweight */
+.atmo-glow--two {
+  top: 42%;
+  left: -20rem;
+  width: 50rem;
+  height: 50rem;
+  background: radial-gradient(circle, var(--glow-crimson), rgb(178 21 21 / 6%) 45%, transparent 68%);
+  animation-delay: -6s;
+}
+
+/* low-right: keeps the footer end of the page from going flat */
+.atmo-glow--three {
+  bottom: -18rem;
+  right: -10rem;
+  width: 46rem;
+  height: 46rem;
+  background: radial-gradient(circle, var(--glow-ember), rgb(255 138 22 / 5%) 45%, transparent 68%);
+  animation-delay: -10s;
+}
+
+/*
+ * The technical grid. Masked to fade out at every edge so it reads as depth
+ * rather than as a HUD, and pinned to a 64px cell so it stays crisp.
+ */
+.atmo-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 3.5%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 3.5%) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 20%, transparent 78%);
+  opacity: 0.7;
+}
+
+/* Fine grain, at the threshold of visibility, to kill gradient banding. */
+.atmo-noise {
+  position: absolute;
+  inset: -50%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.028;
+}
+
+/*
+ * The content column. Transparent so the fixed atmosphere shows through —
+ * the previous build painted an opaque colour here, which is what made the
+ * sections read as separate slabs.
+ */
+.site-main {
+  position: relative;
+  background: transparent;
+}
+
+/* ==================================================================
+ * 3. Sections — continuous, not banded
+ * ================================================================== */
+
+/*
+ * Every band gets its own soft wash instead of a flat fill, and the washes
+ * alternate side so the eye is carried down the page. The old build gave
+ * `tone="surface"` an opaque colour and a hairline top border, which is what
+ * produced the dark/plain/dark/plain stripe the redesign had to remove.
+ */
 .site-section {
   position: relative;
   isolation: isolate;
-  border-top: 1px solid rgb(255 255 255 / 4%);
-  background-image: radial-gradient(ellipse 34rem 18rem at 92% 8%, rgb(249 91 52 / 7%), transparent 72%);
+  border-top: 0;
+  background-color: transparent;
+  /*
+   * The washes below are deliberately wider than the band and hang off both
+   * edges, so they have to be clipped or they widen the document.
+   *
+   * `clip` rather than `hidden`: `overflow: hidden` on a full-width element
+   * turns it into a scroll container, which breaks `position: sticky`
+   * descendants and — as `overflow-x: hidden` on <body> did here — can move
+   * scrolling off the viewport entirely, leaving IntersectionObserver with
+   * nothing that ever comes into view. `clip` cuts the paint and nothing else.
+   */
+  overflow-x: clip;
 }
 
-.site-section.bg-surface {
-  background-image:
-    radial-gradient(ellipse 32rem 20rem at 8% 50%, rgb(249 91 52 / 6%), transparent 72%),
-    linear-gradient(180deg, rgb(255 255 255 / 1.5%), transparent 25%);
-}
-
-.section-heading > img,
-.crm-reference-heading > img,
-.velocity-feature-mark {
-  filter: drop-shadow(0 0 .8rem rgb(249 91 52 / 45%));
-}
-
-.section-heading h2,
-.crm-reference-heading h2,
-.velocity-feature-copy h2 {
-  letter-spacing: -.035em;
-}
-
-.pricing-card,
-.article-card,
-.faq-item,
-.crm-reference-group,
-.site-section .rounded-3xl.border {
-  box-shadow: 0 .8rem 2.5rem rgb(0 0 0 / 16%);
-  transition: border-color .3s ease, background-color .3s ease, box-shadow .3s ease, transform .3s ease;
-}
-
-.pricing-card:hover,
-.article-card:hover,
-.faq-item:hover,
-.crm-reference-group:hover,
-.site-section .rounded-3xl.border:hover {
-  box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 28%);
-  transform: translateY(-4px);
-}
-
-.pricing-card.is-featured {
-  background: linear-gradient(150deg, rgb(249 91 52 / 17%), rgb(255 255 255 / 5%) 48%, rgb(0 0 0 / 10%));
-  box-shadow: 0 1rem 3rem rgb(249 91 52 / 13%);
-}
-
-.pricing-card.is-featured:hover {
-  box-shadow: 0 1.5rem 3.5rem rgb(249 91 52 / 22%);
-}
-
-.article-card {
-  background: linear-gradient(145deg, rgb(255 255 255 / 8%), rgb(255 255 255 / 3%));
-}
-
-.article-card img {
-  filter: saturate(.86) contrast(1.04);
-}
-
-.cta-reference-panel {
-  position: relative;
-  overflow: hidden;
-  background:
-    radial-gradient(ellipse 26rem 22rem at 8% 50%, rgb(249 91 52 / 30%), transparent 72%),
-    linear-gradient(135deg, #171014 0%, #0c0d13 62%);
-  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 30%);
-}
-
-.cta-reference-panel::after {
+.site-section::before {
   position: absolute;
-  right: -8rem;
-  bottom: -12rem;
-  width: 25rem;
-  height: 25rem;
-  border: 1px solid rgb(249 91 52 / 28%);
-  border-radius: 50%;
-  box-shadow: 0 0 0 2rem rgb(249 91 52 / 4%), 0 0 0 5rem rgb(249 91 52 / 3%);
+  z-index: -1;
+  top: -18%;
+  right: -12%;
+  width: 55rem;
+  height: 130%;
+  max-width: 90vw;
+  background: radial-gradient(ellipse at center, rgb(249 91 52 / 9%), transparent 68%);
   content: "";
   pointer-events: none;
 }
 
-.cta-reference-panel > * { position: relative; z-index: 1; }
-.cta-reference-panel > img { animation: nonhero-art-float 7s ease-in-out infinite; }
-
-.site-section .velocity-feature-grid,
-.site-section .crm-reference-heading,
-.site-section .crm-reference-groups { position: relative; z-index: 1; }
-
-@keyframes nonhero-art-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(.5deg); }
+/* mirror every other band so the wash zig-zags down the page */
+.site-section:nth-of-type(even)::before {
+  right: auto;
+  left: -12%;
+  background: radial-gradient(ellipse at center, rgb(178 21 21 / 10%), transparent 68%);
 }
 
-@media (max-width: 640px) {
-  .site-section { background-image: none; }
-  .cta-reference-panel::after { right: -13rem; }
+/*
+ * `tone="surface"` is now a translucent lift rather than an opaque slab: a
+ * faint sheet of white over the shared atmosphere, feathered top and bottom
+ * so neither edge lands as a visible seam.
+ */
+.site-section.bg-surface,
+.site-section.bg-surface-2,
+.site-section.bg-surface-3 {
+  background-color: transparent;
 }
 
-/* Hero-only background treatment from the supplied Opzio reference. */
-.hero-reference-bg {
+.site-section.bg-surface::after,
+.site-section.bg-surface-2::after,
+.site-section.bg-surface-3::after {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(255 255 255 / 2.6%) 18%,
+    rgb(255 255 255 / 3.2%) 82%,
+    transparent 100%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+/* Content sits above both washes without each page having to say so. */
+.site-section > * {
   position: relative;
+  z-index: 1;
+}
+
+/* ==================================================================
+ * 4. Cards — one glass treatment
+ * ================================================================== */
+
+.vc-card {
+  position: relative;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  background: var(--glass-fill);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur));
+  transition:
+    transform 0.4s var(--ease-entrance),
+    border-color 0.4s var(--ease-soft),
+    background 0.4s var(--ease-soft),
+    box-shadow 0.4s var(--ease-soft);
+}
+
+/*
+ * The top highlight every glass panel in the reference carries — a one-pixel
+ * bright edge that sells the surface as lit from above. Pseudo-element rather
+ * than a second border so it does not affect layout.
+ */
+.vc-card::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 12%;
+  left: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 32%), transparent);
+  content: "";
+  pointer-events: none;
+}
+
+.vc-card-hover:hover {
+  border-color: var(--glass-border-hover);
+  background: var(--glass-fill-hover);
+  box-shadow: var(--glass-shadow-hover);
+  transform: translateY(-6px);
+}
+
+/* the icon/illustration inside a card grows a hair on hover, nothing more */
+.vc-card-hover:hover .vc-card-art {
+  transform: scale(1.06);
+}
+
+.vc-card-art {
+  transition: transform 0.45s var(--ease-entrance);
+}
+
+/* The accented variant: featured pricing tier, "after" state, active filters. */
+.vc-card-accent {
+  border-color: rgb(249 91 52 / 42%);
+  background: linear-gradient(155deg, rgb(249 91 52 / 16%), rgb(249 91 52 / 3%) 55%, rgb(255 255 255 / 3%));
+  box-shadow: 0 1rem 3rem rgb(0 0 0 / 35%), 0 0 2.5rem rgb(249 91 52 / 12%);
+}
+
+.vc-card-accent:hover {
+  border-color: rgb(249 91 52 / 70%);
+  box-shadow: 0 1.5rem 3.5rem rgb(0 0 0 / 45%), 0 0 3.5rem rgb(249 91 52 / 22%);
+}
+
+/*
+ * Catch-all. Panels that still use the raw utility combo get the glass fill
+ * too, so a component I have not touched does not read as a flat grey box
+ * next to one that has. Unlayered, so it beats the utilities it overrides.
+ */
+.site-main [class~="bg-white/5"]:not(.vc-card),
+.site-main [class~="bg-white/[0.03]"]:not(.vc-card) {
+  background: var(--glass-fill);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+.site-main [class~="border-white/10"]:not(.vc-card) {
+  border-color: var(--glass-border);
+}
+
+/* ==================================================================
+ * 5. Buttons
+ * ================================================================== */
+
+.vc-btn {
   overflow: hidden;
   isolation: isolate;
-  background:
-    radial-gradient(ellipse 55% 70% at 55% 0%, rgb(118 39 20 / 70%), transparent 72%),
-    linear-gradient(180deg, #080303 0%, #170505 58%, #050000 100%);
+  transition:
+    transform 0.3s var(--ease-entrance),
+    box-shadow 0.35s var(--ease-soft),
+    background-color 0.3s var(--ease-soft),
+    border-color 0.3s var(--ease-soft),
+    color 0.3s var(--ease-soft);
 }
 
+.vc-btn-primary {
+  background: linear-gradient(135deg, #ff7a45, var(--color-brand) 55%, #e04a24);
+  box-shadow: 0 0.5rem 1.5rem rgb(249 91 52 / 28%);
+}
+
+.vc-btn-primary:hover {
+  box-shadow: 0 0.85rem 2rem rgb(249 91 52 / 42%), 0 0 1.5rem rgb(255 138 22 / 30%);
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+/* the sheen that crosses the pill on hover, transform-only */
+.vc-btn-primary::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 28%) 50%, transparent 65%);
+  content: "";
+  transform: translateX(-120%);
+  transition: transform 0.7s var(--ease-entrance);
+}
+
+.vc-btn-primary:hover::after {
+  transform: translateX(120%);
+}
+
+/* Secondary: glass, thin border, warms up on hover. */
+.vc-btn-outline {
+  border: 1px solid rgb(255 255 255 / 22%);
+  background: rgb(255 255 255 / 4%);
+  backdrop-filter: blur(10px);
+}
+
+.vc-btn-outline:hover {
+  border-color: rgb(249 91 52 / 65%);
+  background: rgb(249 91 52 / 14%);
+  box-shadow: 0 0.6rem 1.5rem rgb(0 0 0 / 30%), 0 0 1.25rem rgb(249 91 52 / 18%);
+  transform: translateY(-2px);
+}
+
+/* no fill to contain, so nothing to clip — and the arrow sits outside the box */
+.vc-btn-ghost {
+  overflow: visible;
+}
+
+.vc-btn-ghost:hover {
+  transform: translateX(2px);
+}
+
+/*
+ * The sheen below is an absolutely positioned pseudo-element, so the button
+ * has to establish a containing block. These rules are unlayered and Tailwind's
+ * utilities are not, so a plain `position: relative` here would silently beat
+ * an `absolute`/`fixed` on the call site — which is exactly what the newsletter
+ * and blog-search submit buttons need. `:where()` contributes no specificity,
+ * so this applies only when the caller has not positioned the button itself;
+ * when it has, that element is already a containing block anyway.
+ */
+.vc-btn:where(:not(.absolute):not(.fixed):not(.sticky)) {
+  position: relative;
+}
+
+/* ==================================================================
+ * 6. Header
+ * ================================================================== */
+
+/*
+ * Transparent at rest, so the pill nav floats over the hero. Once the page is
+ * scrolled a scrim fades in across the *whole* header box — the pill alone is
+ * not enough, because the 1rem of padding above it is where body copy would
+ * otherwise slide past in plain sight.
+ */
+.site-header {
+  background: transparent !important;
+}
+
+.site-header::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(3 2 2 / 94%), rgb(3 2 2 / 72%));
+  content: "";
+  opacity: 0;
+  backdrop-filter: blur(16px);
+  transition: opacity 0.4s var(--ease-soft);
+  pointer-events: none;
+}
+
+.site-header.is-scrolled::before { opacity: 1; }
+
+.site-nav {
+  border: 1px solid rgb(255 255 255 / 9%);
+  background: linear-gradient(160deg, rgb(20 16 16 / 62%), rgb(8 6 6 / 48%));
+  box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 28%);
+  backdrop-filter: blur(14px);
+  transition:
+    border-color 0.4s var(--ease-soft),
+    background 0.4s var(--ease-soft),
+    box-shadow 0.4s var(--ease-soft),
+    backdrop-filter 0.4s var(--ease-soft);
+}
+
+/* MotionRuntime toggles `is-scrolled` past 24px */
+.site-header.is-scrolled .site-nav {
+  border-color: rgb(249 91 52 / 24%);
+  background: linear-gradient(160deg, rgb(22 17 15 / 96%), rgb(10 8 7 / 94%));
+  box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 50%), 0 0 2rem rgb(249 91 52 / 10%);
+  backdrop-filter: blur(22px) saturate(1.3);
+}
+
+/* the thin glowing rule that appears under the bar once it is pinned */
+.site-header::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(249 91 52 / 35%), transparent);
+  content: "";
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-soft);
+}
+
+.site-header.is-scrolled::after { opacity: 1; }
+
+/*
+ * The submenu and the mobile drawer are glass panels at desktop and plain
+ * nested lists on a phone, where a card inside a card reads as clutter. Two
+ * classes with one media query, rather than `lg:`-prefixing a dozen
+ * properties — several of them (the fill, the lit edge) are not utilities.
+ */
+.nav-submenu,
+.nav-drawer {
+  border-radius: var(--glass-radius);
+}
+
+/*
+ * Both are opaque, not glass. A few percent of translucency is enough for
+ * white headline text underneath to stay legible straight through the menu,
+ * which makes the nav itself hard to read — the panels sit over content, so
+ * they get a solid fill and earn their depth from the border and shadow.
+ */
+@media (min-width: 1024px) {
+  .nav-submenu {
+    border: 1px solid var(--glass-border);
+    background: linear-gradient(160deg, #16110f, #0a0807);
+    box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 65%);
+  }
+
+  /*
+   * Bridges the 0.5rem the panel hangs below the button. That strip belongs
+   * to neither element, so a pointer travelling from the parent to a child
+   * link left the <li> mid-journey and took the menu with it. Invisible, and
+   * present only while the panel is — the panel is `hidden` when closed.
+   */
+  .nav-submenu::before {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    height: 0.75rem;
+    content: "";
+  }
+}
+
+@media (max-width: 1023px) {
+  .nav-drawer {
+    border: 1px solid var(--glass-border);
+    background: linear-gradient(160deg, #16110f, #0a0807);
+    box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 65%);
+  }
+}
+
+/* nav links get an underline that grows from the centre */
+.site-nav a[href]:not(.vc-btn),
+.site-nav button {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  position: absolute;
+  bottom: 0.25rem;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-ember), var(--color-brand));
+  content: "";
+  transition: width 0.3s var(--ease-entrance), left 0.3s var(--ease-entrance);
+}
+
+.nav-link-underline:hover::after,
+.nav-link-underline[aria-current="page"]::after {
+  left: 15%;
+  width: 70%;
+}
+
+/* ==================================================================
+ * 7. Hero
+ * ================================================================== */
+
+/*
+ * The reference builds its banner from one huge soft orange glow at the top
+ * right plus two rotated light sweeps low in the frame. Recreated as
+ * gradients rather than the kit's 1.5MB `home2-banner-vector.png`.
+ */
+.hero-reference-bg {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /*
+   * The header is `sticky`, so it keeps a box in normal flow and the hero
+   * would otherwise start below it — leaving the body's flat black showing
+   * across the top of the page. Pulling the hero up by the header's height
+   * and padding the content back down by the same amount puts the gradient
+   * behind the bar without moving a single word of the hero.
+   */
+  margin-top: calc(-1 * var(--header-height));
+  padding-top: calc(var(--header-height) + 2.7rem);
+
+  /*
+   * The hero runs 10% tighter than the rest of the page: the display clamp
+   * is the site's own, every stop scaled by 0.9. Scoped here rather than
+   * changed in @theme, which every other h1 on the site reads.
+   */
+  --text-display: clamp(1.8rem, 1.08rem + 5.04vw, 4.5rem);
+  /*
+   * Ends transparent rather than on a colour. The atmosphere is a fixed layer
+   * behind the whole document, so any opaque floor here would mask it and the
+   * hero would meet the next section on a hard horizontal line — the banded
+   * look this redesign is meant to remove.
+   */
+  background:
+    radial-gradient(ellipse 60% 55% at 78% 2%, rgb(249 91 52 / 26%), transparent 62%),
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgb(118 39 20 / 42%), transparent 70%),
+    linear-gradient(180deg, #0a0404 0%, rgb(18 5 5 / 88%) 46%, rgb(5 2 2 / 0%) 100%);
+}
+
+/* the wide ember sweep across the lower third */
 .hero-reference-bg::before,
 .hero-reference-bg::after {
   position: absolute;
@@ -317,97 +833,409 @@
   pointer-events: none;
 }
 
+/*
+ * Both sweeps hang below their container, which clips them — so the mask has
+ * to reach zero inside the *visible* part of the box, not at its own bottom.
+ * This one spans 66%–114% of the hero (bottom:-14%, height:48%), so only its
+ * top ~70% is ever on screen; the fade therefore finishes at 66%.
+ */
 .hero-reference-bg::before {
   right: -15%;
-  bottom: -12%;
-  border-top: 3px solid #ff8a16;
-  background: linear-gradient(175deg, transparent 20%, rgb(255 89 0 / 70%) 54%, rgb(75 0 0 / 95%) 56%, transparent 75%);
-  box-shadow: 0 -1rem 2rem rgb(255 70 0 / 28%);
+  bottom: -14%;
+  mask-image: linear-gradient(180deg, #000 0%, #000 22%, transparent 66%);
+  /* no border-top: the sweep is rotated, so a hard edge on it drew a crisp
+     orange diagonal straight across the hero. The glow does the work. */
+  background: linear-gradient(175deg, transparent 20%, rgb(255 89 0 / 42%) 54%, rgb(75 0 0 / 70%) 56%, transparent 75%);
+  box-shadow: 0 -1rem 3rem rgb(255 70 0 / 22%);
   transform: rotate(-5deg);
-  animation: hero-orange-wave 11s ease-in-out infinite;
+  animation: hero-orange-wave 13s ease-in-out infinite;
 }
 
 .hero-reference-bg::after {
+  top: 24%;
   right: -18%;
-  top: 22%;
-  border-bottom: 2px solid rgb(178 21 21 / 75%);
-  background: linear-gradient(170deg, transparent 34%, rgb(81 0 0 / 85%) 48%, rgb(162 0 0 / 60%) 54%, transparent 67%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 30%, transparent 92%);
+  border-bottom: 2px solid rgb(178 21 21 / 55%);
+  background: linear-gradient(170deg, transparent 34%, rgb(81 0 0 / 55%) 48%, rgb(162 0 0 / 38%) 54%, transparent 67%);
   transform: rotate(-5deg);
-  animation: hero-red-wave 14s ease-in-out infinite reverse;
+  animation: hero-red-wave 17s ease-in-out infinite reverse;
 }
 
 @keyframes hero-orange-wave {
-  0%, 100% { transform: rotate(-5deg); }
-  50% { transform: rotate(-3deg) translate3d(-2.5%, -3%, 0) scale(1.035); }
+  0%, 100% { transform: rotate(-5deg) translate3d(0, 0, 0); }
+  50% { transform: rotate(-3.5deg) translate3d(-2%, -2.5%, 0) scale(1.03); }
 }
 
 @keyframes hero-red-wave {
-  0%, 100% { transform: rotate(-5deg); }
-  50% { transform: rotate(-7deg) translate3d(2%, 3%, 0) scale(1.04); }
+  0%, 100% { transform: rotate(-5deg) translate3d(0, 0, 0); }
+  50% { transform: rotate(-6.8deg) translate3d(1.6%, 2.4%, 0) scale(1.035); }
 }
 
-.velocity-feature { overflow: hidden; background: radial-gradient(ellipse 42rem 32rem at 8% 50%, rgb(249 91 52 / 28%), transparent 70%), #000; }
-.velocity-feature-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(26rem, .95fr); align-items: center; gap: clamp(3rem, 7vw, 7rem); }
-.velocity-feature-art img { display: block; width: 100%; max-width: 51rem; filter: drop-shadow(0 1.5rem 2.5rem rgb(0 0 0 / 35%)); animation: velocity-art-float 7s ease-in-out infinite; }
-.velocity-feature-mark { width: 2rem; height: 2rem; object-fit: contain; margin-bottom: 1.1rem; }
-.velocity-feature-copy h2 { margin: 0; font-size: var(--text-h2); line-height: var(--text-h2--line-height); }
-.velocity-timeline { position: relative; display: grid; gap: 1.35rem; margin: 2.2rem 0 0; padding: 0; list-style: none; }
-.velocity-timeline::before { position: absolute; top: 1rem; bottom: 1rem; left: 1rem; border-left: 1px dotted rgb(255 255 255 / 40%); content: ""; }
-.velocity-timeline li { position: relative; display: grid; grid-template-columns: 2rem 1fr; gap: 1.25rem; align-items: start; }
-.velocity-timeline-dot { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: 50%; background: rgb(40 40 40 / 95%); box-shadow: 0 0 0 .35rem rgb(0 0 0 / 60%); color: #fff; font-size: .85rem; font-weight: 800; }
-.velocity-timeline .is-final .velocity-timeline-dot { background: var(--color-brand); }
-.velocity-timeline h3 { margin: 0; color: #fff; font-size: var(--text-h3); line-height: var(--text-h3--line-height); }
-.velocity-timeline p { max-width: 32rem; margin: .55rem 0 0; color: var(--color-muted); font-size: var(--text-base); line-height: var(--text-base--line-height); }
-@keyframes velocity-art-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-@media (max-width: 900px) { .velocity-feature-grid { grid-template-columns: 1fr; } .velocity-feature-copy { max-width: 40rem; } }
+/* Loose glowing dots scattered behind the headline. */
+.hero-spark {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  background: var(--color-ember);
+  box-shadow: 0 0 0.75rem rgb(255 138 22 / 90%);
+  pointer-events: none;
+}
 
-/* CRM section restyled to match the centered grouped-card reference layout. */
-.crm-reference-heading {
+@keyframes spark-pulse {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+.hero-spark { animation: spark-pulse 5s ease-in-out infinite; }
+
+/* Gradient text, used on one phrase per page and no more. */
+.text-gradient {
+  background: linear-gradient(92deg, #ffffff 12%, #ffb08a 52%, var(--color-brand) 92%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/*
+ * The badge row: the gradient hairline ring the reference draws on its
+ * `top-badges`, white → orange → white.
+ *
+ * Two background layers rather than the usual `mask-composite: exclude` ring:
+ * the fill is clipped to the padding box and the gradient to the border box,
+ * so the border area is the only place the gradient shows. The mask version
+ * does not survive minification here — the shorthand gets reordered after
+ * `mask-composite`, which resets it to `add` and fills the pill solid.
+ *
+ * The fill layer is mostly opaque so the ring gradient does not bleed through
+ * the middle; the blur behind it is what keeps it reading as glass.
+ */
+.vc-badge {
+  position: relative;
+  border: 1px solid transparent;
+  background-image:
+    linear-gradient(rgb(14 9 9 / 72%), rgb(14 9 9 / 72%)),
+    linear-gradient(90deg, rgb(255 255 255 / 55%), var(--color-brand), rgb(255 255 255 / 55%));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  backdrop-filter: blur(10px);
+  transition: background-image 0.3s var(--ease-soft), transform 0.3s var(--ease-entrance);
+}
+
+.vc-badge:hover {
+  background-image:
+    linear-gradient(rgb(40 14 8 / 78%), rgb(40 14 8 / 78%)),
+    linear-gradient(90deg, var(--color-brand), var(--color-ember), var(--color-brand));
+  transform: translateY(-2px);
+}
+
+/* ==================================================================
+ * 8. Pipeline / process connectors
+ * ================================================================== */
+
+/*
+ * The stage cards are joined by a glowing rule that draws itself in when the
+ * row scrolls into view — the reference's `pipeline-vector`, as CSS.
+ */
+.vc-steps { position: relative; }
+
+.vc-steps::before {
+  position: absolute;
+  z-index: 0;
+  /* lines up with the middle of the step badge: card padding + half of 3rem */
+  top: calc(var(--steps-pad, 2rem) + 1.5rem);
+  right: 7%;
+  left: 7%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(249 91 52 / 55%), rgb(255 138 22 / 75%), rgb(249 91 52 / 55%), transparent);
+  content: "";
+  /* hidden until the row is actually one row — see the variants below */
+  display: none;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.1s var(--ease-entrance) 0.15s, opacity 0.5s var(--ease-soft) 0.15s;
+}
+
+.vc-steps[data-revealed]::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/*
+ * The rule only makes sense while the steps sit side by side, so each variant
+ * turns it on at the breakpoint where its own grid reaches full width. Wrapped
+ * onto two rows it would be drawing a connection that is not there.
+ */
+@media (min-width: 768px) {
+  .vc-steps-3::before { display: block; }
+}
+
+@media (min-width: 1024px) {
+  .vc-steps-4::before { display: block; }
+}
+
+/* the home page's five-across pipeline; its cards use p-7 rather than p-8 */
+@media (min-width: 1280px) {
+  .vc-steps:not(.vc-steps-3):not(.vc-steps-4)::before {
+    display: block;
+    --steps-pad: 1.75rem;
+  }
+}
+
+/*
+ * Flip cards — the pipeline row.
+ *
+ * The face the reader sees is decided by `backface-visibility`, so both faces
+ * are stacked in the same box and the wrapper rotates. `perspective` lives on
+ * the outer element rather than on the rotating one: on the rotating element
+ * it is applied *after* the rotation and the flip reads flat.
+ */
+.vc-flip {
+  position: relative;
+  list-style: none;
+  perspective: 1400px;
+}
+
+/* the outline belongs on the card's edge, not on the invisible li box */
+.vc-flip:focus { outline: none; }
+
+.vc-flip-inner {
+  position: relative;
+  min-height: 20rem;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.75s var(--ease-entrance);
+}
+
+.vc-flip:hover .vc-flip-inner,
+.vc-flip:focus-visible .vc-flip-inner,
+.vc-flip:focus-within .vc-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.vc-flip-face {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  overflow: hidden;
+  /* Safari still needs the prefix, and without it both faces show at once */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-.crm-reference-heading > img {
+.vc-flip-back {
+  justify-content: center;
+  transform: rotateY(180deg);
+}
+
+.vc-flip:focus-visible .vc-flip-face { border-color: rgb(249 91 52 / 70%); }
+
+/* the badge lights up as the card turns, as it did on the old hover */
+.vc-flip:hover .vc-step-index {
+  border-color: rgb(249 91 52 / 60%);
+  box-shadow: 0 0 0 0.5rem rgb(249 91 52 / 10%), 0 0 2rem rgb(249 91 52 / 35%);
+}
+
+/*
+ * A flip is a hover affordance, and a touch screen has no hover — the browser
+ * fakes one on tap and leaves the card stuck on its back. There the card stays
+ * put and shows both halves of the copy instead, which is why the front keeps
+ * its own one-line summary rather than moving it all to the back.
+ */
+@media (hover: none) {
+  .vc-flip-inner { min-height: 0; transform: none !important; }
+  .vc-flip-face { position: relative; inset: auto; backface-visibility: visible; }
+  .vc-flip-back { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* cross-fade rather than rotate; the same two faces, no motion */
+  .vc-flip-inner { transition: none; transform: none !important; }
+  .vc-flip-face { transition: opacity 0.3s var(--ease-soft); backface-visibility: visible; }
+  .vc-flip-back { opacity: 0; transform: none; }
+  .vc-flip:hover .vc-flip-back,
+  .vc-flip:focus-within .vc-flip-back { opacity: 1; }
+  .vc-flip:hover .vc-flip-face:not(.vc-flip-back),
+  .vc-flip:focus-within .vc-flip-face:not(.vc-flip-back) { opacity: 0; }
+}
+
+.vc-step-index {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid rgb(249 91 52 / 35%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, rgb(249 91 52 / 30%), rgb(0 0 0 / 60%));
+  box-shadow: 0 0 0 0.4rem rgb(249 91 52 / 6%), 0 0 1.5rem rgb(249 91 52 / 20%);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  transition: box-shadow 0.4s var(--ease-soft), border-color 0.4s var(--ease-soft);
+}
+
+.vc-card-hover:hover .vc-step-index {
+  border-color: rgb(249 91 52 / 75%);
+  box-shadow: 0 0 0 0.5rem rgb(249 91 52 / 10%), 0 0 2rem rgb(249 91 52 / 40%);
+}
+
+/* ==================================================================
+ * 9. Statistics and mini charts
+ * ================================================================== */
+
+.vc-stat-value {
+  font-variant-numeric: tabular-nums;
+  /* the counter swaps digits; a fixed tabular figure stops the reflow */
+  letter-spacing: -0.02em;
+}
+
+.vc-delta {
+  border: 1px solid rgb(249 91 52 / 30%);
+  background: rgb(249 91 52 / 12%);
+  box-shadow: 0 0 1rem rgb(249 91 52 / 12%);
+}
+
+/*
+ * Sparkline. The stroke is drawn on entry with the classic dash-offset
+ * technique — one property, GPU-friendly, and it degrades to a static line
+ * when reduced motion is on.
+ */
+.vc-spark-line {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  transition: stroke-dashoffset 1.4s var(--ease-entrance) 0.2s;
+}
+
+[data-revealed] .vc-spark-line { stroke-dashoffset: 0; }
+
+.vc-spark-fill {
+  opacity: 0;
+  transition: opacity 0.9s var(--ease-soft) 0.7s;
+}
+
+[data-revealed] .vc-spark-fill { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .vc-spark-line { stroke-dashoffset: 0; }
+  .vc-spark-fill { opacity: 1; }
+}
+
+/* ==================================================================
+ * 10. Velocity timeline
+ * ================================================================== */
+
+.velocity-feature {
+  position: relative;
+  overflow: hidden;
+}
+
+.velocity-feature::before {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: -14%;
+  width: 46rem;
+  height: 46rem;
+  background: radial-gradient(circle, rgb(249 91 52 / 20%), transparent 66%);
+  content: "";
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.velocity-feature-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(26rem, 0.95fr);
+  align-items: center;
+  gap: clamp(3rem, 7vw, 7rem);
+}
+
+.velocity-feature-art img {
+  display: block;
+  width: 100%;
+  max-width: 51rem;
+  filter: drop-shadow(0 1.5rem 3rem rgb(0 0 0 / 45%));
+}
+
+.velocity-feature-mark { width: 2rem; height: 2rem; margin-bottom: 1.1rem; object-fit: contain; }
+.velocity-feature-copy h2 { margin: 0; font-size: var(--text-h2); line-height: var(--text-h2--line-height); letter-spacing: -0.035em; }
+
+.velocity-timeline { position: relative; display: grid; gap: 1.35rem; margin: 2.2rem 0 0; padding: 0; list-style: none; }
+
+/* the dotted rail, with a lit segment that grows as the list reveals */
+.velocity-timeline::before {
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  border-left: 1px dashed rgb(255 255 255 / 22%);
+  content: "";
+}
+
+.velocity-timeline::after {
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  border-left: 1px solid rgb(249 91 52 / 70%);
+  box-shadow: 0 0 0.75rem rgb(249 91 52 / 45%);
+  content: "";
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 1.4s var(--ease-entrance) 0.2s;
+}
+
+.velocity-timeline[data-revealed]::after { transform: scaleY(1); }
+
+.velocity-timeline li { position: relative; display: grid; grid-template-columns: 2rem 1fr; gap: 1.25rem; align-items: start; }
+
+.velocity-timeline-dot {
+  position: relative;
+  z-index: 1;
+  display: flex;
   width: 2rem;
   height: 2rem;
-  object-fit: contain;
-  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 50%;
+  background: rgb(24 20 20 / 96%);
+  box-shadow: 0 0 0 0.35rem rgb(3 2 2 / 90%);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 800;
 }
 
-.crm-reference-heading h2 { max-width: 42rem; margin: 0; }
+.velocity-timeline .is-final .velocity-timeline-dot {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--color-ember), var(--color-brand));
+  box-shadow: 0 0 0 0.35rem rgb(3 2 2 / 90%), 0 0 1.5rem rgb(249 91 52 / 55%);
+}
+
+.velocity-timeline h3 { margin: 0; color: #fff; font-size: var(--text-h3); line-height: var(--text-h3--line-height); }
+.velocity-timeline p { max-width: 32rem; margin: 0.55rem 0 0; color: var(--color-muted); font-size: var(--text-base); line-height: var(--text-base--line-height); }
+
+@media (max-width: 900px) {
+  .velocity-feature-grid { grid-template-columns: 1fr; }
+  .velocity-feature-copy { max-width: 40rem; }
+}
+
+/* ==================================================================
+ * 11. CRM group cards
+ * ================================================================== */
+
+.crm-reference-heading { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.crm-reference-heading > img { width: 4rem; height: 4rem; margin-bottom: 1rem; object-fit: contain; }
+.crm-reference-heading h2 { max-width: 42rem; margin: 0; letter-spacing: -0.035em; }
 .crm-reference-heading p { margin: 1rem 0 0; color: var(--color-muted); }
 
-.crm-reference-groups {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
-  margin-top: 3.5rem;
-}
+.crm-reference-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
 
-.crm-reference-group {
-  padding: 1.5rem 1.5rem 1.35rem;
-  border: 1px solid rgb(255 255 255 / 28%);
-  border-radius: 1.8rem;
-  background: rgb(0 0 0 / 32%);
-}
-
-.crm-reference-group h3 {
-  margin: 0 0 1.2rem;
-  text-align: center;
-  font-size: var(--text-h3);
-  line-height: var(--text-h3--line-height);
-}
-
-.crm-reference-group ul {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+.crm-reference-group { padding: 1.5rem 1.5rem 1.35rem; border-radius: 1.8rem; }
+.crm-reference-group h3 { margin: 0 0 1.2rem; text-align: center; font-size: var(--text-h3); line-height: var(--text-h3--line-height); }
+.crm-reference-group ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
 
 .crm-reference-group li {
   display: flex;
@@ -415,25 +1243,393 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: .7rem;
-  border-radius: .7rem;
-  background: rgb(255 255 255 / 10%);
+  gap: 0.7rem;
+  border: 1px solid rgb(255 255 255 / 7%);
+  border-radius: 0.85rem;
+  background: rgb(255 255 255 / 6%);
   color: #fff;
   text-align: center;
-  transition: background .25s ease, transform .25s ease;
+  transition: background 0.35s var(--ease-soft), border-color 0.35s var(--ease-soft), transform 0.35s var(--ease-entrance), box-shadow 0.35s var(--ease-soft);
 }
 
-.crm-reference-group li:hover { background: rgb(249 91 52 / 20%); transform: translateY(-4px); }
-.crm-reference-group li span { font-size: 1.75rem; color: #fff; }
-.crm-reference-group li strong { font-size: .95rem; }
+.crm-reference-group li:hover {
+  border-color: rgb(249 91 52 / 45%);
+  background: rgb(249 91 52 / 16%);
+  box-shadow: 0 0.6rem 1.5rem rgb(0 0 0 / 30%), 0 0 1.25rem rgb(249 91 52 / 18%);
+  transform: translateY(-5px);
+}
+
+.crm-reference-group li span { color: #fff; font-size: 1.75rem; transition: color 0.3s var(--ease-soft); }
+.crm-reference-group li:hover span { color: var(--color-ember); }
+.crm-reference-group li strong { font-size: 0.95rem; }
 
 @media (max-width: 900px) {
-  .crm-reference-groups { grid-template-columns: 1fr; max-width: 42rem; margin-right: auto; margin-left: auto; }
+  .crm-reference-groups { max-width: 42rem; margin-right: auto; margin-left: auto; grid-template-columns: 1fr; }
 }
 
 @media (max-width: 520px) {
-  .crm-reference-group ul { gap: .6rem; }
   .crm-reference-group { padding: 1.15rem; }
+  .crm-reference-group ul { gap: 0.6rem; }
   .crm-reference-group li { min-height: 6rem; }
-  .crm-reference-group li strong { font-size: .8rem; }
+  .crm-reference-group li strong { font-size: 0.8rem; }
+}
+
+/* ==================================================================
+ * 12. FAQ
+ * ================================================================== */
+
+.faq-item {
+  border: 1px solid var(--glass-border);
+  background: var(--glass-fill);
+  backdrop-filter: blur(var(--glass-blur));
+  transition: border-color 0.35s var(--ease-soft), background 0.35s var(--ease-soft), box-shadow 0.35s var(--ease-soft);
+}
+
+.faq-item:hover { border-color: rgb(249 91 52 / 32%); }
+
+.faq-item.is-open {
+  border-color: rgb(249 91 52 / 55%);
+  background: linear-gradient(155deg, rgb(249 91 52 / 10%), rgb(255 255 255 / 3%));
+  box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 35%), 0 0 2rem rgb(249 91 52 / 14%);
+}
+
+/*
+ * Height animation without measuring anything in JS: the panel is a grid row
+ * that transitions from 0fr to 1fr. The panel stays in the DOM, so `hidden`
+ * cannot be used for the closed state — `inert` plus `visibility` keeps it out
+ * of the tab order and out of the accessibility tree instead.
+ */
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--ease-entrance);
+}
+
+.faq-panel > div { overflow: hidden; }
+
+.faq-item.is-open .faq-panel { grid-template-rows: 1fr; }
+
+.faq-panel[aria-hidden="true"] { visibility: hidden; }
+.faq-item.is-open .faq-panel { visibility: visible; }
+
+/* ==================================================================
+ * 13. Closing call to action
+ * ================================================================== */
+
+.cta-reference-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 10%);
+  background:
+    radial-gradient(ellipse 26rem 22rem at 8% 50%, rgb(249 91 52 / 26%), transparent 70%),
+    linear-gradient(135deg, #17100f 0%, #0b0808 62%);
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 45%);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+/* the concentric rings the reference sets behind its CTA artwork */
+.cta-reference-panel::after {
+  position: absolute;
+  right: -8rem;
+  bottom: -12rem;
+  width: 25rem;
+  height: 25rem;
+  border: 1px solid rgb(249 91 52 / 26%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2rem rgb(249 91 52 / 4%), 0 0 0 5rem rgb(249 91 52 / 3%), 0 0 0 8rem rgb(249 91 52 / 2%);
+  content: "";
+  pointer-events: none;
+}
+
+.cta-reference-panel > * { position: relative; z-index: 1; }
+
+/* ==================================================================
+ * 14. Sub-page banner
+ * ================================================================== */
+
+.inner-banner {
+  position: relative;
+  overflow-x: clip;
+  min-height: 27rem;
+  border-bottom: 0;
+  /* transparent at the foot, for the reason given on .hero-reference-bg */
+  background:
+    radial-gradient(ellipse 34rem 20rem at 76% 30%, rgb(249 91 52 / 24%), transparent 70%),
+    linear-gradient(180deg, rgb(8 4 4 / 74%) 40%, rgb(3 2 2 / 0%) 100%);
+}
+
+/*
+ * The artwork and its scrim fade out over the bottom third, so the banner
+ * dissolves into the page instead of stopping on an edge. Applied to the
+ * layers rather than as an overlay: an overlay would need a colour to fade
+ * to, which is the problem being solved.
+ */
+.inner-banner-layer {
+  mask-image: linear-gradient(180deg, #000 58%, transparent 97%);
+}
+
+/* the ember sweep, matching the hero's so the two pages feel of a piece */
+/* spans 72%–142% of the banner, so only its top ~40% is ever on screen */
+/* no border on the leading edge: rotated and masked, it read as a hard amber
+   diagonal drawn across the banner rather than as part of the glow */
+.inner-banner::after {
+  position: absolute;
+  right: -12%;
+  bottom: -42%;
+  mask-image: linear-gradient(180deg, #000 0%, #000 12%, transparent 38%);
+  z-index: -2;
+  width: 72%;
+  height: 70%;
+  background: linear-gradient(170deg, transparent 20%, rgb(249 91 52 / 22%) 52%, transparent 74%);
+  content: "";
+  pointer-events: none;
+  transform: rotate(-6deg);
+}
+
+/* ==================================================================
+ * 15. Section headings
+ * ================================================================== */
+
+.section-heading > img,
+.crm-reference-heading > img,
+.velocity-feature-mark {
+  filter: drop-shadow(0 0 0.9rem rgb(249 91 52 / 55%));
+}
+
+.section-heading h2 { letter-spacing: -0.035em; }
+
+/* ==================================================================
+ * 16. Footer
+ * ================================================================== */
+
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgb(255 255 255 / 7%);
+  background:
+    radial-gradient(ellipse 40rem 20rem at 84% 0%, rgb(249 91 52 / 11%), transparent 70%),
+    linear-gradient(180deg, rgb(255 255 255 / 2%), rgb(3 2 2 / 60%) 60%);
+  backdrop-filter: blur(8px);
+}
+
+/* a lit hairline along the very top edge, continuing the card highlight idea */
+.site-footer::before {
+  position: absolute;
+  top: 0;
+  right: 20%;
+  left: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(249 91 52 / 45%), transparent);
+  content: "";
+}
+
+.footer-newsletter {
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  background: var(--glass-fill);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+.social-dot {
+  transition: transform 0.3s var(--ease-entrance), border-color 0.3s var(--ease-soft), background 0.3s var(--ease-soft), box-shadow 0.3s var(--ease-soft);
+}
+
+.social-dot:hover {
+  border-color: transparent !important;
+  background: linear-gradient(135deg, var(--color-ember), var(--color-brand)) !important;
+  box-shadow: 0 0.5rem 1.25rem rgb(249 91 52 / 35%);
+  transform: translateY(-3px);
+}
+
+/* ==================================================================
+ * 17. Form controls
+ * ================================================================== */
+
+.vc-field {
+  border: 1px solid rgb(255 255 255 / 12%);
+  background: rgb(255 255 255 / 4%);
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s var(--ease-soft), background 0.3s var(--ease-soft), box-shadow 0.3s var(--ease-soft);
+}
+
+.vc-field:hover { border-color: rgb(255 255 255 / 20%); }
+
+/* the native dropdown list is painted by the OS, not by the field */
+.vc-field option { background: #0d1017; color: #fff; }
+
+/* an unanswered select reads as a placeholder, like an empty input does */
+select.vc-field:has(option[value=""]:checked) { color: var(--color-muted-3, rgb(255 255 255 / 45%)); }
+
+.vc-field:focus {
+  border-color: rgb(249 91 52 / 70%);
+  background: rgb(255 255 255 / 6%);
+  box-shadow: 0 0 0 3px rgb(249 91 52 / 14%);
+  outline: none;
+}
+
+/* ==================================================================
+ * 18. Back to top
+ * ================================================================== */
+
+.vc-to-top {
+  background: linear-gradient(135deg, #ff7a45, var(--color-brand) 60%, #e04a24);
+  box-shadow: 0 0.5rem 1.5rem rgb(249 91 52 / 32%);
+  transition: transform 0.35s var(--ease-entrance), opacity 0.35s var(--ease-soft), box-shadow 0.35s var(--ease-soft);
+}
+
+.vc-to-top:hover {
+  box-shadow: 0 0.85rem 2rem rgb(249 91 52 / 48%);
+  transform: translateY(-3px);
+}
+
+/* ==================================================================
+ * 19. Modal — the audit application
+ * ================================================================== */
+
+.vc-modal {
+  /*
+   * The modal runs at 90% of the site's scale.
+   *
+   * Every Tailwind utility resolves its size through a theme variable —
+   * `p-6` is `calc(var(--spacing) * 6)`, `text-base` is `var(--text-base)`,
+   * `rounded-xl` is `var(--radius-xl)` — so redefining those variables here
+   * takes 10% off every type size, padding, margin, gap, radius and width
+   * inside the panel at once. The alternative, a smaller utility on each of
+   * the forty-odd elements, drifts the moment the form changes.
+   *
+   * Each value below is the @theme value × 0.9.
+   */
+  --spacing: 0.225rem;
+
+  --text-xs: 0.7875rem;
+  --text-xs--line-height: 1.125rem;
+  --text-sm: 0.85rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 0.9375rem;
+  --text-base--line-height: 1.4rem;
+  --text-lg: 0.9375rem;
+  --text-lg--line-height: 1.4rem;
+  --text-xl: 1.0625rem;
+  --text-xl--line-height: 1.3rem;
+  --text-h3: 1.0625rem;
+  --text-h3--line-height: 1.3rem;
+
+  /*
+   * The heading is a dialog title, not a section headline: the page's h2
+   * clamp tops out at 3rem, which inside a 43rem panel reads as a shout and
+   * costs two lines of the form's height.
+   */
+  --text-h2: clamp(1.375rem, 1.1rem + 1.1vw, 1.75rem);
+  --text-h2--line-height: 1.2;
+
+  --radius-xl: 0.675rem;
+  --radius-2xl: 0.9rem;
+  --glass-radius: 1.35rem;
+
+  --container-3xl: 43.2rem;
+  /* the sample report is a document rather than a form, so it runs wider */
+  --container-5xl: 57.6rem;
+
+  background: rgb(6 8 14 / 78%);
+  backdrop-filter: blur(10px);
+  animation: vc-modal-in 0.25s var(--ease-soft) both;
+}
+
+/*
+ * The scrollbar belongs to the panel's body, not to the overlay and not to
+ * the page behind it: the overlay only centres, the panel caps its height,
+ * and this is the one element that scrolls. Styled thin and warm so it reads
+ * as part of the glass — Firefox takes the two standard properties, Chrome
+ * and Safari need the pseudo-elements.
+ */
+.vc-modal-body {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(249 91 52 / 55%) transparent;
+}
+
+.vc-modal-body::-webkit-scrollbar { width: 10px; }
+.vc-modal-body::-webkit-scrollbar-track { background: transparent; }
+
+.vc-modal-body::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: rgb(249 91 52 / 45%);
+  background-clip: content-box;
+}
+
+.vc-modal-body::-webkit-scrollbar-thumb:hover { background: rgb(249 91 52 / 75%); background-clip: content-box; }
+
+/*
+ * Mobile Safari zooms the whole page in when it focuses a field whose text
+ * is under 16px, and never zooms back out. The compact field size is a
+ * desktop affordance; below `sm` the type goes back to 1rem.
+ */
+@media (max-width: 640px) {
+  .vc-modal .vc-field { font-size: 1rem; }
+}
+
+/*
+ * The panel rises rather than scales: it is tall enough to scroll, and a
+ * scale on a scrolling element blurs its own text mid-transition.
+ */
+.vc-modal-panel {
+  animation: vc-modal-panel-in 0.35s var(--ease-entrance) both;
+}
+
+@keyframes vc-modal-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes vc-modal-panel-in {
+  from { opacity: 0; transform: translateY(1.5rem); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vc-modal,
+  .vc-modal-panel { animation: none; }
+}
+
+/* ==================================================================
+ * 20. Mobile — same design, fewer effects
+ * ================================================================== */
+
+@media (max-width: 1023px) {
+  /*
+   * Below `lg` the bar is logo + the 2.5rem burger rather than a full row of
+   * links and a button, so it stands 0.75rem shorter — and the hero's offset
+   * has to follow it exactly or the gap comes back.
+   */
+  :root { --header-height: 5rem; }
+}
+
+@media (max-width: 1024px) {
+  /* the desktop drift reads as jitter on a small screen */
+  .vc-float,
+  .vc-float-slow { animation: none; }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --glass-blur: 12px;
+    --glass-radius: 1.25rem;
+  }
+
+  /* dim the ambient layer so text keeps its contrast on a bright phone */
+  .atmo-glow { opacity: 0.55 !important; animation: none; }
+  .atmo-glow--three { display: none; }
+  .atmo-grid { background-size: 40px 40px; opacity: 0.45; }
+  .atmo-noise { display: none; }
+
+  .site-section::before { width: 34rem; height: 100%; opacity: 0.7; }
+
+  .hero-reference-bg::after { display: none; }
+  .hero-spark { display: none; }
+
+  .cta-reference-panel::after { right: -13rem; bottom: -14rem; }
+
+  /* parallax on a phone fights the browser's own scroll smoothing */
+  .atmo-glow { translate: none !important; }
 }

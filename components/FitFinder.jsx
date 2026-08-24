@@ -17,7 +17,8 @@ export default function FitFinder() {
 
   return (
     <form
-      className="mx-auto mt-12 max-w-3xl rounded-3xl border border-white/10 bg-white/5 p-8"
+      data-reveal
+      className="vc-card mx-auto mt-12 max-w-3xl p-8"
       onSubmit={(e) => {
         e.preventDefault();
         setResult(answers);
@@ -33,7 +34,7 @@ export default function FitFinder() {
               id={`${base}-${q.id}`}
               value={answers[q.id]}
               onChange={(e) => setAnswers((a) => ({ ...a, [q.id]: e.target.value }))}
-              className="mt-2 w-full rounded-xl border border-white/15 bg-surface-2 px-4 py-3 text-base text-white focus:border-brand focus:outline-none"
+              className="vc-field mt-2 w-full rounded-xl px-4 py-3 text-base text-white"
             >
               {q.options.map((option) => (
                 <option key={option}>{option}</option>
@@ -46,7 +47,7 @@ export default function FitFinder() {
       <div className="mt-8 text-center">
         <button
           type="submit"
-          className="rounded-full bg-brand px-8 py-3.5 font-semibold text-white transition-colors duration-200 hover:bg-brand-dim"
+          className="vc-btn vc-btn-primary rounded-full px-8 py-3.5 font-semibold text-white"
         >
           Get a recommendation
         </button>

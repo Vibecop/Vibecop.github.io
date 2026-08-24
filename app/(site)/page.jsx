@@ -1,14 +1,16 @@
 import HeroDashboard from "@/components/HeroDashboard";
+import VelocityPlan from "@/components/VelocityPlan";
 import Accordion from "@/components/Accordion";
 import CallToAction from "@/components/CallToAction";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
+import AuditButton from "@/components/AuditButton";
 import Badge from "@/components/ui/Badge";
 import PricingCards from "@/components/PricingCards";
+import Sparkline from "@/components/ui/Sparkline";
 import { FAQS } from "@/content/faqs";
-import { TIMELINE } from "@/content/process";
 import {
   DASHBOARD_STATS,
   HERO,
@@ -27,14 +29,50 @@ export const metadata = {
  * 14-day handoff; the rest of the list is shared. */
 const HOME_FAQS = FAQS.map((faq, i) => (i === 1 ? HOME_FAQ_OVERRIDE : faq));
 
+/* Decorative trend shapes for the three metric cards — rising, rising
+ * harder, falling, matching what each figure is saying. */
+const STAT_SERIES = [
+  [18, 24, 21, 33, 30, 42, 52],
+  [10, 16, 14, 26, 31, 40, 58],
+  [58, 49, 52, 38, 33, 24, 16],
+];
+
+/*
+ * Gradient-fills the closing phrase of a headline.
+ *
+ * Taking the last two words rather than a hard-coded substring keeps
+ * content/home.js free of markup — the rule the data modules already follow —
+ * and means editing the headline does not silently drop the effect.
+ */
+function emphasise(line, words = 2) {
+  const parts = line.split(" ");
+  if (parts.length <= words) return <span className="text-gradient">{line}</span>;
+
+  const head = parts.slice(0, -words).join(" ");
+  const tail = parts.slice(-words).join(" ");
+  return (
+    <>
+      {head}{" "}
+      <span className="text-gradient">{tail}</span>
+    </>
+  );
+}
+
 export default function IndexPage() {
   return (
     <>
-      <section className="hero-reference-bg pb-16 pt-12 md:pb-20 lg:pb-25">
+      <section className="hero-reference-bg pb-12 md:pb-16 lg:pb-18">
+        {/* Loose glowing motes behind the headline. Purely atmospheric, so
+            they are inert and drop out entirely below the md breakpoint. */}
+        <span aria-hidden="true" className="hero-spark left-[8%] top-[22%] h-1.5 w-1.5" />
+        <span aria-hidden="true" className="hero-spark left-[46%] top-[12%] h-1 w-1 [animation-delay:-1.6s]" />
+        <span aria-hidden="true" className="hero-spark left-[30%] top-[68%] h-2 w-2 [animation-delay:-3.2s]" />
+        <span aria-hidden="true" className="hero-spark right-[6%] top-[46%] h-1.5 w-1.5 [animation-delay:-2.4s]" />
+
         <Container>
-          <div className="grid items-center gap-14 lg:grid-cols-2">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <ul className="m-0 flex list-none flex-wrap gap-3 p-0">
+              <ul className="hero-rise hero-rise-1 m-0 flex list-none flex-wrap gap-3 p-0">
                 {HERO.claims.map((claim) => (
                   <li key={claim}>
                     <Badge>
@@ -45,20 +83,20 @@ export default function IndexPage() {
                 ))}
               </ul>
 
-              <h1 className="text-display mt-8">
+              <h1 className="text-display hero-rise hero-rise-2 mt-7">
                 {HERO.titleLines.map((line) => (
                   <span key={line} className="block">
-                    {line}
+                    {emphasise(line)}
                   </span>
                 ))}
               </h1>
 
-              <p className="mt-6 max-w-xl text-lg text-muted">{HERO.lede}</p>
+              <p className="hero-rise hero-rise-3 mt-5 max-w-xl text-lg text-muted">{HERO.lede}</p>
 
-              <div className="mt-9 flex flex-wrap items-center gap-4">
-                <Button href="/contact" size="lg">
+              <div className="hero-rise hero-rise-4 mt-8 flex flex-wrap items-center gap-4">
+                <AuditButton size="lg">
                   Book an Automation Audit
-                </Button>
+                </AuditButton>
                 <Button href="/process" variant="ghost">
                   See Pipeline Stages
                   <i className="fa-solid fa-arrow-right text-sm" aria-hidden="true" />
@@ -77,72 +115,100 @@ export default function IndexPage() {
           lede="We plug automations into each stage so fewer leads leak and more turn into booked calls."
         />
 
-        <ol className="m-0 mt-12 grid list-none gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {PIPELINE_STAGES.map((stage) => (
-            <li
-              key={stage.stage}
-              className="rounded-3xl border border-white/10 bg-white/5 p-7 transition-colors duration-200 hover:border-brand/50"
-            >
-              <img src={stage.icon} alt="" aria-hidden="true" className="h-12 w-12" />
-              <h3 className="mt-5 text-h3">{stage.stage}</h3>
-              <p className="m-0 mt-1 text-sm font-semibold uppercase tracking-wide text-brand">
-                {stage.label}
-              </p>
-              <p className="mt-3 text-base text-muted">{stage.automation}</p>
+        {/* `vc-steps` draws the glowing rule that joins the stages once the
+            row scrolls into view; `data-stagger` brings the cards in one at
+            a time behind it. */}
+        <ol
+          data-stagger
+          className="vc-steps m-0 mt-12 grid list-none gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+        >
+          {PIPELINE_STAGES.map((stage, i) => (
+            /* `tabIndex` on the card, not a control inside it: the flip is
+               triggered by :hover and :focus-within, and without a focusable
+               element the back is unreachable by keyboard. */
+            <li key={stage.stage} className="vc-flip" tabIndex={0}>
+              <div className="vc-flip-inner">
+                <div className="vc-flip-face vc-card p-7">
+                  <span className="vc-step-index" aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <img
+                    src={stage.icon}
+                    alt=""
+                    aria-hidden="true"
+                    className="vc-card-art mt-5 h-12 w-12"
+                  />
+                  <h3 className="mt-4 text-h3">{stage.stage}</h3>
+                  <p className="m-0 mt-1 text-sm font-semibold uppercase tracking-wide text-brand">
+                    {stage.label}
+                  </p>
+                  <p className="mt-3 text-base text-muted">{stage.automation}</p>
+                </div>
+
+                <div className="vc-flip-face vc-flip-back vc-card vc-card-accent p-7">
+                  <p className="m-0 text-sm font-semibold uppercase tracking-wide text-brand">
+                    {stage.label}
+                  </p>
+                  <h3 className="mt-2 text-h3">{stage.stage}</h3>
+                  <p className="mt-3 text-base text-muted">{stage.detail}</p>
+                </div>
+              </div>
             </li>
           ))}
         </ol>
       </Section>
 
       <Section className="velocity-feature">
-        <div className="velocity-feature-grid">
-          <div className="velocity-feature-art">
-            <img src="/assets/images/velocity-plan-img.png" alt="Automation workflow dashboard" />
-          </div>
-          <div className="velocity-feature-copy">
-            <img src="/assets/images/special-img.png" alt="" aria-hidden="true" className="velocity-feature-mark" />
-            <h2 className="text-h1">The 14-Day Velocity<br className="hidden sm:block" /> Plan of Us</h2>
-            <ol className="velocity-timeline">
-              {TIMELINE.map((step, i) => (
-                <li key={step.title} className={i === TIMELINE.length - 1 ? "is-final" : undefined}>
-                  <span className="velocity-timeline-dot" aria-hidden="true">{i === TIMELINE.length - 1 ? "✓" : ""}</span>
-                  <div>
-                    <h3>{step.when}: {step.title}</h3>
-                    <p>{step.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
+        <VelocityPlan />
       </Section>
 
       <Section tone="surface">
-        <div className="crm-reference-heading">
+        <div className="crm-reference-heading" data-reveal>
           <img src="/assets/images/special-img.png" alt="" aria-hidden="true" />
           <h2 className="text-h1">Which CRM Do You Use?</h2>
           <p>We connect directly to your existing CRM setup — no rip-and-replace required.</p>
         </div>
 
-        <div className="crm-reference-groups">
-          {[
-            { title: "Sales CRM", tools: ["HubSpot", "Salesforce", "Pipedrive"] },
-            { title: "Marketing & Automation", tools: ["Zapier", "Make", "Calendly"] },
-            { title: "Support & Operations", tools: ["Slack", "Teams", "Zoho"] },
-          ].map((group) => (
-            <div key={group.title} className="crm-reference-group">
-              <h3>{group.title}</h3>
-              <ul>
-                {group.tools.map((tool, i) => (
-                  <li key={tool}>
-                    <span aria-hidden="true"><i className={["fa-solid fa-circle-nodes", "fa-solid fa-bolt", "fa-solid fa-comments"][i]} /></span>
-                    <strong>{tool}</strong>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+<div className="crm-reference-groups" data-stagger>
+  {[
+    {
+      title: "Integration",
+      tools: [
+        { name: "REST APIs", icon: "fa-solid fa-code" },
+        { name: "Webhooks", icon: "fa-solid fa-circle-nodes" },
+        { name: "OAuth", icon: "fa-solid fa-key" },
+      ],
+    },
+    {
+      title: "Codebase",
+      tools: [
+        { name: "GitHub", icon: "fa-brands fa-github" },
+        { name: "GitLab", icon: "fa-brands fa-gitlab" },
+        { name: "Bitbucket", icon: "fa-brands fa-bitbucket" },
+      ],
+    },
+{
+  title: "Deployment",
+  tools: [
+    { name: "Heroku", icon: "fa-solid fa-cloud" },
+    { name: "AWS", icon: "fa-brands fa-aws" },
+    { name: "Docker", icon: "fa-brands fa-docker" },
+  ],
+},
+  ].map((group) => (
+    <div key={group.title} className="vc-card crm-reference-group">
+      <h3>{group.title}</h3>
+      <ul>
+        {group.tools.map((tool) => (
+          <li key={tool.name}>
+            <span aria-hidden="true"><i className={tool.icon} /></span>
+            <strong>{tool.name}</strong>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</div>
       </Section>
 
       <Section>
@@ -155,20 +221,27 @@ export default function IndexPage() {
 
       <Section tone="surface">
         <SectionHeading
-          title="One View: Leads, Conversion, Follow-Ups"
-          lede="Complete visibility into your sales pipeline from first touch to close."
+          title="What We Catch Before Your Users Do"
+          lede="Every architecture, security, and scale risk in your codebase, ranked by what actually threatens your launch."
         />
 
-        <ul className="m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-3">
-          {DASHBOARD_STATS.map((stat) => (
-            <li key={stat.label} className="rounded-3xl border border-white/10 bg-white/5 p-8">
+        {/* `data-count` on the figure: MotionRuntime reads the rendered text,
+            keeps its prefix/suffix, and counts up to it once. The markup still
+            ships the final value, so it is correct with JS off and there is no
+            layout shift when the animation runs. */}
+        <ul data-stagger className="m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-3">
+          {DASHBOARD_STATS.map((stat, i) => (
+            <li key={stat.label} className="vc-card vc-card-hover overflow-hidden p-8">
               <p className="m-0 flex items-center justify-between gap-3">
                 <span className="text-base text-muted">{stat.label}</span>
-                <span className="rounded-full bg-brand/15 px-3 py-1 text-sm font-semibold text-brand">
+                <span className="vc-delta rounded-full px-3 py-1 whitespace-nowrap text-xs font-semibold text-brand">
                   {stat.delta}
                 </span>
               </p>
-              <p className="m-0 mt-5 text-5xl font-bold text-white">{stat.value}</p>
+              <p className="vc-stat-value m-0 mt-5 text-5xl font-bold text-white" data-count>
+                {stat.value}
+              </p>
+              <Sparkline id={`stat-${i}`} values={STAT_SERIES[i]} className="mt-6" />
             </li>
           ))}
         </ul>

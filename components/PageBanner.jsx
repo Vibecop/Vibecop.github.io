@@ -13,23 +13,26 @@ import Container from "@/components/ui/Container";
 export default function PageBanner({ title, lede, breadcrumb }) {
   return (
     <section className="inner-banner relative isolate overflow-hidden">
+      {/* Both layers carry `inner-banner-layer`, which fades them out over the
+          bottom third so the banner dissolves into the page's shared
+          background rather than ending on a hard horizontal edge. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[url('/assets/images/sub-banner-image.jpg')] bg-cover bg-bottom bg-no-repeat"
+        className="inner-banner-layer absolute inset-0 -z-10 bg-[url('/assets/images/sub-banner-image.jpg')] bg-cover bg-bottom bg-no-repeat"
       />
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ink/45" />
+      <div aria-hidden="true" className="inner-banner-layer absolute inset-0 -z-10 bg-ink/55" />
 
       <Container className="py-20 text-center md:py-28 lg:py-32">
-        <h1 className="text-display mx-auto max-w-5xl">{title}</h1>
+        <h1 className="text-display hero-rise hero-rise-1 mx-auto max-w-5xl">{title}</h1>
 
         {lede && (
-          <p className="mx-auto mt-6 max-w-3xl text-balance text-base font-medium text-white/90">
+          <p className="hero-rise hero-rise-2 mx-auto mt-6 max-w-3xl text-balance text-base font-medium text-white/90">
             {lede}
           </p>
         )}
 
-        <nav aria-label="Breadcrumb" className="mt-8">
-          <ol className="m-0 inline-flex list-none items-center gap-3 rounded-full border border-white/25 px-6 py-3 text-base">
+        <nav aria-label="Breadcrumb" className="hero-rise hero-rise-3 mt-8">
+          <ol className="vc-badge m-0 inline-flex list-none items-center gap-3 rounded-full border px-6 py-3 text-base">
             <li>
               <Link
                 href="/"

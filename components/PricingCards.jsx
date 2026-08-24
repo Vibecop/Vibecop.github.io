@@ -1,16 +1,19 @@
-import Button from "@/components/ui/Button";
+import AuditButton from "@/components/AuditButton";
 import { cn } from "@/lib/cn";
 import { PLANS } from "@/content/pricing";
 
 export default function PricingCards({ className }) {
   return (
-    <ul className={cn("m-0 grid list-none gap-6 p-0 md:grid-cols-2 lg:grid-cols-4", className)}>
+    <ul data-stagger className={cn("m-0 grid list-none gap-6 p-0 md:grid-cols-2 lg:grid-cols-4", className)}>
       {PLANS.map((plan) => (
         <li
           key={plan.name}
-          className={cn("pricing-card flex min-h-[23rem] flex-col rounded-xl border bg-white/5 p-6 transition-colors duration-200 hover:border-brand/50", plan.featured ? "is-featured border-brand" : "border-white/10")}
+          className={cn(
+            "vc-card vc-card-hover flex min-h-[23rem] flex-col p-6",
+            plan.featured && "vc-card-accent"
+          )}
         >
-          <img src={plan.icon} alt="" aria-hidden="true" className="mb-5 h-12 w-12 object-contain" />
+          <img src={plan.icon} alt="" aria-hidden="true" className="vc-card-art mb-5 h-12 w-12 object-contain" />
           <h3 className="text-xl font-semibold text-white">
             {plan.name}
             {plan.featured && <span className="ml-3 rounded-full border border-brand px-2 py-1 text-[10px] font-semibold uppercase text-brand">Featured</span>}
@@ -33,10 +36,10 @@ export default function PricingCards({ className }) {
             ))}
           </ul>
 
-          <Button href="/contact" className="mt-auto w-full">
+          <AuditButton className="mt-auto w-full">
             Request an audit
             <span className="sr-only"> — {plan.name}</span>
-          </Button>
+          </AuditButton>
         </li>
       ))}
     </ul>

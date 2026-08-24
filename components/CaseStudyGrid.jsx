@@ -28,9 +28,7 @@ export default function CaseStudyGrid() {
               onClick={() => setFilter(name)}
               className={cn(
                 "rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200",
-                active
-                  ? "bg-brand text-white"
-                  : "border border-white/15 text-white hover:border-brand hover:bg-brand"
+                active ? "vc-btn vc-btn-primary text-white" : "vc-btn vc-btn-outline text-white"
               )}
             >
               {name}
@@ -39,22 +37,21 @@ export default function CaseStudyGrid() {
         })}
       </div>
 
-      <ul className="m-0 mt-12 grid list-none gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3">
+      <ul data-stagger className="m-0 mt-12 grid list-none gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3">
         {shown.map((study) => (
-          <li
-            key={study.slug}
-            className="flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 transition-colors duration-200 hover:border-brand/50"
-          >
-            <img
-              src={study.image}
-              alt=""
-              loading="lazy"
-              className="aspect-16/10 w-full object-cover"
-            />
+          <li key={study.slug} className="vc-card vc-card-hover group flex flex-col overflow-hidden">
+            <div className="overflow-hidden">
+              <img
+                src={study.image}
+                alt=""
+                loading="lazy"
+                className="vc-card-art aspect-16/10 w-full object-cover"
+              />
+            </div>
 
             <div className="flex flex-1 flex-col p-6">
               <p className="m-0 flex flex-wrap gap-2 text-sm">
-                <span className="rounded-full bg-brand/15 px-3 py-1 font-semibold text-brand">
+                <span className="vc-delta rounded-full px-3 py-1 font-semibold text-brand">
                   {study.category}
                 </span>
                 <span className="rounded-full border border-white/15 px-3 py-1 text-muted">

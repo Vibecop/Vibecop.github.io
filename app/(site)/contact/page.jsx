@@ -37,7 +37,7 @@ export default function ContactPage() {
 
       <Section>
         <div className="grid items-start gap-12 lg:grid-cols-2">
-          <div>
+          <div data-reveal="left">
             <SectionHeading title="Book an Automation Audit" align="left" mark={false} />
             <p className="mt-5 text-base text-muted">
               15 minutes. We’ll map one workflow and give you a clear next step. No pitch, no
@@ -65,13 +65,13 @@ export default function ContactPage() {
           lede="Understand the process and timeline after you reach out to us."
         />
 
-        <ol className="m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-3">
+        <ol data-stagger className="vc-steps vc-steps-3 m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-3">
           {NEXT_STEPS.map((step, i) => (
-            <li key={step.title} className="rounded-3xl border border-white/10 bg-white/5 p-8">
-              <span aria-hidden="true" className="text-4xl font-bold leading-none text-brand/25">
+            <li key={step.title} className="vc-card vc-card-hover p-8">
+              <span className="vc-step-index" aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-4 text-h3">{step.title}</h3>
+              <h3 className="mt-5 text-h3">{step.title}</h3>
               <p className="mt-3 text-base text-muted">{step.body}</p>
             </li>
           ))}

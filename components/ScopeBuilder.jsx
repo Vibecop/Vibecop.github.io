@@ -34,7 +34,8 @@ export default function ScopeBuilder() {
 
   return (
     <form
-      className="mx-auto mt-12 max-w-3xl rounded-3xl border border-white/10 bg-white/5 p-8"
+      data-reveal
+      className="vc-card mx-auto mt-12 max-w-3xl p-8"
       onSubmit={(e) => {
         e.preventDefault();
         setSheet(picked);
@@ -54,8 +55,8 @@ export default function ScopeBuilder() {
                   className={cn(
                     "rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200",
                     isOn(group, option)
-                      ? "bg-brand text-white"
-                      : "border border-white/15 text-white hover:border-brand"
+                      ? "vc-btn vc-btn-primary text-white"
+                      : "vc-btn vc-btn-outline text-white"
                   )}
                 >
                   {option}
@@ -70,7 +71,7 @@ export default function ScopeBuilder() {
         <button
           id={`${base}-submit`}
           type="submit"
-          className="rounded-full bg-brand px-8 py-3.5 font-semibold text-white transition-colors duration-200 hover:bg-brand-dim"
+          className="vc-btn vc-btn-primary rounded-full px-8 py-3.5 font-semibold text-white"
         >
           Generate Build Sheet
         </button>

@@ -16,9 +16,11 @@ export default function ComingSoonPage() {
           <img src="/assets/images/logo.png" alt="Vibecop" className="h-10 w-auto" />
         </Link>
 
-        <div>
+        <div className="hero-rise hero-rise-1">
           <p className="m-0 text-lg font-medium text-brand">The Website is under construction</p>
-          <h1 className="text-display mt-3">Coming Soon</h1>
+          <h1 className="text-display mt-3">
+            Coming <span className="text-gradient">Soon</span>
+          </h1>
         </div>
 
         <Countdown />
@@ -37,11 +39,11 @@ export default function ComingSoonPage() {
               required
               autoComplete="email"
               placeholder="Enter Your Email Address"
-              className="min-w-0 flex-1 rounded-full border border-white/15 bg-white/5 px-5 py-3.5 text-base text-white placeholder:text-muted-3 focus:border-brand focus:outline-none"
+              className="vc-field min-w-0 flex-1 rounded-full px-5 py-3.5 text-base text-white placeholder:text-muted-3"
             />
             <button
               type="submit"
-              className="rounded-full bg-brand px-7 py-3.5 font-semibold text-white transition-colors duration-200 hover:bg-brand-dim"
+              className="vc-btn vc-btn-primary rounded-full px-7 py-3.5 font-semibold text-white"
             >
               Subscribe
             </button>

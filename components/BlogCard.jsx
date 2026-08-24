@@ -29,8 +29,7 @@ export default function BlogCard({ post, layout = "stacked", className }) {
   return (
     <article
       className={cn(
-        "flex h-full overflow-hidden rounded-3xl border border-white/10 bg-white/5",
-        "transition-colors duration-200 hover:border-brand/50",
+        "vc-card vc-card-hover flex h-full overflow-hidden",
         wide ? "flex-col sm:flex-row" : "flex-col",
         className
       )}
@@ -58,7 +57,7 @@ export default function BlogCard({ post, layout = "stacked", className }) {
           </span>
           <Link
             href="/single-blog"
-            className="rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white no-underline transition-colors duration-200 hover:bg-brand-dim"
+            className="vc-btn vc-btn-primary rounded-full px-4 py-2 text-sm font-semibold text-white no-underline"
           >
             Read More
             <span className="sr-only"> about {post.tag}</span>

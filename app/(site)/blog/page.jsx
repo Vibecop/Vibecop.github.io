@@ -26,7 +26,7 @@ export default function BlogPage() {
           lede="Read our latest articles, tips, & expert insights to stay informed and inspired."
         />
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div data-stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {ARTICLES.map((article, i) => (
             <ArticleCard key={article.slug} article={article} cta={i === 0 ? "Learn More" : "Read More"} />
           ))}

@@ -21,13 +21,46 @@ function isCurrent(pathname, item) {
  * leaves the menu unreachable by keyboard and unusable on touch, which is
  * what the Bootstrap version did. Escape closes and returns focus to the
  * toggle; a click outside closes.
+ *
+ * Closing is deliberately delayed. The panel hangs 0.5rem below the button,
+ * and the pointer crossing that gap — or cutting a corner on its way to a
+ * child link — leaves the <li> for a frame or two. Closing on that first
+ * mouseleave pulled the menu out from under the click.
  */
+const CLOSE_DELAY = 180;
+
 function NavDropdown({ item, pathname }) {
   const [open, setOpen] = useState(false);
   const wrapper = useRef(null);
   const toggle = useRef(null);
+  const closeTimer = useRef(null);
   const menuId = useId();
   const current = isCurrent(pathname, item);
+
+  const cancelClose = () => {
+    clearTimeout(closeTimer.current);
+    closeTimer.current = null;
+  };
+
+  const openNow = () => {
+    cancelClose();
+    setOpen(true);
+  };
+
+  const closeSoon = () => {
+    cancelClose();
+    closeTimer.current = setTimeout(() => setOpen(false), CLOSE_DELAY);
+  };
+
+  /* a pending close must not fire into an unmounted component */
+  useEffect(() => cancelClose, []);
+
+  /* the route changed, so the menu has done its job — and the pointer may
+     still be sitting on it, which would otherwise leave it open */
+  useEffect(() => {
+    cancelClose();
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -53,17 +86,26 @@ function NavDropdown({ item, pathname }) {
     <li
       ref={wrapper}
       className="lg:relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      /*
+       * Pointer events rather than mouse events, filtered to a real mouse.
+       * A tap fires mouseenter first and then click, so on a phone the
+       * hover-open and the click-toggle cancelled each other out and the
+       * submenu never appeared.
+       */
+      onPointerEnter={(e) => e.pointerType === "mouse" && openNow()}
+      onPointerLeave={(e) => e.pointerType === "mouse" && closeSoon()}
     >
       <button
         ref={toggle}
         type="button"
         aria-expanded={open}
         aria-controls={menuId}
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => {
+          cancelClose();
+          setOpen((v) => !v);
+        }}
         className={cn(
-          "flex w-full items-center justify-between gap-1.5 py-2 text-base font-medium",
+          "nav-link-underline flex w-full items-center justify-between gap-1.5 py-2 text-base font-medium",
           "transition-colors duration-200 lg:w-auto lg:justify-start",
           current ? "text-brand" : "text-white hover:text-brand"
         )}
@@ -82,14 +124,18 @@ function NavDropdown({ item, pathname }) {
         id={menuId}
         hidden={!open}
         className={cn(
-          "mb-2 list-none space-y-0.5 pl-3 lg:absolute lg:left-0 lg:top-full lg:z-50 lg:mb-0",
-          "lg:min-w-56 lg:rounded-2xl lg:border lg:border-white/10 lg:bg-surface-2 lg:p-2 lg:pl-2 lg:shadow-2xl"
+          "nav-submenu mb-2 list-none space-y-0.5 pl-3",
+          "lg:absolute lg:left-0 lg:top-full lg:z-50 lg:mb-0 lg:mt-6 lg:min-w-56 lg:p-2 lg:pl-2"
         )}
       >
         {item.children.map((child) => (
           <li key={child.href}>
             <Link
               href={child.href}
+              onClick={() => {
+                cancelClose();
+                setOpen(false);
+              }}
               className={cn(
                 "block rounded-lg px-3 py-2 text-sm no-underline transition-colors duration-200",
                 pathname === child.href
@@ -115,11 +161,11 @@ export default function Header() {
   useEffect(() => setMenuOpen(false), [pathname]);
 
   return (
-    <header className="site-header sticky top-0 z-50 bg-black/80 pt-4 backdrop-blur-md">
+    <header className="site-header sticky top-0 z-50 pt-4">
       <Container>
         <nav
           aria-label="Main"
-          className="site-nav rounded-3xl border border-white/10 bg-surface-2/80 px-5 py-3 backdrop-blur-md lg:px-8"
+          className="site-nav rounded-3xl px-5 py-3 lg:px-8"
         >
           <div className="flex items-center justify-between gap-6">
             <Link href="/" className="shrink-0" aria-label="Vibecop — home">
@@ -152,8 +198,8 @@ export default function Header() {
             <div
               id="main-menu"
               className={cn(
-                "absolute inset-x-4 top-full mt-2 rounded-3xl border border-white/10 bg-surface-2 p-5 lg:static lg:mt-0",
-                "lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-8 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0",
+                "nav-drawer absolute inset-x-4 top-full mt-2 p-5 lg:static lg:mt-0 lg:p-0",
+                "lg:flex lg:items-center lg:gap-8",
                 menuOpen ? "block" : "hidden lg:flex"
               )}
             >
@@ -167,7 +213,8 @@ export default function Header() {
                         href={item.href}
                         aria-current={pathname === item.href ? "page" : undefined}
                         className={cn(
-                          "block py-2 text-base font-medium no-underline transition-colors duration-200",
+                          "nav-link-underline block py-2 text-base font-medium no-underline",
+                          "transition-colors duration-200",
                           pathname === item.href ? "text-brand" : "text-white hover:text-brand"
                         )}
                       >
@@ -177,14 +224,11 @@ export default function Header() {
                   )
                 )}
               </ul>
-
+            </div>
               <div className="mt-5 gap-3 border-t border-white/10 pt-5 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 lg:border-0 lg:pt-0">
-                <Button  href="/contact"rel="noopener noreferrer">
-                  Contact Us
-                </Button>
+                <Button href="/contact">Contact Us</Button>
               </div>
             </div>
-          </div>
         </nav>
       </Container>
     </header>

@@ -4,7 +4,7 @@ import { CATEGORIES, POPULAR_POSTS, TAGS } from "@/content/blog-sidebar";
 
 function Widget({ title, children }) {
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/5 p-6">
+    <section className="vc-card p-6">
       <h2 className="text-h3">{title}</h2>
       <div className="mt-5">{children}</div>
     </section>
@@ -25,12 +25,12 @@ export default function BlogSidebar() {
             type="search"
             name="q"
             placeholder="Search articles…"
-            className="w-full rounded-full border border-white/15 bg-white/5 py-3 pl-5 pr-12 text-base text-white placeholder:text-muted-3 focus:border-brand focus:outline-none"
+            className="vc-field w-full rounded-full py-3 pl-5 pr-12 text-base text-white placeholder:text-muted-3"
           />
           <button
             type="submit"
             aria-label="Search"
-            className="absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-brand text-white transition-colors duration-200 hover:bg-brand-dim"
+            className="vc-btn vc-btn-primary absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-white"
           >
             <i className="fa-solid fa-magnifying-glass text-sm" aria-hidden="true" />
           </button>
@@ -81,7 +81,7 @@ export default function BlogSidebar() {
             <li key={tag}>
               <Link
                 href="/blog"
-                className="inline-block rounded-full border border-white/15 px-3 py-1.5 text-sm text-muted no-underline transition-colors duration-200 hover:border-brand hover:bg-brand hover:text-white"
+                className="vc-btn vc-btn-outline inline-block rounded-full px-3 py-1.5 text-sm text-muted no-underline"
               >
                 {tag}
               </Link>

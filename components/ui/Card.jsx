@@ -1,20 +1,20 @@
 import { cn } from "@/lib/cn";
 
 /**
- * The design's one card treatment: translucent fill, hairline border, large
- * radius. `interactive` adds the hover lift the grids use.
+ * The design's one card treatment: glass fill, hairline border, lit top edge,
+ * large radius. `interactive` adds the hover lift and glow the grids use.
  *
- * The fill is part of the treatment, so passing a different `bg-*` through
- * `className` does not reliably win — which utility applies is decided by
- * Tailwind's emit order, not by the order of the class list. A panel that
- * needs its own background should be a plain element rather than a Card.
+ * The fill is part of the treatment and is set by `.vc-card` in theme.css, so
+ * passing a different `bg-*` through `className` will not win — the rule is
+ * unlayered and Tailwind's utilities are not. A panel that needs its own
+ * background should be a plain element rather than a Card.
  */
 export default function Card({ as: Tag = "div", interactive, className, ...props }) {
   return (
     <Tag
       className={cn(
-        "rounded-3xl border border-white/10 bg-white/5",
-        interactive && "transition-colors duration-200 hover:border-brand/60 hover:bg-white/8",
+        "vc-card",
+        interactive && "vc-card-hover",
         className
       )}
       {...props}

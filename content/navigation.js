@@ -11,11 +11,7 @@
 export const MAIN_NAV = [
   { label: "About", href: "/about" },
   {
-    label: "Services",
-    children: [
-      { label: "Services", href: "/services" },
-      { label: "Single Services", href: "/single-services" },
-    ],
+    label: "Services",href: "/services"
   },
   {
     label: "Pages",

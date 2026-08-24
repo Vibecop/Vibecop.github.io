@@ -27,11 +27,12 @@ export default function ContactForm() {
   const [sent, setSent] = useState(false);
 
   const inputClass =
-    "w-full rounded-xl border border-white/15 bg-surface-2 px-4 py-3 text-base text-white placeholder:text-muted-3 focus:border-brand focus:outline-none";
+    "vc-field w-full rounded-xl px-4 py-3 text-base text-white placeholder:text-muted-3";
 
   return (
     <form
-      className="rounded-3xl border border-white/10 bg-white/5 p-8"
+      data-reveal
+      className="vc-card p-8"
       onSubmit={(e) => {
         e.preventDefault();
         setSent(true);
@@ -49,8 +50,8 @@ export default function ContactForm() {
               className={cn(
                 "rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200",
                 help === option
-                  ? "bg-brand text-white"
-                  : "border border-white/15 text-white hover:border-brand"
+                  ? "vc-btn vc-btn-primary text-white"
+                  : "vc-btn vc-btn-outline text-white"
               )}
             >
               {option}
@@ -106,7 +107,7 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="mt-8 w-full rounded-full bg-brand px-8 py-4 font-semibold text-white transition-colors duration-200 hover:bg-brand-dim sm:w-auto"
+        className="vc-btn vc-btn-primary mt-8 w-full rounded-full px-8 py-4 font-semibold text-white sm:w-auto"
       >
         Send Request
       </button>

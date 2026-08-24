@@ -13,7 +13,7 @@ export const metadata = {
 
 function Widget({ title, children }) {
   return (
-    <section className="rounded-3xl border border-white/10 bg-white/5 p-6">
+    <section data-reveal className="vc-card p-6">
       <h2 className="text-h3">{title}</h2>
       <div className="mt-5">{children}</div>
     </section>
@@ -30,7 +30,7 @@ export default function SingleBlogPage() {
 
       <Section>
         <div className="grid gap-10 lg:grid-cols-12">
-          <article className="lg:col-span-8">
+          <article data-reveal className="lg:col-span-8">
             <p className="m-0 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-muted">
               <span className="inline-flex items-center gap-1.5">
                 <i className="fa-solid fa-user text-xs text-brand" aria-hidden="true" />
@@ -48,7 +48,7 @@ export default function SingleBlogPage() {
               src={POST.image}
               alt=""
               aria-hidden="true"
-              className="mt-8 aspect-16/9 w-full rounded-3xl object-cover"
+              className="mt-8 aspect-16/9 w-full rounded-3xl object-cover shadow-[0_1.5rem_3.5rem_rgb(0_0_0/45%)]"
             />
 
             {POST.body.map((paragraph) => (
@@ -57,7 +57,7 @@ export default function SingleBlogPage() {
               </p>
             ))}
 
-            <blockquote className="mt-8 rounded-3xl border-l-4 border-brand bg-white/5 p-8">
+            <blockquote className="vc-card mt-8 border-l-4 border-l-brand p-8">
               <p className="m-0 text-xl font-medium italic text-white">{POST.quote}</p>
             </blockquote>
 
@@ -70,7 +70,7 @@ export default function SingleBlogPage() {
               ))}
             </ul>
 
-            <section className="mt-14 border-t border-white/10 pt-10">
+            <section className="mt-14 border-t border-white/8 pt-10">
               <h2 className="text-h2">Leave Us a Reply:</h2>
               <p className="mt-3 text-base text-muted">
                 Share your thoughts, ideas, or questions about SaaS and AI solutions. Our team is

@@ -5,6 +5,7 @@ import CallToAction from "@/components/CallToAction";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
+import AuditButton from "@/components/AuditButton";
 import { FAQS } from "@/content/faqs";
 import { HOW_IT_WORKS, INCLUDED, STACK } from "@/content/single-service";
 
@@ -32,7 +33,7 @@ export default function SingleServicesPage() {
 
       <Section tone="surface">
         <div className="grid items-start gap-12 lg:grid-cols-2">
-          <div>
+          <div data-reveal="left">
             <SectionHeading title="What’s included in Lead Flow Automation" align="left" mark={false} />
             <p className="mt-5 text-base text-muted">
               From form or email to CRM and calendar — first response in minutes, not hours.
@@ -45,12 +46,12 @@ export default function SingleServicesPage() {
                 </li>
               ))}
             </ul>
-            <Button href="/contact" size="lg" className="mt-8">
+            <AuditButton size="lg" className="mt-8">
               Book an Automation Audit
-            </Button>
+            </AuditButton>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <div data-reveal="right" className="vc-card p-8">
             <h3 className="text-h3">Works With Your Stack</h3>
             <ul className="m-0 mt-5 list-none space-y-2 p-0">
               {STACK.map((line) => (
@@ -69,19 +70,19 @@ export default function SingleServicesPage() {
       <Section>
         <SectionHeading title="How it works" />
 
-        <ol className="m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-3">
+        <ol data-stagger className="vc-steps vc-steps-3 m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-3">
           {HOW_IT_WORKS.map((step, i) => (
-            <li key={step.title} className="rounded-3xl border border-white/10 bg-white/5 p-8">
-              <span aria-hidden="true" className="text-4xl font-bold leading-none text-brand/25">
+            <li key={step.title} className="vc-card vc-card-hover p-8">
+              <span className="vc-step-index" aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-4 text-h3">{step.title}</h3>
+              <h3 className="mt-5 text-h3">{step.title}</h3>
               <p className="mt-3 text-base text-muted">{step.body}</p>
             </li>
           ))}
         </ol>
 
-        <div className="mt-12 text-center">
+        <div data-reveal className="mt-12 text-center">
           <Button href="/contact" size="lg">
             Start this Service
           </Button>
