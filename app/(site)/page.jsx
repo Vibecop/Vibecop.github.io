@@ -16,20 +16,19 @@ import {
   HERO,
   HOME_FAQ_OVERRIDE,
   PIPELINE_STAGES,
-  RESULT,
 } from "@/content/home";
 
 export const metadata = {
   // absolute: the root template appends "| Vibecop", which this already says
-  title: { absolute: "Vibecop — Senior Supervision for Products built with AI" },
+  title: { absolute: "Vibecop - Senior Supervision for Products built with AI" },
   description: HERO.lede,
 };
 
-/* The home page asks about attribution where the other pages ask about the
- * 14-day handoff; the rest of the list is shared. */
+/* The home page asks what an engagement needs to start; the rest of the
+ * list is shared with /faq. */
 const HOME_FAQS = FAQS.map((faq, i) => (i === 1 ? HOME_FAQ_OVERRIDE : faq));
 
-/* Decorative trend shapes for the three metric cards — rising, rising
+/* Decorative trend shapes for the three metric cards rising, rising
  * harder, falling, matching what each figure is saying. */
 const STAT_SERIES = [
   [18, 24, 21, 33, 30, 42, 52],
@@ -41,7 +40,7 @@ const STAT_SERIES = [
  * Gradient-fills the closing phrase of a headline.
  *
  * Taking the last two words rather than a hard-coded substring keeps
- * content/home.js free of markup — the rule the data modules already follow —
+ * content/home.js free of markup the rule the data modules already follow
  * and means editing the headline does not silently drop the effect.
  */
 function emphasise(line, words = 2) {
@@ -95,10 +94,10 @@ export default function IndexPage() {
 
               <div className="hero-rise hero-rise-4 mt-8 flex flex-wrap items-center gap-4">
                 <AuditButton size="lg">
-                  Book an Automation Audit
+                  Request an audit
                 </AuditButton>
                 <Button href="/process" variant="ghost">
-                  See Pipeline Stages
+                  See how an audit runs
                   <i className="fa-solid fa-arrow-right text-sm" aria-hidden="true" />
                 </Button>
               </div>
@@ -111,8 +110,8 @@ export default function IndexPage() {
 
       <Section tone="surface">
         <SectionHeading
-          title="Your Pipeline, With Health at Every Stage"
-          lede="We plug automations into each stage so fewer leads leak and more turn into booked calls."
+          title="How an Audit Runs, Stage by Stage"
+          lede="Machine-speed analysis, senior engineer verification, and a roadmap your team can execute every stage accounted for."
         />
 
         {/* `vc-steps` draws the glowing rule that joins the stages once the
@@ -142,7 +141,7 @@ export default function IndexPage() {
                   <p className="m-0 mt-1 text-sm font-semibold uppercase tracking-wide text-brand">
                     {stage.label}
                   </p>
-                  <p className="mt-3 text-base text-muted">{stage.automation}</p>
+                  <p className="mt-3 text-base text-muted">{stage.deliverable}</p>
                 </div>
 
                 <div className="vc-flip-face vc-flip-back vc-card vc-card-accent p-7">
@@ -165,8 +164,8 @@ export default function IndexPage() {
       <Section tone="surface">
         <div className="crm-reference-heading" data-reveal>
           <img src="/assets/images/special-img.png" alt="" aria-hidden="true" />
-          <h2 className="text-h1">Which CRM Do You Use?</h2>
-          <p>We connect directly to your existing CRM setup — no rip-and-replace required.</p>
+          <h2 className="text-h1">What Stack Are You On?</h2>
+          <p>We review modern SaaS and AI-focused stacks in place no migration, no rewrite required.</p>
         </div>
 
 <div className="crm-reference-groups" data-stagger>
@@ -213,16 +212,16 @@ export default function IndexPage() {
 
       <Section>
         <SectionHeading
-          title="Investment Built on ROI"
-          lede="Fixed-scope projects. No monthly fees. You own the code."
+          title="Scoped Engagements, Priced Up Front"
+          lede="Fixed-scope audits and sprints. One prevented incident typically covers the cost many times over."
         />
         <PricingCards className="mt-12" />
       </Section>
 
       <Section tone="surface">
         <SectionHeading
-          title="What We Catch Before Your Users Do"
-          lede="Every architecture, security, and scale risk in your codebase, ranked by what actually threatens your launch."
+          title="Human Verification, Not Just a Scan"
+          lede="Automated tools surface signals. Senior engineers decide what matters, why it matters, and what to do next."
         />
 
         {/* `data-count` on the figure: MotionRuntime reads the rendered text,
@@ -233,12 +232,12 @@ export default function IndexPage() {
           {DASHBOARD_STATS.map((stat, i) => (
             <li key={stat.label} className="vc-card vc-card-hover overflow-hidden p-8">
               <p className="m-0 flex items-center justify-between gap-3">
-                <span className="text-base text-muted">{stat.label}</span>
+                <span className="text-sm text-muted">{stat.label}</span>
                 <span className="vc-delta rounded-full px-3 py-1 whitespace-nowrap text-xs font-semibold text-brand">
                   {stat.delta}
                 </span>
               </p>
-              <p className="vc-stat-value m-0 mt-5 text-5xl font-bold text-white" data-count>
+              <p className="vc-stat-value m-0 mt-5 text-4xl font-bold text-white" data-count>
                 {stat.value}
               </p>
               <Sparkline id={`stat-${i}`} values={STAT_SERIES[i]} className="mt-6" />
@@ -255,16 +254,7 @@ export default function IndexPage() {
         <Accordion items={HOME_FAQS} className="mx-auto mt-12 max-w-4xl" />
       </Section>
 
-      <CallToAction
-        title={
-          <>
-            Bring Your Messy
-            <br />
-            Pipeline.
-          </>
-        }
-        lede="We transform scattered processes into a reliable, revenue-ready engine."
-      />
+      <CallToAction />
     </>
   );
 }

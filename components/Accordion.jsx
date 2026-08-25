@@ -12,7 +12,7 @@ import { cn } from "@/lib/cn";
  * with `aria-expanded`/`aria-controls`, so it works from the keyboard and
  * reads correctly to a screen reader.
  *
- * `defaultOpen` is the index that starts expanded — pass `null` for none.
+ * `defaultOpen` is the index that starts expanded pass `null` for none.
  *
  * Opening animates the height rather than snapping: the panel is a grid whose
  * single row goes from `0fr` to `1fr` (see `.faq-panel`), so nothing has to be
@@ -67,7 +67,7 @@ export default function Accordion({ items, defaultOpen = 0, className }) {
               * order and out of the accessibility tree, and unlike
               * `aria-hidden` alone it also blocks pointer and find-in-page.
               * React 19 treats it as a real boolean attribute, so it takes a
-              * boolean — an empty string reads as false and warns.
+              * boolean an empty string reads as false and warns.
               */}
             <div
               id={panelId}

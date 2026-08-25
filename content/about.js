@@ -1,24 +1,25 @@
 /** Copy for /about. */
 
 export const STORY = [
-  "Vibecop started from a simple frustration: SMBs drowning in manual admin and scattered tools, with no clear way to get from “we need automation” to “it’s live and we can prove the ROI.” We focus on one thing — designing and launching reliable workflows in 14 days — measured in hours saved, fewer errors, and faster responses.",
-  "We don’t sell platforms. We sell outcomes: your first (or next) automation, delivered on time, with documentation and a handoff you can run without us.",
+  "Vibecop started from a pattern we kept seeing: founders shipping fast with Claude Code, Cursor, Lovable, and Bolt, and no senior engineer reviewing what actually went out. AI generates code fast it doesn’t own the consequences. Technical debt, exposed endpoints, and architecture that quietly fails at scale accumulate from day one, invisible until they surface in an enterprise security review, in investor due diligence, or in a production incident.",
+  "So we built the human verification layer. Automated analysis runs across your architecture, codebase, infrastructure config, and security posture at machine speed. Then every finding goes in front of a senior engineer who validates it, adds architectural context, and turns it into a business decision with a clear priority because breadth and speed don’t answer the question that matters most: what do we actually fix, and why?",
+  "We work with a limited number of companies each month so every review gets deep technical attention, and most audits complete within a few days. The goal is simple: prevent million-dollar technical mistakes before they happen.",
 ];
 
 export const PRINCIPLES = [
   {
-    title: "Outcome-First",
-    body: "We define success in your terms: hours saved, errors reduced, response time. No vague “efficiency”.",
+    title: "Architecture-First",
+    body: "We assess how a system is shaped, not just whether it currently runs through a production lens rather than a checklist. The question is always what breaks under real conditions.",
     icon: "/assets/images/automate-icon1.png",
   },
   {
-    title: "Measurable",
-    body: "Every delivery includes a way to track impact. We show you the before/after numbers.",
+    title: "Security-Aware",
+    body: "Threat surface mapping, auth hardening, secrets handling, and access control the architecture-level risks that need human judgment to prioritize and act on.",
     icon: "/assets/images/automate-icon2.png",
   },
   {
-    title: "Documented",
-    body: "Full docs, diagrams, and handover. You own the workflow and can maintain or extend it.",
+    title: "Human-Verified",
+    body: "Automated tools surface signals. Senior engineers decide what matters, why it matters, and what to do next. Every finding is validated before it reaches you.",
     icon: "/assets/images/automate-icon3.png",
   },
 ];
@@ -26,27 +27,27 @@ export const PRINCIPLES = [
 /** The before/after pairs in "The Vibecop Shift". */
 export const SHIFT = [
   {
-    label: "High Friction",
+    label: "Unverified",
     tone: "before",
-    title: "Manual: Leads",
-    body: "Copy-pasting lead info from form emails to your CRM. Average response time: 4-6 hours.",
+    title: "Shipped: AI-Written Auth",
+    body: "AI wrote your auth layer and no senior engineer reviewed it. Exposed endpoints, misconfigured access, and unencrypted data stay hidden until they’re exploited.",
   },
   {
-    label: "Instant",
+    label: "Verified",
     tone: "after",
-    title: "Vibecop: Lead Flow",
-    body: "Auto-enrichment & CRM sync. Immediate Slack alert for the sales team. Average response: 30 seconds.",
+    title: "Vibecop: Engineer-Reviewed Security",
+    body: "Automated analysis surfaces the signals. Senior engineers validate each one, separate critical risk from noise, and translate it into business impact.",
   },
   {
-    label: "Error Prone",
+    label: "Fails at Scale",
     tone: "before",
-    title: "Manual: Finance",
-    body: "Reviewing bank statements to manually mark invoices as paid in your accounting software.",
+    title: "Shipped: Demo-Grade Architecture",
+    body: "It carries the demo and the pilot customers. What happens at real volume was never tested, and nothing is watching for the moment it stops.",
   },
   {
-    label: "Silent Sync",
+    label: "Production-Ready",
     tone: "after",
-    title: "Vibecop: Reconciliation",
-    body: "Automatic matching of payments via API. One summary email sent to your accountant weekly.",
+    title: "Vibecop: Prioritized Risk Roadmap",
+    body: "A clear plan ordered by severity and business impact. Specific fixes your team can execute immediately, with senior oversight through implementation if you want it.",
   },
 ];

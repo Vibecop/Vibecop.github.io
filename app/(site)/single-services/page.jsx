@@ -10,23 +10,24 @@ import { FAQS } from "@/content/faqs";
 import { HOW_IT_WORKS, INCLUDED, STACK } from "@/content/single-service";
 
 export const metadata = {
-  title: "Single Services",
-  description: "From form or email to CRM and calendar — first response in minutes, not hours.",
+  title: "Architectural Risk Audit",
+  description:
+    "A full review of your system design, data flows, and structural weaknesses found before they become expensive to fix.",
 };
 
 export default function SingleServicesPage() {
   return (
     <>
       <PageBanner
-        title="Single Service"
+        title="Architectural Risk Audit"
         breadcrumb="Service Detail"
-        lede="From form or email to CRM and calendar — first response in minutes, not hours."
+        lede="A full review of your system design, data flows, and structural weaknesses found before they become expensive to fix."
       />
 
       <Section>
         <SectionHeading
           title="Scope Builder"
-          lede="Pick your triggers, tools, and outputs. We’ll give you a build sheet."
+          lede="Tell us how it was built and what to focus on. We’ll come back with a scoped audit plan."
         />
         <ScopeBuilder />
       </Section>
@@ -34,9 +35,10 @@ export default function SingleServicesPage() {
       <Section tone="surface">
         <div className="grid items-start gap-12 lg:grid-cols-2">
           <div data-reveal="left">
-            <SectionHeading title="What’s included in Lead Flow Automation" align="left" mark={false} />
+            <SectionHeading title="What’s included in an Architectural Risk Audit" align="left" />
             <p className="mt-5 text-base text-muted">
-              From form or email to CRM and calendar — first response in minutes, not hours.
+              Architecture, scalability, and security assessed through a production lens not a
+              checklist. We ask what breaks under real conditions.
             </p>
             <ul className="m-0 mt-7 list-none space-y-3 p-0">
               {INCLUDED.map((item) => (
@@ -47,12 +49,12 @@ export default function SingleServicesPage() {
               ))}
             </ul>
             <AuditButton size="lg" className="mt-8">
-              Book an Automation Audit
+              Request an audit
             </AuditButton>
           </div>
 
           <div data-reveal="right" className="vc-card p-8">
-            <h3 className="text-h3">Works With Your Stack</h3>
+            <h3 className="text-h3">Stacks We Review</h3>
             <ul className="m-0 mt-5 list-none space-y-2 p-0">
               {STACK.map((line) => (
                 <li key={line} className="text-base text-muted">
@@ -61,7 +63,7 @@ export default function SingleServicesPage() {
               ))}
             </ul>
             <Button href="/contact" variant="outline" className="mt-8">
-              Check My Tools
+              Check My Stack
             </Button>
           </div>
         </div>
@@ -84,7 +86,7 @@ export default function SingleServicesPage() {
 
         <div data-reveal className="mt-12 text-center">
           <Button href="/contact" size="lg">
-            Start this Service
+            Start an audit
           </Button>
         </div>
       </Section>

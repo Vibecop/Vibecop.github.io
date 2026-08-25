@@ -6,7 +6,7 @@ import Container from "@/components/ui/Container";
  * kit's wave artwork.
  *
  * The artwork is a decorative background rather than an `<img>`, so it is
- * `aria-hidden` and the text sits on its own layer with a scrim behind it —
+ * `aria-hidden` and the text sits on its own layer with a scrim behind it
  * the kit put white text straight onto the image, which failed contrast where
  * the wave is brightest.
  */

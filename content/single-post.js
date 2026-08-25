@@ -1,38 +1,38 @@
 /** The article rendered at /single-blog. */
 export const POST = {
-  title: "Insights on SaaS Development & AI Solutions",
+  title: "What AI Coding Tools Leave Behind in Your Codebase",
   author: "Vibecop Team",
   date: "Jan 20, 2026",
   image: "/assets/images/singleblog-image1.jpg",
   body: [
-    "Modern SaaS products rely on scalability, performance, and intelligent automation. Understanding how to build and maintain AI-driven systems is essential for long-term digital success.",
-    "From system architecture to continuous optimization, expert SaaS practices ensure better performance, faster delivery, and improved user experience. With AI integration, businesses can streamline workflows, reduce costs, and scale efficiently in competitive markets.",
+    "Claude Code, Cursor, Lovable, and Bolt ship working software faster than any team could a few years ago. What they do not ship is the judgment about whether the result survives production and that gap is invisible right up until it is expensive.",
+    "AI-generated code accumulates complexity that compounds silently with every new feature. Auth layers written without a reviewer, architecture that works at 100 users and quietly fails at 10,000, infrastructure hiding single points of failure behind dashboards that look fine. Automated scanning surfaces some of it. Deciding what actually threatens your launch still takes a senior engineer.",
   ],
   quote:
-    "Building scalable SaaS solutions with AI is not a cost — it’s a long-term growth strategy for modern startups.",
+    "AI generates code fast. It doesn’t own the consequences.",
   points: [
-    "Design scalable SaaS architecture for growth",
-    "Implement AI-driven automation systems",
-    "Optimize cloud performance and uptime",
-    "Secure data with modern encryption standards",
-    "Monitor system performance in real time",
-    "Enhance user experience with smart features",
-    "Use analytics for product improvement",
-    "Scale infrastructure without downtime",
+    "Review system design and data flows before they are expensive to change",
+    "Check that sensitive actions are protected on the backend, not only the frontend",
+    "Know where secrets, API keys, and environment variables are stored",
+    "Enforce tenant isolation at the database layer, not in application filters",
+    "Move background work off the request path before load exposes it",
+    "Put structured logging and error tracking in place ahead of the first incident",
+    "Test with realistic user and data volume, not demo data",
+    "Document the handover so the product does not depend on one developer",
   ],
 };
 
 export const RECENT_POSTS = [
-  { title: "SaaS Growth Strategies for Modern Startups", image: "/assets/images/singleblog-feed1.jpg" },
-  { title: "How AI Improves Business Efficiency", image: "/assets/images/singleblog-feed2.jpg" },
-  { title: "Signs Your Startup Needs AI Integration", image: "/assets/images/singleblog-feed3.jpg" },
-  { title: "Choosing the Right SaaS Tools", image: "/assets/images/singleblog-feed4.jpg" },
+  { title: "What Breaks First When Enterprise Customers Arrive", image: "/assets/images/singleblog-feed1.jpg" },
+  { title: "Automated Findings vs Senior Engineering Judgment", image: "/assets/images/singleblog-feed2.jpg" },
+  { title: "Signs Your Product Needs a Technical Audit", image: "/assets/images/singleblog-feed3.jpg" },
+  { title: "When Rebuilding Is the Wrong Call", image: "/assets/images/singleblog-feed4.jpg" },
 ].map((p) => ({ ...p, author: "Vibecop Team", date: "Jan 3, 2026" }));
 
 export const POST_CATEGORIES = [
-  { label: "SaaS Strategy", count: "02" },
-  { label: "AI Automation", count: "11" },
-  { label: "Cloud Solutions", count: "26" },
-  { label: "Product Scaling", count: "13" },
-  { label: "Tech Insights", count: "09" },
+  { label: "Architecture Review", count: "02" },
+  { label: "Security Findings", count: "11" },
+  { label: "Production Readiness", count: "26" },
+  { label: "Scaling Risk", count: "13" },
+  { label: "AI-Generated Code", count: "09" },
 ];

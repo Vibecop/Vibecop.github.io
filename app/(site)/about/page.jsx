@@ -9,7 +9,8 @@ import { PRINCIPLES, SHIFT, STORY } from "@/content/about";
 
 export const metadata = {
   title: "About Us",
-  description: "Outcome-first, measurable, and fully documented. No lock-in, no long contracts, ever.",
+  description:
+    "Architecture-first. Security-aware. Human-verified. We prevent million-dollar technical mistakes before they happen.",
 };
 
 export default function AboutPage() {
@@ -17,7 +18,7 @@ export default function AboutPage() {
     <>
       <PageBanner
         title="About Us"
-        lede="Outcome-first, measurable, and fully documented. No lock-in, no long contracts, ever."
+        lede="Architecture-first. Security-aware. Human-verified. We prevent million-dollar technical mistakes before they happen."
       />
 
       <Section>
@@ -30,14 +31,14 @@ export default function AboutPage() {
             className="w-full rounded-3xl object-cover shadow-[0_1.5rem_3.5rem_rgb(0_0_0/45%)]"
           />
           <div data-reveal="right">
-            <SectionHeading title="Our Story" align="left" mark={false} />
+            <SectionHeading title="Our Story" align="left" />
             {STORY.map((paragraph) => (
               <p key={paragraph} className="mt-5 text-base text-muted">
                 {paragraph}
               </p>
             ))}
             <AuditButton size="lg" className="mt-8">
-              Book an Automation Audit
+              Request an audit
             </AuditButton>
           </div>
         </div>
@@ -45,8 +46,8 @@ export default function AboutPage() {
 
       <Section tone="surface">
         <SectionHeading
-          title="Automation Built for Real Results"
-          lede="Our pipelines focus on tangible improvements like time saved, errors reduced, and faster response times."
+          title="Beyond Automated Scanning"
+          lede="Every audit pairs AI-powered analysis at machine speed with senior engineer verification architectural judgment, prioritized decisions, and production-ready confidence."
         />
 
         <ul data-stagger className="m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-3">
@@ -60,18 +61,18 @@ export default function AboutPage() {
         </ul>
       </Section>
 
-      {/* <Section>
+      <Section>
         <SectionHeading
-          title="Meet the Team"
-          lede="The people designing smarter systems to remove busy work from your operations."
+          title="Who Reviews Your Product"
+          lede="The senior engineering judgment behind every Vibecop audit."
         />
         <TeamGrid className="mt-12" limit={4} />
-      </Section> */}
+      </Section>
 
       <Section tone="surface">
         <SectionHeading
           title="The Vibecop Shift"
-          lede="We don’t just “help” — we replace high-friction manual steps with low-maintenance digital pipes."
+          lede="We don’t just hand you a list of findings we replace unverified, demo-grade decisions with architecture you can take to production."
         />
 
         <ul data-stagger className="m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-2">
@@ -97,7 +98,17 @@ export default function AboutPage() {
         </ul>
       </Section>
 
-      <CallToAction />
+      <CallToAction
+        title={
+          <>
+            Build with
+            <br />
+            confidence.
+          </>
+        }
+        lede="AI builds the product. Vibecop makes sure it won’t break in production, fail under scale, or expose your users to risk. One audit. Fewer expensive surprises."
+        action={{ label: "Request an audit" }}
+      />
     </>
   );
 }

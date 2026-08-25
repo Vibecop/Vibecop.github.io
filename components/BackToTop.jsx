@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 
 /**
- * Appears past 300px of scroll, as the kit's back-to-top-button.js did —
+ * Appears past 300px of scroll, as the kit's back-to-top-button.js did
  * but as ordinary React state rather than a class toggled onto a bare
  * `<a id="button">` from an effect.
  */

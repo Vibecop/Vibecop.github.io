@@ -1,6 +1,6 @@
 /*
- * One stylesheet. styles/theme.css is the whole design system — Tailwind v4
- * plus the design's tokens — and it pulls in the self-hosted Inter Tight faces.
+ * One stylesheet. styles/theme.css is the whole design system Tailwind v4
+ * plus the design's tokens and it pulls in the self-hosted Inter Tight faces.
  *
  * Bootstrap 4, the kit's 10k-line style.css, animate.css, Owl Carousel and
  * jQuery UI are all gone: the pages are Tailwind now and the behaviour those
@@ -13,11 +13,11 @@ import "@/styles/theme.css";
 export const metadata = {
   metadataBase: new URL("https://vibecop.io"),
   title: {
-    default: "Vibecop — Senior Supervision for Products built with AI",
+    default: "Vibecop - Senior Supervision for Products built with AI",
     template: "%s | Vibecop",
   },
   description:
-    "Practical, revenue-driven automation that quickly covers its own cost, built exclusively for scaling small & mid-sized businesses.",
+    "Enterprise-grade architecture, security, and production-readiness audits for startups, SaaS founders, and companies building with AI-generated code.",
   icons: {
     icon: [16, 32, 96].map((s) => ({
       url: `/assets/images/favicon/favicon-${s}x${s}.png`,
@@ -43,7 +43,7 @@ export const viewport = {
  * The reveal styles hide `[data-reveal]` elements until they scroll into
  * view, which is only acceptable if something is guaranteed to reveal them.
  * Gating that on a class set here means the content renders plainly whenever
- * JS is off — and the timer takes the class back off if MotionRuntime never
+ * JS is off and the timer takes the class back off if MotionRuntime never
  * boots, so a hydration failure degrades to a visible page rather than a
  * blank one. Setting it in <head> rather than in an effect is what stops the
  * hero flashing in and then out on load.
@@ -59,7 +59,7 @@ export default function RootLayout({ children }) {
        * hydrates, so the server HTML and the client DOM deliberately differ
        * here. Without this, React reports it as a hydration mismatch on every
        * page load. It suppresses the warning for this element's own attributes
-       * only — not for anything inside it.
+       * only not for anything inside it.
        */
       suppressHydrationWarning
       /*

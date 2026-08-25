@@ -17,13 +17,13 @@ export default function BlogPage() {
     <>
       <PageBanner
         title="Blog"
-        lede="SaaS-driven innovation, AI-powered solutions, and scalable growth. Built for startups to launch faster, optimize smarter, and grow without limits."
+        lede="Notes on architecture, security, and production readiness for products built with AI what senior review finds, and why it matters."
       />
 
       <Section>
         <SectionHeading
-          title="Discover Knowledge, Tips, & Inspiration in Our Blog"
-          lede="Read our latest articles, tips, & expert insights to stay informed and inspired."
+          title="What We Find, and Why It Matters"
+          lede="Field notes from production reviews the failures that repeat, and the decisions that prevent them."
         />
 
         <div data-stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

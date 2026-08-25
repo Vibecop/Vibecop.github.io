@@ -2,8 +2,8 @@ import { cn } from "@/lib/cn";
 
 /**
  * The small pill used for hero claims and post tags. The ring is a masked
- * gradient rather than a flat border — the reference draws it white→orange→
- * white — which `.vc-badge` in theme.css supplies.
+ * gradient rather than a flat border the reference draws it white→orange→
+ * white which `.vc-badge` in theme.css supplies.
  */
 export default function Badge({ className, children, ...props }) {
   return (

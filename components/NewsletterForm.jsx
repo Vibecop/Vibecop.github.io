@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useId } from "react";
 
 /**
- * The footer signup. There is no backend behind it — the kit's form carried
- * `action="javascript:;"` — so the submit is prevented rather than pointed at
+ * The footer signup. There is no backend behind it the kit's form carried
+ * `action="javascript:;"` so the submit is prevented rather than pointed at
  * an endpoint that does not exist. Wire `onSubmit` to a real handler when one
  * lands; the markup does not need to change.
  */

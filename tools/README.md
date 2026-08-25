@@ -21,8 +21,8 @@
 | --- | --- |
 | `routes.mjs` | the page manifest every other script reads: one entry per route, with the source filename, output directory and component name derived from it. Nothing else in the toolchain hardcodes a `*.html` name. |
 | `convert.mjs` | parse5-based HTML → JSX serializer. Maps attributes, self-closes void elements, turns comments into JSX comments, rewrites `assets/…` paths, swaps internal `*.html` links for `next/link`, and preserves whitespace between inline elements as `{' '}`. |
-| `gen-pages.mjs` | writes `app/**/page.jsx` for every page in the manifest, lifting `<header>` / footer / promo bar out into the shared components. **Destructive** — see above. |
-| `gen-components.mjs` | regenerates the raw JSX for `Header` / `Footer` / `PromotionalTopbar` from `/contact` (the page whose header carries the full menu). **Destructive** — see above. |
+| `gen-pages.mjs` | writes `app/**/page.jsx` for every page in the manifest, lifting `<header>` / footer / promo bar out into the shared components. **Destructive** see above. |
+| `gen-components.mjs` | regenerates the raw JSX for `Header` / `Footer` / `PromotionalTopbar` from `/contact` (the page whose header carries the full menu). **Destructive** see above. |
 | `compare.mjs` | DOM diff of every route against its source HTML file. Run `npm run start` first. Superseded by the rewrite. |
 | `visual-check.mjs` | screenshot + pixel diff of each route against the original file. Superseded by the rewrite. |
 
@@ -33,7 +33,7 @@ a route, plus `group` when it is not an ordinary `(site)` page. The source
 filename (`/three-column` → `three-column.html`), output directory and component
 name are all derived from the route, so no `*.html` filename is written out by
 hand anywhere. `aliases` covers slugs the kit's own markup linked that are not a
-page's own — there is one, a misspelling of a file that never existed, which
+page's own there is one, a misspelling of a file that never existed, which
 `/single-blog` pointed at.
 
 The kit is read from `../vibecop`, resolved against `routes.mjs` rather than the

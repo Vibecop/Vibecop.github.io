@@ -6,13 +6,13 @@
  * with the rest of the copy: the numbers, findings and roadmap are the thing
  * a reader is judging, and editing them should not mean reading JSX.
  *
- * "Acme SaaS" is fictional. Keep it that way — the point is to show the shape
+ * "Acme SaaS" is fictional. Keep it that way the point is to show the shape
  * of a report, not to publish a customer's findings.
  */
 
 export const SAMPLE_REPORT = {
   eyebrow: "Sample Audit Report · Vibecop",
-  title: "Acme SaaS — Architectural Risk Audit",
+  title: "Acme SaaS - Architectural Risk Audit",
   lede: [
     "Every finding is validated, prioritized, and translated into business impact by senior engineers.",
     "Built for founders, CTOs, and engineering teams preparing for real scale.",
@@ -28,7 +28,7 @@ export const SAMPLE_REPORT = {
   ],
 };
 
-/* The headline number. `verdict` is the sentence the score buys you — a bare
+/* The headline number. `verdict` is the sentence the score buys you a bare
  * 35 means nothing to a founder reading their first audit. */
 export const SAMPLE_SCORE = {
   label: "Overall Production Readiness Score",
@@ -37,7 +37,7 @@ export const SAMPLE_SCORE = {
   verdict: "Not production-ready",
 };
 
-/* Counts must agree with SAMPLE_FINDINGS below — 2/4/2/1 across nine. */
+/* Counts must agree with SAMPLE_FINDINGS below 2/4/2/1 across nine. */
 export const SAMPLE_SEVERITY_COUNTS = [
   { severity: "critical", count: 2 },
   { severity: "high", count: 4 },
@@ -56,18 +56,18 @@ export const SAMPLE_CATEGORIES = [
 export const SAMPLE_SUMMARY = {
   title: "Executive Summary",
   paragraphs: [
-    "Acme SaaS was built rapidly using Claude Code and Cursor over 6 weeks. The product is functionally complete and visually polished. However, this audit identified 9 significant findings — including 2 critical vulnerabilities and 3 architecture-level issues — that represent serious production, security, and scaling risk.",
+    "Acme SaaS was built rapidly using Claude Code and Cursor over 6 weeks. The product is functionally complete and visually polished. However, this audit identified 9 significant findings including 2 critical vulnerabilities and 3 architecture-level issues that represent serious production, security, and scaling risk.",
     "The two critical findings (JWT secret exposure and missing row-level security) should be treated as immediate blockers to enterprise customer onboarding or public launch. Both are exploitable with minimal attacker sophistication.",
     "Beyond security, the architecture has two compounding structural problems: a premature microservices split that adds operational complexity without scaling benefit, and synchronous processing across all background work with no queueing strategy. These patterns will not survive production load.",
     "The performance and observability gaps mean the team has no visibility into current failures and no capacity to scale beyond ~300 concurrent users without a significant breakdown.",
-    "The prioritized fix roadmap addresses all findings in order of business impact. Critical and high-severity items can be resolved within 2–3 sprint cycles with the right execution sequence.",
+    "The prioritized fix roadmap addresses all findings in order of business impact. Critical and high-severity items can be resolved within 2-3 sprint cycles with the right execution sequence.",
   ],
 };
 
 /*
  * The body of the report. Each finding carries the same four beats a real one
- * does — what it is, what it costs the business, what to do, and how long
- * that takes — because the middle two are what separate an audit from a
+ * does what it is, what it costs the business, what to do, and how long
+ * that takes because the middle two are what separate an audit from a
  * linter run.
  */
 export const SAMPLE_FINDINGS = [
@@ -173,7 +173,7 @@ export const SAMPLE_FINDINGS = [
       "Production incidents are invisible until users report them. MTTR is measured in hours rather than minutes. Post-mortems are impossible.",
     recommendation:
       "Integrate structured logging (Pino/Winston). Add Sentry for error tracking. Configure alerts on error rate thresholds.",
-    effort: "2–3 days",
+    effort: "2-3 days",
   },
   {
     id: "F-009",
@@ -183,7 +183,7 @@ export const SAMPLE_FINDINGS = [
     description:
       "Dependency audit reveals packages last updated 18+ months ago. Three packages have publicly disclosed vulnerabilities (CVE-2023-44487, CVE-2024-21538, CVE-2024-4067).",
     impact:
-      "Two CVEs are low severity. One (CVE-2023-44487 — HTTP/2 Rapid Reset) is high severity and could be leveraged for DoS.",
+      "Two CVEs are low severity. One (CVE-2023-44487 - HTTP/2 Rapid Reset) is high severity and could be leveraged for DoS.",
     recommendation:
       "Run npm audit fix immediately for the high-severity CVE. Schedule quarterly dependency update reviews. Add Dependabot.",
     effort: "4 hours",
@@ -196,7 +196,7 @@ export const SAMPLE_ROADMAP = {
   lede: "Sprint-by-sprint execution plan ordered by business impact and dependency sequence.",
   sprints: [
     {
-      title: "Sprint 1 — Immediate blockers",
+      title: "Sprint 1 - Immediate blockers",
       items: [
         { id: "F-001", task: "Migrate JWT secrets to secrets manager" },
         { id: "F-002", task: "Implement database row-level security" },
@@ -204,7 +204,7 @@ export const SAMPLE_ROADMAP = {
       ],
     },
     {
-      title: "Sprint 2 — Architecture & performance",
+      title: "Sprint 2 - Architecture & performance",
       items: [
         { id: "F-003", task: "Resolve N+1 query patterns in product feed" },
         { id: "F-007", task: "Introduce async job queue for background work" },

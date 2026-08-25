@@ -1,5 +1,5 @@
 /*
- * Tailwind v4 — the whole design system.
+ * Tailwind v4 the whole design system.
  *
  * The visual target is the Opzio "home 02" reference: orange on near-black,
  * one continuous atmosphere rather than a stack of flat bands. Three layers
@@ -13,7 +13,7 @@
  * `data-count`) that components/MotionRuntime.jsx wires up, so pages stay
  * server components. Every animation is transform/opacity only.
  *
- * Reach for a raw value in a page only when it is genuinely one-off — if it
+ * Reach for a raw value in a page only when it is genuinely one-off if it
  * shows up twice, it belongs here.
  */
 @import "tailwindcss";
@@ -85,7 +85,7 @@
 }
 
 /*
- * Design constants that are not Tailwind utilities — the glass recipe, the
+ * Design constants that are not Tailwind utilities the glass recipe, the
  * glow stops and the one easing curve every entrance shares. Kept on :root
  * rather than in @theme because nothing needs a `bg-glass-*` class generated
  * for them.
@@ -168,7 +168,7 @@
 
 /*
  * Scroll reveal. Elements opt in with `data-reveal`; MotionRuntime adds
- * `data-revealed` when they cross into the viewport — an attribute rather than
+ * `data-revealed` when they cross into the viewport an attribute rather than
  * a class, because React rewrites `className` on re-render and would drop it.
  * The initial state is only
  * applied once JS has confirmed it can run (`.motion-ready` on <html>), so
@@ -181,7 +181,7 @@
  *
  * That is not a style preference: the reveal's end state (`translate: none`)
  * and a card's hover lift both have to be live at once, and as `transform`
- * they collide — the reveal selector is the more specific of the two, so it
+ * they collide the reveal selector is the more specific of the two, so it
  * won every hover and the lift silently did nothing. `translate` and
  * `transform` are separate properties that compose, so hover can keep using
  * `transform` and neither has to know about the other.
@@ -250,7 +250,7 @@
 .motion-ready [data-stagger][data-revealed] > *:nth-child(8) { transition-delay: 0.6s; }
 .motion-ready [data-stagger][data-revealed] > *:nth-child(n + 9) { transition-delay: 0.66s; }
 
-/* Hero entrance — runs on load rather than on scroll, staggered by depth. */
+/* Hero entrance runs on load rather than on scroll, staggered by depth. */
 @keyframes rise-in {
   from {
     opacity: 0;
@@ -327,7 +327,7 @@
 /*
  * One fixed layer behind the whole document: two large soft orange glows, a
  * faded technical grid and a grain wash. Fixed rather than per-section so the
- * page reads as a single environment while scrolling — and so none of it can
+ * page reads as a single environment while scrolling and so none of it can
  * push layout around or intercept a click.
  */
 .site-atmosphere {
@@ -400,7 +400,7 @@
 }
 
 /*
- * The content column. Transparent so the fixed atmosphere shows through —
+ * The content column. Transparent so the fixed atmosphere shows through
  * the previous build painted an opaque colour here, which is what made the
  * sections read as separate slabs.
  */
@@ -430,7 +430,7 @@
    *
    * `clip` rather than `hidden`: `overflow: hidden` on a full-width element
    * turns it into a scroll container, which breaks `position: sticky`
-   * descendants and — as `overflow-x: hidden` on <body> did here — can move
+   * descendants and as `overflow-x: hidden` on <body> did here can move
    * scrolling off the viewport entirely, leaving IntersectionObserver with
    * nothing that ever comes into view. `clip` cuts the paint and nothing else.
    */
@@ -510,7 +510,7 @@
 }
 
 /*
- * The top highlight every glass panel in the reference carries — a one-pixel
+ * The top highlight every glass panel in the reference carries a one-pixel
  * bright edge that sells the surface as lit from above. Pseudo-element rather
  * than a second border so it does not affect layout.
  */
@@ -624,7 +624,7 @@
   transform: translateY(-2px);
 }
 
-/* no fill to contain, so nothing to clip — and the arrow sits outside the box */
+/* no fill to contain, so nothing to clip and the arrow sits outside the box */
 .vc-btn-ghost {
   overflow: visible;
 }
@@ -637,7 +637,7 @@
  * The sheen below is an absolutely positioned pseudo-element, so the button
  * has to establish a containing block. These rules are unlayered and Tailwind's
  * utilities are not, so a plain `position: relative` here would silently beat
- * an `absolute`/`fixed` on the call site — which is exactly what the newsletter
+ * an `absolute`/`fixed` on the call site which is exactly what the newsletter
  * and blog-search submit buttons need. `:where()` contributes no specificity,
  * so this applies only when the caller has not positioned the button itself;
  * when it has, that element is already a containing block anyway.
@@ -652,7 +652,7 @@
 
 /*
  * Transparent at rest, so the pill nav floats over the hero. Once the page is
- * scrolled a scrim fades in across the *whole* header box — the pill alone is
+ * scrolled a scrim fades in across the *whole* header box the pill alone is
  * not enough, because the 1rem of padding above it is where body copy would
  * otherwise slide past in plain sight.
  */
@@ -713,7 +713,7 @@
  * The submenu and the mobile drawer are glass panels at desktop and plain
  * nested lists on a phone, where a card inside a card reads as clutter. Two
  * classes with one media query, rather than `lg:`-prefixing a dozen
- * properties — several of them (the fill, the lit edge) are not utilities.
+ * properties several of them (the fill, the lit edge) are not utilities.
  */
 .nav-submenu,
 .nav-drawer {
@@ -723,7 +723,7 @@
 /*
  * Both are opaque, not glass. A few percent of translucency is enough for
  * white headline text underneath to stay legible straight through the menu,
- * which makes the nav itself hard to read — the panels sit over content, so
+ * which makes the nav itself hard to read the panels sit over content, so
  * they get a solid fill and earn their depth from the border and shadow.
  */
 @media (min-width: 1024px) {
@@ -737,7 +737,7 @@
    * Bridges the 0.5rem the panel hangs below the button. That strip belongs
    * to neither element, so a pointer travelling from the parent to a child
    * link left the <li> mid-journey and took the menu with it. Invisible, and
-   * present only while the panel is — the panel is `hidden` when closed.
+   * present only while the panel is the panel is `hidden` when closed.
    */
   .nav-submenu::before {
     position: absolute;
@@ -796,7 +796,7 @@
   overflow: hidden;
   /*
    * The header is `sticky`, so it keeps a box in normal flow and the hero
-   * would otherwise start below it — leaving the body's flat black showing
+   * would otherwise start below it leaving the body's flat black showing
    * across the top of the page. Pulling the hero up by the header's height
    * and padding the content back down by the same amount puts the gradient
    * behind the bar without moving a single word of the hero.
@@ -813,7 +813,7 @@
   /*
    * Ends transparent rather than on a colour. The atmosphere is a fixed layer
    * behind the whole document, so any opaque floor here would mask it and the
-   * hero would meet the next section on a hard horizontal line — the banded
+   * hero would meet the next section on a hard horizontal line the banded
    * look this redesign is meant to remove.
    */
   background:
@@ -834,7 +834,7 @@
 }
 
 /*
- * Both sweeps hang below their container, which clips them — so the mask has
+ * Both sweeps hang below their container, which clips them so the mask has
  * to reach zero inside the *visible* part of the box, not at its own bottom.
  * This one spans 66%–114% of the hero (bottom:-14%, height:48%), so only its
  * top ~70% is ever on screen; the fade therefore finishes at 66%.
@@ -903,7 +903,7 @@
  * Two background layers rather than the usual `mask-composite: exclude` ring:
  * the fill is clipped to the padding box and the gradient to the border box,
  * so the border area is the only place the gradient shows. The mask version
- * does not survive minification here — the shorthand gets reordered after
+ * does not survive minification here the shorthand gets reordered after
  * `mask-composite`, which resets it to `add` and fills the pill solid.
  *
  * The fill layer is mostly opaque so the ring gradient does not bleed through
@@ -934,7 +934,7 @@
 
 /*
  * The stage cards are joined by a glowing rule that draws itself in when the
- * row scrolls into view — the reference's `pipeline-vector`, as CSS.
+ * row scrolls into view the reference's `pipeline-vector`, as CSS.
  */
 .vc-steps { position: relative; }
 
@@ -948,7 +948,7 @@
   height: 1px;
   background: linear-gradient(90deg, transparent, rgb(249 91 52 / 55%), rgb(255 138 22 / 75%), rgb(249 91 52 / 55%), transparent);
   content: "";
-  /* hidden until the row is actually one row — see the variants below */
+  /* hidden until the row is actually one row see the variants below */
   display: none;
   opacity: 0;
   transform: scaleX(0);
@@ -983,7 +983,7 @@
 }
 
 /*
- * Flip cards — the pipeline row.
+ * Flip cards the pipeline row.
  *
  * The face the reader sees is decided by `backface-visibility`, so both faces
  * are stacked in the same box and the wrapper rotates. `perspective` lives on
@@ -1038,7 +1038,7 @@
 }
 
 /*
- * A flip is a hover affordance, and a touch screen has no hover — the browser
+ * A flip is a hover affordance, and a touch screen has no hover the browser
  * fakes one on tap and leaves the card stuck on its back. There the card stays
  * put and shows both halves of the copy instead, which is why the front keeps
  * its own one-line summary rather than moving it all to the back.
@@ -1100,7 +1100,7 @@
 
 /*
  * Sparkline. The stroke is drawn on entry with the classic dash-offset
- * technique — one property, GPU-friendly, and it degrades to a static line
+ * technique one property, GPU-friendly, and it degrades to a static line
  * when reduced motion is on.
  */
 .vc-spark-line {
@@ -1159,8 +1159,95 @@
   filter: drop-shadow(0 1.5rem 3rem rgb(0 0 0 / 45%));
 }
 
-.velocity-feature-mark { width: 2rem; height: 2rem; margin-bottom: 1.1rem; object-fit: contain; }
+.velocity-feature-mark { width: 6rem; height: 6rem; margin-bottom: 1.1rem; object-fit: contain; }
 .velocity-feature-copy h2 { margin: 0; font-size: var(--text-h2); line-height: var(--text-h2--line-height); letter-spacing: -0.035em; }
+
+.velocity-feature-note {
+  max-width: 34rem;
+  margin: 1rem 0 0;
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+}
+
+/* small circled "?" that reveals a tooltip on hover or keyboard focus */
+.tip-mark {
+  position: relative;
+  display: inline-flex;
+  width: 1.5em;
+  height: 1.5em;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 50%;
+  margin-left: 0.5em;
+  background: rgb(255 255 255 / 6%);
+  color: var(--color-muted);
+  cursor: help;
+  font-size: 0.42em;
+  transition: border-color 0.2s var(--ease-entrance), background 0.2s var(--ease-entrance), color 0.2s var(--ease-entrance);
+  vertical-align: middle;
+}
+
+.tip-mark:hover,
+.tip-mark:focus-visible {
+  border-color: rgb(249 91 52 / 70%);
+  background: rgb(249 91 52 / 16%);
+  color: #fff;
+}
+
+.tip-mark:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 0.25rem; }
+.tip-mark > i { font-size: 0.62em; line-height: 1; }
+
+.tip-mark > .tip {
+  position: absolute;
+  z-index: 5;
+  bottom: calc(100% + 0.85rem);
+  left: 50%;
+  width: max-content;
+  max-width: 22rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 0.6rem;
+  background: rgb(24 20 20 / 98%);
+  box-shadow: 0 1rem 2rem rgb(0 0 0 / 45%);
+  color: var(--color-muted);
+  font-size: 1em;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+  opacity: 0;
+  pointer-events: none;
+  text-align: left;
+  transform: translate(-50%, 0.35rem);
+  transition: opacity 0.2s var(--ease-entrance), transform 0.2s var(--ease-entrance);
+  white-space: normal;
+}
+
+/* the little arrow under the bubble */
+.tip-mark > .tip::after {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-right: 1px solid rgb(255 255 255 / 14%);
+  border-bottom: 1px solid rgb(255 255 255 / 14%);
+  background: rgb(24 20 20 / 98%);
+  content: "";
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.tip-mark:hover > .tip,
+.tip-mark:focus-visible > .tip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 600px) {
+  .tip-mark > .tip { max-width: min(18rem, 70vw); }
+}
 
 .velocity-timeline { position: relative; display: grid; gap: 1.35rem; margin: 2.2rem 0 0; padding: 0; list-style: none; }
 
@@ -1227,7 +1314,7 @@
  * ================================================================== */
 
 .crm-reference-heading { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.crm-reference-heading > img { width: 4rem; height: 4rem; margin-bottom: 1rem; object-fit: contain; }
+.crm-reference-heading > img { width: auto; height: 4rem; margin-bottom: 1rem; object-fit: contain; }
 .crm-reference-heading h2 { max-width: 42rem; margin: 0; letter-spacing: -0.035em; }
 .crm-reference-heading p { margin: 1rem 0 0; color: var(--color-muted); }
 
@@ -1296,7 +1383,7 @@
 /*
  * Height animation without measuring anything in JS: the panel is a grid row
  * that transitions from 0fr to 1fr. The panel stays in the DOM, so `hidden`
- * cannot be used for the closed state — `inert` plus `visibility` keeps it out
+ * cannot be used for the closed state `inert` plus `visibility` keeps it out
  * of the tab order and out of the accessibility tree instead.
  */
 .faq-panel {
@@ -1491,9 +1578,9 @@ select.vc-field:has(option[value=""]:checked) { color: var(--color-muted-3, rgb(
   /*
    * The modal runs at 90% of the site's scale.
    *
-   * Every Tailwind utility resolves its size through a theme variable —
+   * Every Tailwind utility resolves its size through a theme variable
    * `p-6` is `calc(var(--spacing) * 6)`, `text-base` is `var(--text-base)`,
-   * `rounded-xl` is `var(--radius-xl)` — so redefining those variables here
+   * `rounded-xl` is `var(--radius-xl)` so redefining those variables here
    * takes 10% off every type size, padding, margin, gap, radius and width
    * inside the panel at once. The alternative, a smaller utility on each of
    * the forty-odd elements, drifts the moment the form changes.
@@ -1540,7 +1627,7 @@ select.vc-field:has(option[value=""]:checked) { color: var(--color-muted-3, rgb(
  * The scrollbar belongs to the panel's body, not to the overlay and not to
  * the page behind it: the overlay only centres, the panel caps its height,
  * and this is the one element that scrolls. Styled thin and warm so it reads
- * as part of the glass — Firefox takes the two standard properties, Chrome
+ * as part of the glass Firefox takes the two standard properties, Chrome
  * and Safari need the pseudo-elements.
  */
 .vc-modal-body {
@@ -1599,7 +1686,7 @@ select.vc-field:has(option[value=""]:checked) { color: var(--color-muted-3, rgb(
 @media (max-width: 1023px) {
   /*
    * Below `lg` the bar is logo + the 2.5rem burger rather than a full row of
-   * links and a button, so it stands 0.75rem shorter — and the hero's offset
+   * links and a button, so it stands 0.75rem shorter and the hero's offset
    * has to follow it exactly or the gap comes back.
    */
   :root { --header-height: 5rem; }

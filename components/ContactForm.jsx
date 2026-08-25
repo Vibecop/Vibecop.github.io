@@ -3,21 +3,21 @@
 import { useId, useState } from "react";
 import { cn } from "@/lib/cn";
 
-const HELP_OPTIONS = ["Ops / back-office", "Sales / lead gen", "E-commerce"];
+const HELP_OPTIONS = ["Architecture", "Security", "Scale & production"];
 const TIMELINES = ["Select", "ASAP", "1-2 Weeks", "1 Month"];
 
 const FIELDS = [
   { id: "name", label: "Name", type: "text", required: true, autoComplete: "name" },
   { id: "email", label: "Email", type: "email", required: true, autoComplete: "email" },
-  { id: "goal", label: "Goal (one workflow you want to automate first)", type: "textarea" },
-  { id: "tools", label: "Tools You Use (CRM, email, sheets, etc.)", type: "text" },
-  { id: "pain", label: "Biggest Pain Right Now", type: "textarea" },
+  { id: "product", label: "What are you building?", type: "textarea" },
+  { id: "stack", label: "How was it built (Cursor, Claude Code, Lovable, internal team)?", type: "text" },
+  { id: "concern", label: "Biggest technical concern right now", type: "textarea" },
 ];
 
 /**
  * The audit request form.
  *
- * There is no endpoint behind it — the kit's form posted to `javascript:;` —
+ * There is no endpoint behind it the kit's form posted to `javascript:;`
  * so it validates, then reports success without claiming to have sent
  * anything. Point `onSubmit` at a real handler when one exists.
  */
@@ -113,7 +113,7 @@ export default function ContactForm() {
       </button>
 
       <output aria-live="polite" className="mt-4 block text-base text-brand">
-        {sent && "Thanks — your details are captured. Connect a form handler to deliver them."}
+        {sent && "Thanks your details are captured. Connect a form handler to deliver them."}
       </output>
     </form>
   );

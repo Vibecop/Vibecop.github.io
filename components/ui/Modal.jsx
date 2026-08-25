@@ -15,7 +15,7 @@ import { cn } from "@/lib/cn";
  * by it.
  *
  * `initialFocus` is an optional ref to the control that should take focus on
- * open — a form's first field. Without one the panel itself takes it, which
+ * open a form's first field. Without one the panel itself takes it, which
  * is right for a dialog you read rather than fill in.
  */
 export default function Modal({
@@ -65,7 +65,7 @@ export default function Modal({
   }, [onClose]);
 
   /*
-   * Focus moves into the panel so the keyboard is not left back on the page —
+   * Focus moves into the panel so the keyboard is not left back on the page
    * and only once `mounted` has flipped, since the first render returns null
    * and there is nothing to focus yet.
    */
@@ -76,7 +76,7 @@ export default function Modal({
   const body = (
     <div
       className="vc-modal fixed inset-0 z-[200] flex items-center justify-center overflow-hidden p-4 sm:p-6"
-      /* the backdrop closes, the panel does not — hence the target check */
+      /* the backdrop closes, the panel does not hence the target check */
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}

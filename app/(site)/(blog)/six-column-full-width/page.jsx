@@ -10,7 +10,7 @@ export default function SixColumnFullWidthPage() {
     <>
       <PageBanner
         title="Six Column"
-        lede="AI-powered SaaS solutions designed for speed, scalability, and innovation. Helping startups build smarter systems and grow with confidence in a digital-first world."
+        lede="Notes on architecture, security, and production readiness for products built with AI what senior review finds, and why it matters."
       />
       {/* the one layout that runs edge to edge rather than inside the container */}
       <Section bleed className="px-4 sm:px-6">

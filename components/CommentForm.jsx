@@ -64,7 +64,7 @@ export default function CommentForm() {
       </button>
 
       <output aria-live="polite" className="mt-4 block text-base text-brand">
-        {sent && "Thanks — connect a comment backend to publish this."}
+        {sent && "Thanks connect a comment backend to publish this."}
       </output>
     </form>
   );

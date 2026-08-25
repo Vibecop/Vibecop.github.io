@@ -7,7 +7,8 @@ import { HANDOFF_KIT } from "@/content/process";
 
 export const metadata = {
   title: "Process",
-  description: "From discovery to deployment, see how we design and deliver automation pipelines.",
+  description:
+    "From repository access to a prioritized risk roadmap how a Vibecop audit runs in 48 to 72 hours.",
 };
 
 export default function ProcessPage() {
@@ -16,7 +17,7 @@ export default function ProcessPage() {
       <PageBanner
         title="Process"
         breadcrumb="Process"
-        lede="From discovery to deployment, see how we design and deliver automation pipelines."
+        lede="From repository access to a prioritized risk roadmap how a Vibecop audit runs in 48 to 72 hours."
       />
 
       <Section className="velocity-feature">
@@ -26,7 +27,7 @@ export default function ProcessPage() {
       <Section tone="surface">
         <SectionHeading
           title="Handoff kit"
-          lede="Everything you need to understand, manage, and confidently maintain your automation workflows."
+          lede="Everything your team needs to act on the audit what we found, in what order to fix it, and a live walkthrough."
         />
 
         <ul data-stagger className="m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-3">

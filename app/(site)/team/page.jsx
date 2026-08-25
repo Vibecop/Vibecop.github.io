@@ -6,7 +6,8 @@ import SectionHeading from "@/components/ui/SectionHeading";
 
 export const metadata = {
   title: "Our Team",
-  description: "Meet the experts behind the automation pipelines we design and deliver.",
+  description:
+    "The senior engineering judgment behind every Vibecop audit eight years of production experience across SaaS, AI, marketplaces, and cloud infrastructure.",
 };
 
 export default function TeamPage() {
@@ -14,13 +15,13 @@ export default function TeamPage() {
     <>
       <PageBanner
         title="Team"
-        lede="Meet the experts behind the automation pipelines we design and deliver."
+        lede="The senior engineering judgment behind every Vibecop audit."
       />
 
       <Section>
         <SectionHeading
-          title="Meet the Team"
-          lede="The people designing smarter systems to remove busy work from your operations."
+          title="Who Reviews Your Product"
+          lede="Eight years of production experience across SaaS, AI-native platforms, marketplaces, and cloud infrastructure patterns that only emerge at scale."
         />
         <TeamGrid className="mt-12" />
       </Section>

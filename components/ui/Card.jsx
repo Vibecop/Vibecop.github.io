@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
  * large radius. `interactive` adds the hover lift and glow the grids use.
  *
  * The fill is part of the treatment and is set by `.vc-card` in theme.css, so
- * passing a different `bg-*` through `className` will not win — the rule is
+ * passing a different `bg-*` through `className` will not win the rule is
  * unlayered and Tailwind's utilities are not. A panel that needs its own
  * background should be a plain element rather than a Card.
  */

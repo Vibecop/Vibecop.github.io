@@ -6,7 +6,8 @@ import SectionHeading from "@/components/ui/SectionHeading";
 
 export const metadata = {
   title: "Case Studies",
-  description: "Real outcomes: time saved, errors reduced, response times cut across teams.",
+  description:
+    "Real outcomes: bottlenecks found, rebuilds avoided, architecture corrected before launch.",
 };
 
 export default function CaseStudiesPage() {
@@ -14,13 +15,13 @@ export default function CaseStudiesPage() {
     <>
       <PageBanner
         title="Case Studies"
-        lede="Real outcomes: time saved, errors reduced, response times cut across teams."
+        lede="Real outcomes: bottlenecks found, rebuilds avoided, architecture corrected before launch."
       />
 
       <Section>
         <SectionHeading
-          title="Real Automation Results"
-          lede="See how our automation pipelines deliver measurable improvements."
+          title="Problems Caught Before Production"
+          lede="What senior review found that automated scanning alone would have left in place."
         />
         <CaseStudyGrid />
       </Section>

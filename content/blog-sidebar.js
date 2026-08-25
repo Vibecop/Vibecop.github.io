@@ -1,45 +1,45 @@
 /** Sidebar data for /three-column-sidebar. */
 
 export const CATEGORIES = [
-  { label: "Web Development", count: 12 },
-  { label: "App Development", count: 9 },
-  { label: "Cyber Security", count: 5 },
-  { label: "UI/UX Design", count: 7 },
-  { label: "Cloud Solutions", count: 10 },
-  { label: "AI & Automation", count: 4 },
-  { label: "Consulting", count: 6 },
-  { label: "System Integration", count: 8 },
-  { label: "Maintenance", count: 5 },
-  { label: "Project Management", count: 7 },
+  { label: "Architecture Review", count: 12 },
+  { label: "Security Findings", count: 9 },
+  { label: "Production Readiness", count: 5 },
+  { label: "Scaling Risk", count: 7 },
+  { label: "Infrastructure", count: 10 },
+  { label: "AI-Generated Code", count: 4 },
+  { label: "CTO Advisory", count: 6 },
+  { label: "Enterprise Onboarding", count: 8 },
+  { label: "Technical Debt", count: 5 },
+  { label: "Developer Handover", count: 7 },
 ];
 
 export const TAGS = [
-  "Web Development",
-  "App Development",
-  "Cyber Security",
-  "UI/UX Design",
-  "Cloud Solutions",
-  "AI Automation",
-  "Consulting",
-  "Integration",
-  "Maintenance",
-  "Project Management",
+  "Architecture",
+  "Security",
+  "Production",
+  "Scaling",
+  "Infrastructure",
+  "AI-Generated Code",
+  "CTO Advisory",
+  "Due Diligence",
+  "Technical Debt",
+  "Handover",
 ];
 
 export const POPULAR_POSTS = [
   {
-    title: "Top Strategies for Scaling Digital Business Growth",
+    title: "What AI Coding Tools Leave Behind in Your Codebase",
     meta: "1d ago",
-    category: "Business Strategy",
+    category: "AI-Generated Code",
   },
   {
-    title: "How Vibecop Ensures Secure & Reliable Digital Systems",
+    title: "Automated Findings vs Senior Engineering Judgment",
     meta: "3d ago",
-    category: "Security & Systems",
+    category: "Architecture Review",
   },
   {
-    title: "Signs Your Business Needs Digital Transformation",
+    title: "Signs Your Product Needs a Technical Audit",
     meta: "5h ago",
-    category: "Digital Growth",
+    category: "Production Readiness",
   },
 ];

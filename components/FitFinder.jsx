@@ -4,8 +4,8 @@ import { useId, useState } from "react";
 import { FIT_QUESTIONS } from "@/content/services";
 
 /**
- * The kit's recommendation widget. It has no model behind it — carousel.js
- * echoed the three selections straight back — so it does the same here rather
+ * The kit's recommendation widget. It has no model behind it carousel.js
+ * echoed the three selections straight back so it does the same here rather
  * than inventing advice it cannot support.
  */
 export default function FitFinder() {

@@ -10,7 +10,7 @@ export default function ThreeColumnPage() {
     <>
       <PageBanner
         title="Three Column"
-        lede="AI-powered SaaS solutions designed for speed, scalability, and innovation. Helping startups build smarter systems and grow with confidence in a digital-first world."
+        lede="Notes on architecture, security, and production readiness for products built with AI what senior review finds, and why it matters."
       />
       <Section>
         <BlogGrid posts={POSTS.slice(0, 3)} columns={3} />

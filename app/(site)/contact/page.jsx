@@ -7,23 +7,24 @@ import Badge from "@/components/ui/Badge";
 
 export const metadata = {
   title: "Contact Us",
-  description: "15 minutes. We’ll map one workflow and give you a clear next step. No pitch, no obligation.",
+  description:
+    "15 minutes. We’ll map your product’s real risk and give you a clear next step. No pitch, no obligation.",
 };
 
-const PROMISES = ["15 min", "No spam", "You get a scope doc"];
+const PROMISES = ["15 min", "NDA-friendly", "You get a scope doc"];
 
 const NEXT_STEPS = [
   {
-    title: "We reply within 24 hours",
-    body: "We’ll suggest a 15-min slot and ask for any extra context.",
+    title: "We review your application",
+    body: "If there is a strong fit, we schedule a strategy call within 24 hours.",
   },
   {
-    title: "15-min audit call",
-    body: "We map your workflow, tools, and success criteria. No pitch.",
+    title: "15-min strategy call",
+    body: "We map your stack, your launch risk, and what the audit should cover. No pitch.",
   },
   {
     title: "You get a scope doc",
-    body: "Fixed scope, timeline, and price. You decide if you want to proceed.",
+    body: "Fixed scope, turnaround, and price. You decide if you want to proceed.",
   },
 ];
 
@@ -32,16 +33,16 @@ export default function ContactPage() {
     <>
       <PageBanner
         title="Contact"
-        lede="Outcome-first, measurable, and fully documented. No lock-in, no long contracts, ever."
+        lede="Architecture-first. Security-aware. Human-verified. Tell us what you’re building and we’ll tell you where the risk is."
       />
 
       <Section>
         <div className="grid items-start gap-12 lg:grid-cols-2">
           <div data-reveal="left">
-            <SectionHeading title="Book an Automation Audit" align="left" mark={false} />
+            <SectionHeading title="Request an audit" align="left" />
             <p className="mt-5 text-base text-muted">
-              15 minutes. We’ll map one workflow and give you a clear next step. No pitch, no
-              obligation.
+              15 minutes. We’ll map your product’s real risk and give you a clear next step. No
+              pitch, no obligation.
             </p>
             <ul className="m-0 mt-7 flex list-none flex-wrap gap-3 p-0">
               {PROMISES.map((promise) => (
@@ -62,7 +63,7 @@ export default function ContactPage() {
       <Section tone="surface">
         <SectionHeading
           title="What Happens Next"
-          lede="Understand the process and timeline after you reach out to us."
+          lede="What to expect between your application and the first line of the audit."
         />
 
         <ol data-stagger className="vc-steps vc-steps-3 m-0 mt-12 grid list-none gap-6 p-0 md:grid-cols-3">

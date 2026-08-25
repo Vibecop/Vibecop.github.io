@@ -8,7 +8,8 @@ import { FAQS } from "@/content/faqs";
 
 export const metadata = {
   title: "Pricing",
-  description: "Fixed-scope projects. No monthly fees. You own the workflows.",
+  description:
+    "Fixed-scope audits and sprints, priced up front. One prevented incident typically covers the cost many times over.",
 };
 
 export default function PricingPage() {
@@ -16,13 +17,13 @@ export default function PricingPage() {
     <>
       <PageBanner
         title="Pricing"
-        lede="Fixed-scope projects. No monthly fees. You own the workflows."
+        lede="Fixed-scope audits and sprints, priced up front. One prevented incident typically covers the cost many times over."
       />
 
       <Section>
         <SectionHeading
-          title="Investment Built on ROI"
-          lede="Fixed-scope projects. No monthly fees. You own the code."
+          title="Scoped Engagements, Priced Up Front"
+          lede="Pick a single audit or ongoing assurance. Every engagement ends in findings your team can act on."
         />
         <PricingCards className="mt-12" />
       </Section>
@@ -30,7 +31,7 @@ export default function PricingPage() {
       <Section tone="surface">
         <SectionHeading
           title="Frequently Asked Questions"
-          lede="Clear, straightforward answers about our process, security, and support."
+          lede="Clear, straightforward answers about scope, security, and what happens after the audit."
         />
         <Accordion items={FAQS} className="mx-auto mt-12 max-w-4xl" />
       </Section>

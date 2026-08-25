@@ -38,7 +38,7 @@ export default function PricingCards({ className }) {
 
           <AuditButton className="mt-auto w-full">
             Request an audit
-            <span className="sr-only"> — {plan.name}</span>
+            <span className="sr-only"> {plan.name}</span>
           </AuditButton>
         </li>
       ))}

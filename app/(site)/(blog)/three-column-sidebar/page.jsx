@@ -12,7 +12,7 @@ export default function ThreeColumnSidebarPage() {
       <PageBanner
         title="Three Column"
         breadcrumb="Three Column Sidebar"
-        lede="AI-powered SaaS solutions designed for speed, scalability, and innovation. Helping startups build smarter systems and grow with confidence in a digital-first world."
+        lede="Notes on architecture, security, and production readiness for products built with AI what senior review finds, and why it matters."
       />
       <Section>
         <div className="grid gap-10 lg:grid-cols-12">

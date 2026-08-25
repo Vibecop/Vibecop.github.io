@@ -10,15 +10,15 @@ import { cn } from "@/lib/cn";
  * The audit application, as a modal.
  *
  * <AuditModalProvider/> sits in the site layout and owns the open state, so
- * the CTA scattered across the pages ("Book an Automation Audit", "Request an
- * audit") stay server components and only <AuditButton/> is a client one.
+ * the "Request an audit" CTAs scattered across the pages stay server
+ * components and only <AuditButton/> is a client one.
  *
- * The dialog chrome — backdrop, focus trap, scroll lock, portal — is
+ * The dialog chrome backdrop, focus trap, scroll lock, portal is
  * <Modal/>, shared with the sample report.
  */
 const AuditModalContext = createContext(null);
 
-/** Null outside the provider — <AuditButton/> falls back to /contact then. */
+/** Null outside the provider <AuditButton/> falls back to /contact then. */
 export function useAuditModal() {
   return useContext(AuditModalContext);
 }

@@ -7,14 +7,14 @@ export default function Footer() {
   return (
     <footer className="site-footer pt-16 md:pt-20">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-12" data-stagger>
+        <div className="grid gap-6 lg:grid-cols-12" data-stagger>
           <div className="lg:col-span-4">
             <Link href="/" aria-label="Vibecop — home">
               <img src="/assets/images/logo.png" alt="Vibecop" className="h-9 w-auto" />
             </Link>
             <p className="mt-6 max-w-sm text-base text-muted">
-              Practical, revenue-driven automation that quickly covers its own cost, built
-              exclusively for scaling small &amp; mid-sized businesses.
+              Human technical audits for AI-built and fast-built software products.
+              Architecture-first. Security-aware. Human-verified.
             </p>
             <ul className="mt-6 flex list-none gap-3 p-0">
               {SOCIAL_LINKS.map(({ label, href, icon }) => (

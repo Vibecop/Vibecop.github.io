@@ -3,8 +3,8 @@
  * the glows, grid and grain read as a single environment the page scrolls
  * through rather than as per-section artwork.
  *
- * Inert by construction — aria-hidden, pointer-events:none, and no layout
- * box of its own — and mounted once per layout instead of repeated down the
+ * Inert by construction aria-hidden, pointer-events:none, and no layout
+ * box of its own and mounted once per layout instead of repeated down the
  * page. The parallax factors are deliberately tiny: felt, not seen.
  */
 export default function Atmosphere() {

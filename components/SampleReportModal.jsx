@@ -21,7 +21,7 @@ import { cn } from "@/lib/cn";
  *
  * It is the one place on the site that shows the product rather than
  * describing it, so it is laid out as the report is: cover, score, summary,
- * findings, roadmap — and it stops at sprint 2, because the rest is what the
+ * findings, roadmap and it stops at sprint 2, because the rest is what the
  * audit is for.
  *
  * Chrome, focus trap and portal come from <Modal/>. Copy comes from
@@ -30,7 +30,7 @@ import { cn } from "@/lib/cn";
 
 /*
  * Severity is carried by hue, so it has to be legible without the label
- * beside it — red for critical down to a plain white for low. These are the
+ * beside it red for critical down to a plain white for low. These are the
  * only colours on the site outside the orange ramp, which is the point: a
  * finding list that is all brand orange reads as decoration.
  */
@@ -67,7 +67,7 @@ function ScoreGauge({ value }) {
   );
 }
 
-/** Label, figure and a proportional rule — used for the category scores. */
+/** Label, figure and a proportional rule used for the category scores. */
 function ScoreBar({ label, score }) {
   return (
     <li>
@@ -170,7 +170,7 @@ function Finding({ finding, expanded, onToggle, headingId, panelId }) {
 }
 
 /**
- * A CTA inside the report. Hands the reader to the application modal —
+ * A CTA inside the report. Hands the reader to the application modal
  * closing this one first, since two dialogs open at once is neither good
  * keyboard behaviour nor good manners. Falls back to /contact where the
  * provider is not mounted.
@@ -296,7 +296,7 @@ export default function SampleReportModal({ onClose }) {
       <section className="mt-7">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <h3 className="m-0 text-h3">
-            Findings <span className="text-sm font-normal text-muted-3">— click any finding to expand</span>
+            Findings <span className="text-sm font-normal text-muted-3">click any finding to expand</span>
           </h3>
           <span className="text-xs font-semibold uppercase tracking-wide text-muted-3">{total} total</span>
         </div>

@@ -11,7 +11,7 @@ export const LEGAL = {
       heading: "Privacy Policy",
       blocks: [
         {
-          p: "This Privacy Policy explains how Vibecop — SaaS & AI Startup Solutions collects, uses, and protects information when you access our platform. We value your privacy and aim to provide a secure, seamless experience while exploring our AI solutions, SaaS tools, and business services."
+          p: "This Privacy Policy explains how Vibecop SaaS & AI Startup Solutions collects, uses, and protects information when you access our platform. We value your privacy and aim to provide a secure, seamless experience while exploring our AI solutions, SaaS tools, and business services."
         }
       ]
     },
@@ -93,7 +93,7 @@ export const LEGAL = {
       heading: "Cookie Policy:",
       blocks: [
         {
-          p: "This Cookie Policy explains how Vibecop — SaaS & AI Startup Solutions (“we”, “our”, or “us”) uses cookies and similar tracking technologies on our platform. Cookies help improve your browsing experience, personalize content, and ensure key features like dashboards, AI tools, and account functionalities work correctly."
+          p: "This Cookie Policy explains how Vibecop SaaS & AI Startup Solutions (“we”, “our”, or “us”) uses cookies and similar tracking technologies on our platform. Cookies help improve your browsing experience, personalize content, and ensure key features like dashboards, AI tools, and account functionalities work correctly."
         }
       ]
     },
@@ -191,7 +191,7 @@ export const LEGAL = {
       heading: "Terms of Use",
       blocks: [
         {
-          p: "Welcome to Vibecop — SaaS & AI Startup Solutions , your digital platform for exploring our AI-powered tools, SaaS products, and innovative business solutions. Please read these Terms of Use carefully before using this website. By accessing or using any part of this site, you agree to be bound by these Terms."
+          p: "Welcome to Vibecop SaaS & AI Startup Solutions , your digital platform for exploring our AI-powered tools, SaaS products, and innovative business solutions. Please read these Terms of Use carefully before using this website. By accessing or using any part of this site, you agree to be bound by these Terms."
         }
       ]
     },

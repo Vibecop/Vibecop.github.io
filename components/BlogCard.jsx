@@ -16,7 +16,7 @@ function Meta({ icon, children }) {
  * One post, in the grid.
  *
  * `h-full` plus the column flex is what keeps a row of cards the same height
- * with their footers aligned, however uneven the excerpts are — the converted
+ * with their footers aligned, however uneven the excerpts are the converted
  * version set a fixed pixel height per breakpoint instead, which is why the
  * text escaped the card.
  *

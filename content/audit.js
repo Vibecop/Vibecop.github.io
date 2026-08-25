@@ -16,17 +16,17 @@ export const AUDIT_MODAL = {
 
   title: "Apply for a Production Review",
   lede:
-    "We work with a limited number of companies each month to ensure deep technical attention and meaningful outcomes. Every audit combines AI-powered analysis with senior engineer verification — going beyond automated findings to deliver architectural judgment, prioritized decisions, and production-ready confidence.",
+    "We work with a limited number of companies each month to ensure deep technical attention and meaningful outcomes. Every audit combines AI-powered analysis with senior engineer verification going beyond automated findings to deliver architectural judgment, prioritized decisions, and production-ready confidence.",
 
   pitchTitle: "Built for founders who cannot afford technical mistakes",
   pitchBody:
-    "Whether you are preparing for launch, onboarding enterprise clients, scaling infrastructure, or reviewing AI-generated code — Vibecop helps prevent expensive problems before they become production incidents.",
+    "Whether you are preparing for launch, onboarding enterprise clients, scaling infrastructure or reviewing AI-generated code Vibecop helps prevent expensive problems before they become production incidents.",
 
   submitLabel: "Request an audit",
   footnote:
     "Applications are reviewed by our team. If there is a strong fit, we will schedule a strategy call within 24 hours.",
   sentNote:
-    "Thanks — your application is captured. Connect a form handler to deliver it.",
+    "Thanks your application is captured. Connect a form handler to deliver it.",
 };
 
 /* `full: true` spans both columns. `placeholder` on a select is its

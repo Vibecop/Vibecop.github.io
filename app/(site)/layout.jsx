@@ -8,7 +8,7 @@ import { AuditModalProvider } from "@/components/AuditModal";
 
 /*
  * The chrome every content page carries. It lives here rather than in each
- * page — the converted pages each rendered their own <Header/> and <Footer/>,
+ * page the converted pages each rendered their own <Header/> and <Footer/>,
  * which is 23 copies of the same three lines.
  *
  * <Atmosphere/> is the shared decorative background; <MotionRuntime/> is the

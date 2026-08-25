@@ -7,7 +7,8 @@ import { FAQS } from "@/content/faqs";
 
 export const metadata = {
   title: "FAQs",
-  description: "Clear, straightforward answers about our process, security, and support.",
+  description:
+    "Clear, straightforward answers about scope, security, and what happens after the audit.",
 };
 
 export default function FaqPage() {
@@ -15,13 +16,13 @@ export default function FaqPage() {
     <>
       <PageBanner
         title="FAQs"
-        lede="Find clear answers about our automation process, delivery, and ongoing support."
+        lede="Find clear answers about how audits are scoped, how findings are verified, and what happens next."
       />
 
       <Section>
         <SectionHeading
           title="Frequently Asked Questions"
-          lede="Clear, straightforward answers about our process, security, and support."
+          lede="Clear, straightforward answers about scope, security, and what happens after the audit."
         />
         <Accordion items={FAQS} className="mx-auto mt-12 max-w-4xl" />
       </Section>

@@ -15,8 +15,8 @@ import { useEffect } from "react";
  *   data-count                                   count the number up on entry
  *   data-parallax="0.06"                         drift with scroll
  *
- * Three listeners total — one IntersectionObserver, one scroll handler, one
- * MutationObserver — instead of a library and a per-element listener.
+ * Three listeners total one IntersectionObserver, one scroll handler, one
+ * MutationObserver instead of a library and a per-element listener.
  */
 
 const REVEAL_SELECTOR = "[data-reveal],[data-stagger],[data-draw]";
@@ -25,7 +25,7 @@ const REVEAL_SELECTOR = "[data-reveal],[data-stagger],[data-draw]";
  * Revealed state is marked with an attribute, never a class.
  *
  * React owns `className` on every element it renders: the moment any state
- * changes the class list — a FAQ item opening, a filter becoming active — React
+ * changes the class list a FAQ item opening, a filter becoming active React
  * rewrites the attribute from its own props and silently drops anything added
  * from the outside. A class-based marker therefore vanished on the next
  * re-render and the element faded back out. React never touches an attribute
@@ -59,7 +59,7 @@ function runCounter(el) {
 
   /*
    * `data-count` is usually a bare attribute, which JSX serialises as
-   * `data-count="true"` — so the attribute is only a source of digits when it
+   * `data-count="true"` so the attribute is only a source of digits when it
    * actually parses as a number, and otherwise the rendered text is. Reading
    * it the other way round silently skipped every counter.
    */
@@ -112,7 +112,7 @@ export default function MotionRuntime() {
     const pending = new Set();
 
     /*
-     * Which elements are already wired up — tracked per effect run, never on
+     * Which elements are already wired up tracked per effect run, never on
      * the element itself.
      *
      * React StrictMode mounts, cleans up, then mounts again in development. A
@@ -165,7 +165,7 @@ export default function MotionRuntime() {
      * would stay hidden for good. That is the state a reload lands in: the
      * browser restores the old scroll offset, and every section above it was
      * skipped over rather than scrolled through, so scrolling back up found
-     * blank space. Reveal those outright — the user is past them, there is no
+     * blank space. Reveal those outright the user is past them, there is no
      * entrance left to play.
      */
     const revealPassed = () => {
@@ -198,7 +198,7 @@ export default function MotionRuntime() {
       const y = window.scrollY;
 
       // Ordinary scrolling passes every element through the observer, so the
-      // sweep is only needed when the viewport *jumps* — a restored scroll
+      // sweep is only needed when the viewport *jumps* a restored scroll
       // position, an in-page anchor. Gating on that keeps its layout reads off
       // the per-frame path.
       if (pending.size && (lastY === null || Math.abs(y - lastY) > window.innerHeight)) {
@@ -217,7 +217,7 @@ export default function MotionRuntime() {
       if (reduced.matches) return;
       for (const layer of layers) {
         const factor = Number.parseFloat(layer.dataset.parallax) || 0;
-        // the glows are position:fixed, so this offset is the whole effect —
+        // the glows are position:fixed, so this offset is the whole effect
         // they drift against the content instead of sitting dead still
         layer.style.setProperty("--parallax", `${(y * factor).toFixed(1)}px`);
       }

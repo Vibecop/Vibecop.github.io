@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn";
  * The mini trend chart on the metric cards.
  *
  * Deliberately not a charting library: it is three numbers of decoration next
- * to a headline figure, so it is a hand-built SVG path — no runtime, no
+ * to a headline figure, so it is a hand-built SVG path no runtime, no
  * layout thrash, and it inherits the section's reveal for its draw-on
  * animation (`.vc-spark-line`, keyed off `[data-revealed]`).
  */
@@ -28,19 +28,21 @@ export default function Sparkline({
 }) {
   const width = 240;
   const height = 64;
-  const pad = 6;
+  /* vertical breathing room only the series runs the full width so the
+   * line and its fill reach the same edges as the baseline rules */
+  const padY = 6;
 
   const min = Math.min(...values);
   const max = Math.max(...values);
   const span = max - min || 1;
 
   const points = values.map((value, i) => [
-    +((i / (values.length - 1)) * (width - pad * 2) + pad).toFixed(2),
-    +(height - pad - ((value - min) / span) * (height - pad * 2)).toFixed(2),
+    +((i / (values.length - 1)) * width).toFixed(2),
+    +(height - padY - ((value - min) / span) * (height - padY * 2)).toFixed(2),
   ]);
 
   const line = smoothPath(points);
-  const area = `${line} L${width - pad},${height} L${pad},${height} Z`;
+  const area = `${line} L${width},${height} L0,${height} Z`;
   const gradientId = `spark-stroke-${id}`;
   const fillId = `spark-fill-${id}`;
 
@@ -50,7 +52,9 @@ export default function Sparkline({
       preserveAspectRatio="none"
       aria-hidden="true"
       focusable="false"
-      className={cn("h-16 w-full", className)}
+      /* the series touches x=0 and x=240, so let the round caps sit
+       * outside the viewBox instead of being sliced in half */
+      className={cn("h-16 w-full overflow-visible", className)}
     >
       <defs>
         <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0">
@@ -78,9 +82,11 @@ export default function Sparkline({
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        vectorEffect="non-scaling-stroke"
         /* normalises the path to 240 units so the dash-offset draw in
-         * theme.css lands exactly, whatever the series shape works out to */
+         * theme.css lands exactly, whatever the series shape works out to.
+         * Note: no non-scaling-stroke that would resolve the dash pattern
+         * in screen space, where the stretched viewBox makes 240 units fall
+         * short of the line and leave the tail undrawn. */
         pathLength="240"
         className="vc-spark-line"
       />

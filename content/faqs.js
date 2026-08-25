@@ -8,7 +8,7 @@ export const FAQS = [
   {
     question: "Is this penetration testing?",
     answer:
-      "No. Vibecop focuses on production readiness, architecture assurance, scalability risks, infrastructure decisions, and security validation — not just penetration testing.",
+      "No. Vibecop focuses on production readiness, architecture assurance, scalability risks, infrastructure decisions and security validation not just penetration testing.",
   },
   {
     question: "Are findings automated or human-reviewed?",
@@ -20,17 +20,17 @@ export const FAQS = [
     answer:
       "Yes. Teams can receive implementation guidance, architecture oversight, or hands-on engineering support after the audit.",
   },
-   {
+  {
     question: "What technologies do you support?",
     answer:
-      "Vibecop supports modern SaaS and AI-focused stacks including JavaScript/TypeScript, Node.js, React, Next.js, Ruby on Rails, Python, cloud infrastructure, and containerized environments.",
+      "Vibecop is built for vibecoded applications first anything shipped with Claude Code, Cursor, Lovable, Bolt, or Copilot alongside hand-written SaaS and AI products. In practice that covers JavaScript/TypeScript, Node.js, React, Next.js, Ruby on Rails, Python, cloud infrastructure, and containerized environments. If a senior engineer can read it, we can review it.",
   },
-   {
+  {
     question: "How long does an audit take?",
     answer:
       "Most reviews are completed within a few days depending on repository size, infrastructure complexity, and scope.",
   },
-   {
+  {
     question: "Do you offer ongoing oversight?",
     answer:
       "Yes. Vibecop can operate as an ongoing architecture and production assurance partner for growing teams.",

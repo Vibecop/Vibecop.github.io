@@ -24,7 +24,7 @@ export const SRC = path.resolve(fileURLToPath(import.meta.url), '../../../vibeco
  *   bare  no chrome at all                       app/(bare)/…
  *
  * `aliases` lists slugs the kit's own hrefs point at that are not the page's
- * own — here, one misspelling that shipped in the markup for a file that never
+ * own here, one misspelling that shipped in the markup for a file that never
  * existed.
  */
 export const PAGES = [
@@ -77,7 +77,7 @@ export const ROUTE_BY_SLUG = new Map(
 );
 
 /**
- * `/404` is not a route of its own — Next renders `app/not-found.jsx` for
+ * `/404` is not a route of its own Next renders `app/not-found.jsx` for
  * anything unmatched, so the checkers ask for a URL that cannot resolve.
  */
 export const NOT_FOUND_URL = '/nope';

@@ -17,14 +17,14 @@ function isCurrent(pathname, item) {
 /**
  * A top-level entry with a submenu.
  *
- * Opens on hover at desktop widths and on click everywhere — hover alone
+ * Opens on hover at desktop widths and on click everywhere hover alone
  * leaves the menu unreachable by keyboard and unusable on touch, which is
  * what the Bootstrap version did. Escape closes and returns focus to the
  * toggle; a click outside closes.
  *
  * Closing is deliberately delayed. The panel hangs 0.5rem below the button,
- * and the pointer crossing that gap — or cutting a corner on its way to a
- * child link — leaves the <li> for a frame or two. Closing on that first
+ * and the pointer crossing that gap or cutting a corner on its way to a
+ * child link leaves the <li> for a frame or two. Closing on that first
  * mouseleave pulled the menu out from under the click.
  */
 const CLOSE_DELAY = 180;
@@ -55,7 +55,7 @@ function NavDropdown({ item, pathname }) {
   /* a pending close must not fire into an unmounted component */
   useEffect(() => cancelClose, []);
 
-  /* the route changed, so the menu has done its job — and the pointer may
+  /* the route changed, so the menu has done its job and the pointer may
      still be sitting on it, which would otherwise leave it open */
   useEffect(() => {
     cancelClose();
@@ -157,7 +157,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Client-side routing keeps the DOM, so the mobile menu has to be closed by
-  // hand on navigation — the static kit got this free from the page reload.
+  // hand on navigation the static kit got this free from the page reload.
   useEffect(() => setMenuOpen(false), [pathname]);
 
   return (
@@ -198,9 +198,16 @@ export default function Header() {
             <div
               id="main-menu"
               className={cn(
-                "nav-drawer absolute inset-x-4 top-full mt-2 p-5 lg:static lg:mt-0 lg:p-0",
-                "lg:flex lg:items-center lg:gap-8",
-                menuOpen ? "block" : "hidden lg:flex"
+                "nav-drawer absolute inset-x-4 top-full mt-2 p-5",
+                /*
+                 * `contents` rather than `flex` at desktop: the drawer is a
+                 * mobile-only panel, and dissolving the wrapper lets the links
+                 * and the CTA sit directly in the nav row the way they did when
+                 * the button lived outside it — while on a phone the button is
+                 * inside the hamburger where it belongs.
+                 */
+                "lg:contents",
+                menuOpen ? "block" : "hidden"
               )}
             >
               <ul className="m-0 list-none space-y-1 p-0 lg:flex lg:items-center lg:gap-7 lg:space-y-0">
@@ -224,11 +231,14 @@ export default function Header() {
                   )
                 )}
               </ul>
-            </div>
-              <div className="mt-5 gap-3 border-t border-white/10 pt-5 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 lg:border-0 lg:pt-0">
-                <Button href="/contact">Contact Us</Button>
+
+              <div className="mt-5 border-t border-white/10 pt-5 lg:mt-0 lg:border-0 lg:pt-0">
+                <Button href="/contact" className="w-full lg:w-auto">
+                  Contact Us
+                </Button>
               </div>
             </div>
+          </div>
         </nav>
       </Container>
     </header>

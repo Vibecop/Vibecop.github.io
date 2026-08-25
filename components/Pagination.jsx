@@ -2,8 +2,8 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 
 /**
- * The kit's pager. It does not page through anything — each number points at
- * one of the column-layout demos — so it is rendered as the navigation it
+ * The kit's pager. It does not page through anything each number points at
+ * one of the column-layout demos so it is rendered as the navigation it
  * actually is, with the current page marked.
  */
 export default function Pagination({ pages, current, prev, next }) {

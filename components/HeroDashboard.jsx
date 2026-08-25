@@ -10,7 +10,7 @@ const MEETINGS = [
 const AVATARS = [1, 2, 3, 4].map((n) => `/assets/images/avatar${n}.png`);
 
 /* The shape every audit report opens with. Critical is 3 so the panel agrees
- * with the launch-blocker card above it — the collage should read as one
+ * with the launch-blocker card above it the collage should read as one
  * report, not four unrelated numbers. Brightness carries severity, so the
  * short bar is the loud one. */
 const SEVERITIES = [
@@ -23,12 +23,12 @@ const SEVERITIES = [
 const SEVERITY_MAX = Math.max(...SEVERITIES.map((s) => s.count));
 
 /**
- * The collage beside the hero headline. Decorative — it illustrates the
+ * The collage beside the hero headline. Decorative it illustrates the
  * product rather than reporting anything, so it is hidden from assistive
  * technology instead of read out as a wall of orphaned numbers.
  *
  * The line beneath it is not: it opens the sample report, so it sits outside
- * the `aria-hidden` wrapper — a focusable control inside a hidden subtree is
+ * the `aria-hidden` wrapper a focusable control inside a hidden subtree is
  * reachable by Tab but invisible to a screen reader, which is worse than
  * either state on its own.
  *
@@ -38,19 +38,19 @@ const SEVERITY_MAX = Math.max(...SEVERITIES.map((s) => s.count));
  */
 export default function HeroDashboard() {
   return (
-    /* At `lg` the collage, not the headline, is what sets the hero's height —
+    /* At `lg` the collage, not the headline, is what sets the hero's height
        so it comes down 10% with everything else and sits against the right
        edge of its column. */
     <div className="hero-rise hero-rise-3 lg:ml-auto lg:w-[90%]">
       <div aria-hidden="true" className="grid gap-4 sm:grid-cols-2">
         <Card interactive className="vc-float overflow-hidden p-0">
-          <div className="relative aspect-3/2 bg-[url('/assets/images/sprint-planning-bg.jpg')] bg-cover bg-center p-5">
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-brand">
-              <img src="/assets/images/video-recorder.png" alt="" className="h-5 w-5" />
+          <div className="relative aspect-3/2 bg-[url('/assets/images/sprint-planning-bg.jpg')] bg-cover bg-center p-4">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand">
+              <img src="/assets/images/video-recorder.png" alt="" className="h-4 w-5" />
             </span>
 
             <div className="absolute inset-x-5 bottom-5">
-              <p className="m-0 font-semibold text-white">Production Readiness Audit</p>
+              <p className="m-0 font-semibold text-base text-white">Production Readiness Audit</p>
               <p className="m-0 text-sm text-white/80"> Aug 22, 2026</p>
               <ul className="m-0 mt-3 flex list-none p-0">
                 {AVATARS.map((src) => (
@@ -68,7 +68,7 @@ export default function HeroDashboard() {
             <p className="m-0 text-base text-muted">Launch blockers</p>
             <p className="m-0 mt-1 text-4xl font-bold text-white">3</p>
           </div>
-          {/* Alert triangle — the blocker count is a warning, not a stat. */}
+          {/* Alert triangle the blocker count is a warning, not a stat. */}
           <svg viewBox="0 0 24 24" className="h-14 w-14 shrink-0 text-brand">
             <path d="M12 3.6 1.9 20.4h20.2L12 3.6z" fill="none" stroke="currentColor"
               strokeWidth="1.8" strokeLinejoin="round" />
@@ -150,7 +150,7 @@ export default function HeroDashboard() {
       </div>
 
       {/* Says out loud what the figures are, so specific numbers can sit in the
-          hero without reading as a live dashboard — and opens the report those
+          hero without reading as a live dashboard and opens the report those
           figures are sampled from. */}
       <div className="mt-4 flex justify-center">
         <SampleReportButton />
