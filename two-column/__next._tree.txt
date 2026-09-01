@@ -1,0 +1,6 @@
+:HL["/_next/static/chunks/0gj0vp44ivzfg.css","style"]
+:HL["/_next/static/chunks/17c3f822j3lyi.css","style"]
+:HC["/",""]
+:HL["/assets/images/error-img.png","image"]
+:HL["/assets/images/logo.png","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"(site)","param":null,"prefetchHints":4128,"slots":{"children":{"name":"(blog)","param":null,"prefetchHints":4160,"slots":{"children":{"name":"two-column","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"mTEqgHAIi7HxjMsvJSWkj"}
