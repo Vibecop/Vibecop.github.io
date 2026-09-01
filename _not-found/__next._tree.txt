@@ -1,4 +1,4 @@
 :HL["/_next/static/chunks/0gj0vp44ivzfg.css","style"]
 :HL["/_next/static/chunks/17c3f822j3lyi.css","style"]
 :HL["/assets/images/error-img.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"mTEqgHAIi7HxjMsvJSWkj"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"y-RWS0uEwTRh6ucXYFi5i"}
