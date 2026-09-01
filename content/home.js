@@ -18,7 +18,7 @@ export const PIPELINE_STAGES = [
 ];
 
 export const DASHBOARD_STATS = [
-  { label: "Typical audit turnaround", delta: "Scope to roadmap", value: "48–72h" },
+  { label: "Typical audit turnaround", delta: "Scope to roadmap", value: "3–7 business days" },
   { label: "Reviewed by a senior engineer", delta: "Human verified", value: "Every report" },
   { label: "Shipped without human review", delta: "What we accept", value: "No findings" },
 ];

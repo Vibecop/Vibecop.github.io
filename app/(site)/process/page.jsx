@@ -8,7 +8,7 @@ import { HANDOFF_KIT } from "@/content/process";
 export const metadata = {
   title: "Process",
   description:
-    "From repository access to a prioritized risk roadmap how a Vibecop audit runs in 48 to 72 hours.",
+    "From repository access to a prioritized risk roadmap how a Vibecop audit runs in 3 to 7 business days.",
 };
 
 export default function ProcessPage() {
@@ -17,7 +17,7 @@ export default function ProcessPage() {
       <PageBanner
         title="Process"
         breadcrumb="Process"
-        lede="From repository access to a prioritized risk roadmap how a Vibecop audit runs in 48 to 72 hours."
+        lede="From repository access to a prioritized risk roadmap how a Vibecop audit runs in 3 to 7 business days."
       />
 
       <Section className="velocity-feature">
