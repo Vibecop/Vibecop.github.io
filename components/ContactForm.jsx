@@ -14,17 +14,16 @@ const FIELDS = [
   { id: "concern", label: "Biggest technical concern right now", type: "textarea" },
 ];
 
-/**
- * The audit request form.
- *
- * There is no endpoint behind it the kit's form posted to `javascript:;`
- * so it validates, then reports success without claiming to have sent
- * anything. Point `onSubmit` at a real handler when one exists.
- */
+// ponytail: public by design Web3Forms keys are meant to ship in the bundle,
+// and on a static export env vars inline identically. Worst case if scraped is
+// spam to our own inbox. Lock the origin allowlist to vibecop.io in their dashboard.
+const ACCESS_KEY = "25f5c1fd-0819-4df2-9c44-31e49415fcc8";
+
+/** The audit request form. Posts to Web3Forms, which emails the registered address. */
 export default function ContactForm() {
   const base = useId();
   const [help, setHelp] = useState(HELP_OPTIONS[0]);
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState(null);
 
   const inputClass =
     "vc-field w-full rounded-xl px-4 py-3 text-base text-white placeholder:text-muted-3";
@@ -33,11 +32,28 @@ export default function ContactForm() {
     <form
       data-reveal
       className="vc-card p-8"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        setSent(true);
+        const form = e.currentTarget;
+        const body = new FormData(form);
+        body.append("help", help);
+        body.append("replyto", body.get("email"));
+        setStatus("sending");
+        try {
+          const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body });
+          const json = await res.json().catch(() => ({}));
+          setStatus(json.success ? "ok" : "err");
+          if (json.success) form.reset();
+        } catch {
+          setStatus("err");
+        }
       }}
     >
+      <input type="hidden" name="access_key" value={ACCESS_KEY} />
+      <input type="hidden" name="subject" value="New audit request vibecop.io" />
+      <input type="hidden" name="from_name" value="vibecop.io" />
+      <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
+
       <fieldset className="m-0 border-0 p-0">
         <legend className="mb-3 text-sm font-medium text-white">What do you need help with?</legend>
         <div className="flex flex-wrap gap-3">
@@ -107,13 +123,18 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="vc-btn vc-btn-primary mt-8 w-full rounded-full px-8 py-4 font-semibold text-white sm:w-auto"
+        disabled={status === "sending"}
+        className="vc-btn vc-btn-primary mt-8 w-full rounded-full px-8 py-4 font-semibold text-white disabled:opacity-60 sm:w-auto"
       >
-        Send Request
+        {status === "sending" ? "Sending" : "Send Request"}
       </button>
 
-      <output aria-live="polite" className="mt-4 block text-base text-brand">
-        {sent && "Thanks your details are captured. Connect a form handler to deliver them."}
+      <output
+        aria-live="polite"
+        className={cn("mt-4 block text-base", status === "err" ? "text-red-400" : "text-brand")}
+      >
+        {status === "ok" && "Thanks we got it. Expect a reply within 24 hours."}
+        {status === "err" && "That did not send. Email us at hello@vibecop.io and we will pick it up."}
       </output>
     </form>
   );
