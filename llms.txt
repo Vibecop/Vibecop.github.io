@@ -1,0 +1,38 @@
+# Vibecop
+
+> Enterprise-grade architecture, security, and production-readiness audits for
+> startups, SaaS founders, and companies shipping AI-generated code. Every audit
+> pairs automated analysis with senior engineer verification, so what you get is
+> architectural judgment and prioritized decisions rather than a scanner dump.
+
+Vibecop reviews products built with AI coding tools (Claude Code, Cursor,
+Lovable, Bolt, and similar) as well as conventionally built systems. Typical
+clients are pre-launch teams, products onboarding enterprise customers, and
+teams scaling past the load their original design assumed.
+
+## Services
+
+- [Architecture Audit](https://vibecop.io/services/architecture-audit): A full review of your system design, data flows, and structural weaknesses identified before they become expensive to fix.
+- [Security Audit](https://vibecop.io/services/security-audit): Threat surface mapping, auth hardening, and access control AI-powered analysis, verified by senior engineers.
+- [AI-Built Product Review](https://vibecop.io/services/ai-built-product-review): Designed for products built with Cursor, Claude Code, Lovable, Bolt, and Copilot. We find what the AI didn’t catch.
+- [Production Readiness](https://vibecop.io/services/production-readiness): Observability, incident response, deployment pipelines, and operational maturity assessed, scored, and prioritized.
+- [CTO Advisory for Founders](https://vibecop.io/services/cto-advisory): Senior engineering judgment on demand. Make the right architecture decisions without the cost of a full-time CTO hire.
+- [Continuous Assurance](https://vibecop.io/services/continuous-assurance): Continuous senior review of architecture decisions, codebase health, and security posture as your product evolves.
+
+## Site
+
+- [/services](https://vibecop.io/services): All audit services, with what each covers and how it is scoped.
+- [/process](https://vibecop.io/process): How an audit runs, from application through to the delivered report.
+- [/pricing](https://vibecop.io/pricing): What audits cost and what is included at each level.
+- [/case-studies](https://vibecop.io/case-studies): Past engagements and what the audits found.
+- [/about](https://vibecop.io/about): Who we are and the engineering judgment behind the reviews.
+- [/team](https://vibecop.io/team): The senior engineers who verify every finding.
+- [/faq](https://vibecop.io/faq): Common questions about scope, turnaround, NDAs, and deliverables.
+- [/blog](https://vibecop.io/blog): Writing on AI-generated code, architecture, and production readiness.
+- [/contact](https://vibecop.io/contact): Request an audit or a 15-minute strategy call.
+
+## Legal
+
+- [/privacy-policy](https://vibecop.io/privacy-policy): How we handle data submitted through the site.
+- [/cookie-policy](https://vibecop.io/cookie-policy): Cookie use on vibecop.io.
+- [/term-of-use](https://vibecop.io/term-of-use): Terms governing use of the site.
