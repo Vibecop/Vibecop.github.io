@@ -1,20 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { useId } from "react";
+import { useId, useState } from "react";
+import { cn } from "@/lib/cn";
+import { submitForm } from "@/lib/web3forms";
 
-/**
- * The footer signup. There is no backend behind it the kit's form carried
- * `action="javascript:;"` so the submit is prevented rather than pointed at
- * an endpoint that does not exist. Wire `onSubmit` to a real handler when one
- * lands; the markup does not need to change.
- */
+/** The footer and sidebar signup. Posts to Web3Forms like the other forms. */
 export default function NewsletterForm() {
   const emailId = useId();
   const termsId = useId();
+  const [status, setStatus] = useState(null);
 
   return (
-    <form className="mt-5" onSubmit={(e) => e.preventDefault()}>
+    <form
+      className="mt-5"
+      onSubmit={async (e) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        setStatus("sending");
+        const ok = await submitForm(form, { subject: "Newsletter signup vibecop.io" });
+        setStatus(ok ? "ok" : "err");
+        if (ok) form.reset();
+      }}
+    >
+      <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
+
       <div className="relative">
         <label htmlFor={emailId} className="sr-only">
           Email address
@@ -31,7 +41,8 @@ export default function NewsletterForm() {
         <button
           type="submit"
           aria-label="Subscribe"
-          className="vc-btn vc-btn-primary absolute right-1.5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-white"
+          disabled={status === "sending"}
+          className="vc-btn vc-btn-primary absolute right-1.5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-white disabled:opacity-60"
         >
           <i className="fa-solid fa-paper-plane" aria-hidden="true" />
         </button>
@@ -41,6 +52,8 @@ export default function NewsletterForm() {
         <input
           id={termsId}
           type="checkbox"
+          name="consent"
+          value="Agreed to the privacy policy"
           required
           className="mt-1.5 h-4 w-4 shrink-0 accent-brand"
         />
@@ -52,6 +65,14 @@ export default function NewsletterForm() {
           .
         </label>
       </div>
+
+      <output
+        aria-live="polite"
+        className={cn("mt-3 block text-sm", status === "err" ? "text-red-400" : "text-brand")}
+      >
+        {status === "ok" && "You are on the list."}
+        {status === "err" && "That did not send. Try again in a moment."}
+      </output>
     </form>
   );
 }

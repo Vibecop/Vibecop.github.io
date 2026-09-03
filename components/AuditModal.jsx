@@ -5,6 +5,7 @@ import Badge from "@/components/ui/Badge";
 import Modal from "@/components/ui/Modal";
 import { AUDIT_FIELDS, AUDIT_MODAL } from "@/content/audit";
 import { cn } from "@/lib/cn";
+import { submitForm } from "@/lib/web3forms";
 
 /*
  * The audit application, as a modal.
@@ -50,7 +51,7 @@ export function AuditModalProvider({ children }) {
 function AuditModal({ onClose }) {
   const base = useId();
   const firstField = useRef(null);
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState(null);
 
   const inputClass = "vc-field w-full rounded-xl px-3.5 py-2 text-sm text-white placeholder:text-muted-3";
 
@@ -84,11 +85,17 @@ function AuditModal({ onClose }) {
 
       <form
         className="mt-6"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          setSent(true);
+          const form = e.currentTarget;
+          setStatus("sending");
+          const ok = await submitForm(form, { subject: "New audit application vibecop.io" });
+          setStatus(ok ? "ok" : "err");
+          if (ok) form.reset();
         }}
       >
+        <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
+
         <div className="grid gap-4 sm:grid-cols-2">
           {AUDIT_FIELDS.map((field, i) => (
             <div key={field.id} className={field.full ? "sm:col-span-2" : undefined}>
@@ -146,15 +153,20 @@ function AuditModal({ onClose }) {
 
         <button
           type="submit"
-          className="vc-btn vc-btn-primary mt-6 w-full rounded-full px-7 py-3 font-semibold text-white sm:w-auto"
+          disabled={status === "sending"}
+          className="vc-btn vc-btn-primary mt-6 w-full rounded-full px-7 py-3 font-semibold text-white disabled:opacity-60 sm:w-auto"
         >
-          {AUDIT_MODAL.submitLabel}
+          {status === "sending" ? "Sending" : AUDIT_MODAL.submitLabel}
         </button>
 
         <p className="mt-3 text-xs text-muted-3">{AUDIT_MODAL.footnote}</p>
 
-        <output aria-live="polite" className="mt-3 block text-sm text-brand">
-          {sent && AUDIT_MODAL.sentNote}
+        <output
+          aria-live="polite"
+          className={cn("mt-3 block text-sm", status === "err" ? "text-red-400" : "text-brand")}
+        >
+          {status === "ok" && AUDIT_MODAL.sentNote}
+          {status === "err" && AUDIT_MODAL.errorNote}
         </output>
       </form>
     </Modal>

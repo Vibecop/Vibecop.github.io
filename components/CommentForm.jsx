@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import { cn } from "@/lib/cn";
+import { submitForm } from "@/lib/web3forms";
 
 const FIELDS = [
   { id: "first-name", label: "First Name", type: "text", autoComplete: "given-name" },
@@ -10,10 +11,15 @@ const FIELDS = [
   { id: "phone", label: "Phone", type: "tel", autoComplete: "tel" },
 ];
 
-/** Comment box. No backend in the kit, so it acknowledges rather than posts. */
+/*
+ * Comment box. Emails the comment to us via Web3Forms nothing on the site
+ * renders comments, so these are moderated in the sense that they land in an
+ * inbox and never appear on the page. The copy says so rather than implying
+ * the comment was published.
+ */
 export default function CommentForm() {
   const base = useId();
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState(null);
 
   const inputClass =
     "vc-field mt-2 w-full rounded-xl px-4 py-3 text-base text-white placeholder:text-muted-3";
@@ -21,11 +27,17 @@ export default function CommentForm() {
   return (
     <form
       className="mt-7"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        setSent(true);
+        const form = e.currentTarget;
+        setStatus("sending");
+        const ok = await submitForm(form, { subject: "New blog comment vibecop.io" });
+        setStatus(ok ? "ok" : "err");
+        if (ok) form.reset();
       }}
     >
+      <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
+
       <div className="grid gap-5 sm:grid-cols-2">
         {FIELDS.map((field) => (
           <div key={field.id}>
@@ -58,13 +70,18 @@ export default function CommentForm() {
 
       <button
         type="submit"
-        className="vc-btn vc-btn-primary mt-7 rounded-full px-8 py-3.5 font-semibold text-white"
+        disabled={status === "sending"}
+        className="vc-btn vc-btn-primary mt-7 rounded-full px-8 py-3.5 font-semibold text-white disabled:opacity-60"
       >
-        Post Comment
+        {status === "sending" ? "Sending" : "Post Comment"}
       </button>
 
-      <output aria-live="polite" className="mt-4 block text-base text-brand">
-        {sent && "Thanks connect a comment backend to publish this."}
+      <output
+        aria-live="polite"
+        className={cn("mt-4 block text-base", status === "err" ? "text-red-400" : "text-brand")}
+      >
+        {status === "ok" && "Thanks your comment is with us for review."}
+        {status === "err" && "That did not send. Try again in a moment."}
       </output>
     </form>
   );

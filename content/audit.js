@@ -26,7 +26,9 @@ export const AUDIT_MODAL = {
   footnote:
     "Applications are reviewed by our team. If there is a strong fit, we will schedule a strategy call within 24 hours.",
   sentNote:
-    "Thanks your application is captured. Connect a form handler to deliver it.",
+    "Thanks your application is in. If there is a strong fit we will be in touch within 24 hours.",
+  errorNote:
+    "That did not send. Email us at hello@vibecop.io and we will pick it up from there.",
 };
 
 /* `full: true` spans both columns. `placeholder` on a select is its

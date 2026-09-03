@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import { cn } from "@/lib/cn";
+import { submitForm } from "@/lib/web3forms";
 
 const HELP_OPTIONS = ["Architecture", "Security", "Scale & production"];
 const TIMELINES = ["Select", "ASAP", "1-2 Weeks", "1 Month"];
@@ -13,11 +14,6 @@ const FIELDS = [
   { id: "stack", label: "How was it built (Cursor, Claude Code, Lovable, internal team)?", type: "text" },
   { id: "concern", label: "Biggest technical concern right now", type: "textarea" },
 ];
-
-// ponytail: public by design Web3Forms keys are meant to ship in the bundle,
-// and on a static export env vars inline identically. Worst case if scraped is
-// spam to our own inbox. Lock the origin allowlist to vibecop.io in their dashboard.
-const ACCESS_KEY = "25f5c1fd-0819-4df2-9c44-31e49415fcc8";
 
 /** The audit request form. Posts to Web3Forms, which emails the registered address. */
 export default function ContactForm() {
@@ -35,23 +31,12 @@ export default function ContactForm() {
       onSubmit={async (e) => {
         e.preventDefault();
         const form = e.currentTarget;
-        const body = new FormData(form);
-        body.append("help", help);
-        body.append("replyto", body.get("email"));
         setStatus("sending");
-        try {
-          const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body });
-          const json = await res.json().catch(() => ({}));
-          setStatus(json.success ? "ok" : "err");
-          if (json.success) form.reset();
-        } catch {
-          setStatus("err");
-        }
+        const ok = await submitForm(form, { subject: "New audit request vibecop.io", help });
+        setStatus(ok ? "ok" : "err");
+        if (ok) form.reset();
       }}
     >
-      <input type="hidden" name="access_key" value={ACCESS_KEY} />
-      <input type="hidden" name="subject" value="New audit request vibecop.io" />
-      <input type="hidden" name="from_name" value="vibecop.io" />
       <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
 
       <fieldset className="m-0 border-0 p-0">
