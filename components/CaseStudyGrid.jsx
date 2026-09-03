@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { CASE_STUDIES, CASE_STUDY_FILTERS } from "@/content/case-studies";
 import { cn } from "@/lib/cn";
 
@@ -59,8 +60,31 @@ export default function CaseStudyGrid() {
                 </span>
               </p>
 
-              <h3 className="mt-4 text-h3">{study.title}</h3>
+              <h3 className="mt-4 text-h3">
+                {/* only the studies with a detail page link anywhere; the rest
+                    stay plain cards rather than pointing at a 404 */}
+                {study.detail ? (
+                  <Link
+                    href={`/case-studies/${study.slug}`}
+                    className="text-inherit no-underline transition-colors duration-200 hover:text-brand"
+                  >
+                    {study.title}
+                  </Link>
+                ) : (
+                  study.title
+                )}
+              </h3>
               <p className="mt-3 text-base text-muted">{study.body}</p>
+
+              {study.detail && (
+                <Link
+                  href={`/case-studies/${study.slug}`}
+                  className="mt-4 inline-flex items-center gap-2 text-base font-semibold text-brand no-underline"
+                >
+                  Read the audit
+                  <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" />
+                </Link>
+              )}
 
               <ul className="m-0 mt-auto flex list-none flex-wrap gap-x-6 gap-y-2 border-t border-white/10 p-0 pt-5 text-sm font-semibold text-white">
                 {study.stats.map((stat) => (
