@@ -9,6 +9,7 @@ import Button from "@/components/ui/Button";
 import AuditButton from "@/components/AuditButton";
 import Badge from "@/components/ui/Badge";
 import PricingCards from "@/components/PricingCards";
+import InvestorCard from "@/components/InvestorCard";
 import Sparkline from "@/components/ui/Sparkline";
 import { FAQS } from "@/content/faqs";
 import {
@@ -216,6 +217,7 @@ export default function IndexPage() {
           lede="Fixed-scope audits and sprints. One prevented incident typically covers the cost many times over."
         />
         <PricingCards className="mt-12" />
+        <InvestorCard className="mt-12" />
       </Section>
 
       <Section tone="surface">

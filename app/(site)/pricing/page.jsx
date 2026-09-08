@@ -1,6 +1,7 @@
 import PageBanner from "@/components/PageBanner";
 import PricingCards from "@/components/PricingCards";
 import Accordion from "@/components/Accordion";
+import InvestorCard from "@/components/InvestorCard";
 import CallToAction from "@/components/CallToAction";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -26,6 +27,7 @@ export default function PricingPage() {
           lede="Pick a single audit or ongoing assurance. Every engagement ends in findings your team can act on."
         />
         <PricingCards className="mt-12" />
+        <InvestorCard className="mt-12" />
       </Section>
 
       <Section tone="surface">
