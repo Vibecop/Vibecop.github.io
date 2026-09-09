@@ -9,6 +9,7 @@
  */
 
 import { SERVICE_PAGES } from "@/content/service-pages";
+import { AUDIT_PAGES } from "@/content/audit-pages";
 
 export const MAIN_NAV = [
   { label: "About", href: "/about" },
@@ -23,6 +24,15 @@ export const MAIN_NAV = [
         label: navLabel,
         href: `/services/${slug}`,
       })),
+    ],
+  },
+  {
+    /* The audit landing pages. Flat list rather than a nested menu: the
+       dropdown renders one level, and twelve rows still fit. */
+    label: "Audits",
+    children: [
+      { label: "All Audits", href: "/audits" },
+      ...AUDIT_PAGES.map(({ h1, navLabel, path }) => ({ label: navLabel ?? h1, href: `/${path}` })),
     ],
   },
   {

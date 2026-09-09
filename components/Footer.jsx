@@ -2,6 +2,7 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import NewsletterForm from "@/components/NewsletterForm";
 import { FOOTER_NAV, SOCIAL_LINKS } from "@/content/navigation";
+import { DESCRIPTOR } from "@/content/entity";
 
 export default function Footer() {
   return (
@@ -13,7 +14,8 @@ export default function Footer() {
               <img src="/assets/images/logo.png" alt="Vibecop" className="h-9 w-auto" />
             </Link>
             <p className="mt-6 max-w-sm text-base text-muted">
-              Human technical audits for AI-built and fast-built software products.
+              <strong className="font-semibold text-white">{DESCRIPTOR}</strong>. Human
+              technical audits for AI-built and fast-built software products.
               Architecture-first. Security-aware. Human-verified.
             </p>
             <ul className="mt-6 flex list-none gap-3 p-0">

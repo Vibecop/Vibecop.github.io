@@ -9,15 +9,16 @@
  */
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@/styles/theme.css";
+import { DESCRIPTION, DESCRIPTOR, ORGANIZATION_JSONLD } from "@/content/entity";
 
 export const metadata = {
   metadataBase: new URL("https://vibecop.io"),
   title: {
-    default: "Vibecop - Senior Supervision for Products built with AI",
+    default: "Vibecop — AI-Built Software Audit Service",
     template: "%s | Vibecop",
   },
-  description:
-    "Enterprise-grade architecture, security, and production-readiness audits for startups, SaaS founders, and companies building with AI-generated code.",
+  description: DESCRIPTION,
+  applicationName: DESCRIPTOR,
   icons: {
     icon: [16, 32, 96].map((s) => ({
       url: `/assets/images/favicon/favicon-${s}x${s}.png`,
@@ -72,6 +73,12 @@ export default function RootLayout({ children }) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: MOTION_BOOT }} />
+        {/* Sitewide, so every page carries the same entity definition: the
+            name alone is ambiguous, this says which Vibecop. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSONLD) }}
+        />
       </head>
       <body>{children}</body>
     </html>

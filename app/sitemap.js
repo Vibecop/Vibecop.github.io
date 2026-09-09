@@ -3,6 +3,7 @@ export const dynamic = "force-static";
 
 import { SERVICE_PAGES } from "@/content/service-pages";
 import { CASE_STUDY_PAGES } from "@/content/case-studies";
+import { AUDIT_PAGES } from "@/content/audit-pages";
 
 /*
  * The sitemap, generated at build time so it lands in dist/sitemap.xml and
@@ -23,6 +24,8 @@ const PAGES = [
   "/team",
   "/services",
   ...SERVICE_PAGES.map(({ slug }) => `/services/${slug}`),
+  "/audits",
+  ...AUDIT_PAGES.map(({ path }) => `/${path}`),
   "/case-studies",
   ...CASE_STUDY_PAGES.map(({ slug }) => `/case-studies/${slug}`),
   "/pricing",

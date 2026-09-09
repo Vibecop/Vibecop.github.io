@@ -21,7 +21,7 @@ import {
 
 export const metadata = {
   // absolute: the root template appends "| Vibecop", which this already says
-  title: { absolute: "Vibecop - Senior Supervision for Products built with AI" },
+  title: { absolute: "Independent Technical Audits for AI-Built Software | Vibecop" },
   description: HERO.lede,
 };
 
@@ -93,6 +93,10 @@ export default function IndexPage() {
 
               <p className="hero-rise hero-rise-3 mt-5 max-w-xl text-lg text-muted">{HERO.lede}</p>
 
+              <p className="hero-rise hero-rise-3 mt-4 text-base font-medium text-brand">{HERO.brandLine}</p>
+
+              <p className="hero-rise hero-rise-3 mt-4 max-w-xl text-sm text-muted">{HERO.support}</p>
+
               <div className="hero-rise hero-rise-4 mt-8 flex flex-wrap items-center gap-4">
                 <AuditButton size="lg">
                   Request an audit
@@ -156,6 +160,14 @@ export default function IndexPage() {
             </li>
           ))}
         </ol>
+
+        {/* The five stages above are the summary; /process is the full ten. */}
+        <div data-reveal className="mt-12 text-center">
+          <Button href="/process" variant="outline" size="lg">
+            Read the full audit methodology
+            <i className="fa-solid fa-arrow-right text-sm" aria-hidden="true" />
+          </Button>
+        </div>
       </Section>
 
       <Section className="velocity-feature">

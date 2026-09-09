@@ -2,6 +2,8 @@
 export const dynamic = "force-static";
 
 import { SERVICE_PAGES } from "@/content/service-pages";
+import { AUDIT_PAGES } from "@/content/audit-pages";
+import { DESCRIPTOR, DESCRIPTION, DISAMBIGUATION } from "@/content/entity";
 
 /*
  * /llms.txt the llmstxt.org convention: a plain-markdown map of the site for
@@ -16,7 +18,7 @@ const SITE = "https://vibecop.io";
 
 const PAGES = [
   ["/services", "All audit services, with what each covers and how it is scoped."],
-  ["/process", "How an audit runs, from application through to the delivered report."],
+  ["/process", "Audit methodology: the ten stages of a Vibecop audit, in order, with the output each stage produces."],
   ["/pricing", "What audits cost and what is included at each level."],
   ["/case-studies", "Past engagements and what the audits found."],
   ["/about", "Who we are and the engineering judgment behind the reviews."],
@@ -36,12 +38,13 @@ const list = (rows) =>
   rows.map(([path, note]) => `- [${path}](${SITE}${path}): ${note}`).join("\n");
 
 export function GET() {
-  const body = `# Vibecop
+  const body = `# ${DESCRIPTOR}
 
-> Enterprise-grade architecture, security, and production-readiness audits for
-> startups, SaaS founders, and companies shipping AI-generated code. Every audit
-> pairs automated analysis with senior engineer verification, so what you get is
-> architectural judgment and prioritized decisions rather than a scanner dump.
+> ${DESCRIPTION}
+
+${DISAMBIGUATION} The service operates at vibecop.io. Every audit pairs
+automated analysis with senior engineer verification, so what you get is
+architectural judgment and prioritized decisions rather than a scanner dump.
 
 Vibecop reviews products built with AI coding tools (Claude Code, Cursor,
 Lovable, Bolt, and similar) as well as conventionally built systems. Typical
@@ -51,6 +54,11 @@ teams scaling past the load their original design assumed.
 ## Services
 
 ${SERVICE_PAGES.map((s) => `- [${s.title}](${SITE}/services/${s.slug}): ${s.lede}`).join("\n")}
+
+## Audits
+
+- [All Audits](${SITE}/audits): Index of every audit Vibecop runs.
+${AUDIT_PAGES.map((p) => `- [${p.h1}](${SITE}/${p.path}): ${p.definition}`).join("\n")}
 
 ## Site
 

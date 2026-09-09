@@ -4,8 +4,12 @@ export const HERO = {
   claims: ["Human Verified", "Production Readiness", "Audits"],
   /* Kept as lines rather than markup: the design breaks the headline in a
      specific place, and data files should not carry JSX. */
-  titleLines: ["Your AI-built product needs adult supervision."],
-  lede: "Founders ship fast with Claude Code, Lovable, Bolt, and Cursor. Enterprise platforms surface risks at scale. But architecture, security, and production decisions still need real senior engineering judgment. Vibecop is the human verification layer.",
+  titleLines: ["Independent Technical Audits for AI-Built Software"],
+  lede: "Vibecop reviews AI-generated and vibe-coded applications for security, architecture, scalability, reliability, and production readiness before you ship, scale, or raise.",
+  brandLine: "Adult supervision for AI-built products.",
+  /* Names the tools founders arrive with; kept in the hero because those
+     terms are how people search for this. */
+  support: "Founders ship fast with Claude Code, Lovable, Bolt, and Cursor. Enterprise platforms surface risks at scale. But architecture, security, and production decisions still need real senior engineering judgment. Vibecop is the human verification layer.",
 };
 
 /** The five audit stages, from repo access through to ongoing oversight. */
