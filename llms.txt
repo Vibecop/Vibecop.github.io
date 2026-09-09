@@ -1,9 +1,10 @@
-# Vibecop
+# Vibecop — AI-built software audit service
 
-> Enterprise-grade architecture, security, and production-readiness audits for
-> startups, SaaS founders, and companies shipping AI-generated code. Every audit
-> pairs automated analysis with senior engineer verification, so what you get is
-> architectural judgment and prioritized decisions rather than a scanner dump.
+> Vibecop is an AI-built software audit service. Senior engineers review applications built with AI coding tools for security, architecture, scalability, reliability and production readiness, then deliver a prioritized roadmap of what to fix.
+
+Vibecop is a professional audit service delivered by human senior engineers for client codebases. It is not a software product, developer tool, linter, npm package or code-quality scanner. The service operates at vibecop.io. Every audit pairs
+automated analysis with senior engineer verification, so what you get is
+architectural judgment and prioritized decisions rather than a scanner dump.
 
 Vibecop reviews products built with AI coding tools (Claude Code, Cursor,
 Lovable, Bolt, and similar) as well as conventionally built systems. Typical
@@ -19,10 +20,26 @@ teams scaling past the load their original design assumed.
 - [CTO Advisory for Founders](https://vibecop.io/services/cto-advisory): Senior engineering judgment on demand. Make the right architecture decisions without the cost of a full-time CTO hire.
 - [Continuous Assurance](https://vibecop.io/services/continuous-assurance): Continuous senior review of architecture decisions, codebase health, and security posture as your product evolves.
 
+## Audits
+
+- [All Audits](https://vibecop.io/audits): Index of every audit Vibecop runs.
+- [AI Software Audit](https://vibecop.io/ai-software-audit): An AI software audit is an independent technical review of an application built partly or entirely with AI coding tools. Vibecop evaluates the codebase, architecture, security, database, infrastructure, integrations, reliability and production readiness, then has senior engineers verify and prioritize the findings.
+- [AI Code Audit](https://vibecop.io/ai-code-audit): An AI code audit is an independent line-level review of code written by AI coding assistants. Vibecop reads the generated code the way a senior engineer would in review, checking correctness, error handling, data validation, concurrency, duplication and dead paths, and reports what is wrong rather than what merely looks unusual.
+- [AI Security Audit](https://vibecop.io/ai-security-audit): An AI security audit is an independent security review of an application built with AI coding tools. Vibecop maps the threat surface, tests authentication and authorization, inspects secrets handling, database isolation and dependency exposure, and ranks every finding by exploitability and business impact rather than by scanner severity alone.
+- [AI Architecture Audit](https://vibecop.io/ai-architecture-audit): An AI architecture audit is an independent review of the structure of a system built with AI coding tools. Vibecop maps service boundaries, data ownership, coupling and request paths as they exist in the code, then judges which of them hold as load, team size and feature scope grow, and sequences the changes that are still cheap to make.
+- [AI Agent Audit](https://vibecop.io/ai-agent-audit): An AI agent audit is an independent review of a product that runs LLM agents in production. Vibecop examines the prompt and context pipeline, tool permissions, memory and retrieval, output handling, cost and rate limits, evaluation and failure behaviour, and reports where an agent can be manipulated, can act beyond its intended authority, or can fail without anyone noticing.
+- [AI Production Readiness Audit](https://vibecop.io/ai-production-readiness-audit): An AI production readiness audit is an independent pre-launch review of an application built with AI coding tools. Vibecop checks whether the system can be deployed, monitored, recovered and supported by a real team under real load, covering deployment, backups, observability, error handling, security baseline, performance and operational ownership before launch rather than after the first incident.
+- [Vibe Code Audit: Security, Architecture & Production Readiness](https://vibecop.io/vibe-code-audit): Vibe code audits are technical reviews of applications built using AI coding tools such as Cursor, Claude Code, Lovable, Bolt, Replit and Copilot. Vibecop reads the system no one has fully reviewed — the generated architecture, the security defaults, the database schema, the abandoned experiments — and reports what is safe to ship, what must be fixed first, and what has to be rebuilt.
+- [Cursor Code Audit](https://vibecop.io/audits/cursor): A Cursor code audit is an independent technical review of an application built with Cursor's AI editor and agent. Vibecop reviews the code produced across many agent sessions — security, architecture, data handling and consistency — and reports where large accepted diffs introduced risk that review inside the editor did not catch.
+- [Lovable App Audit](https://vibecop.io/audits/lovable): A Lovable app audit is an independent technical review of an application generated with Lovable. Vibecop reviews the generated frontend, the backend and database configuration behind it, and the auth and access rules — checking whether data is genuinely protected server-side before the product takes real users, payments, or an enterprise customer.
+- [Bolt App Audit](https://vibecop.io/audits/bolt): A Bolt app audit is an independent technical review of an application built with Bolt. Vibecop reviews the generated stack end to end — frontend, backend, database rules, deployment configuration and integrations — and reports what needs fixing before a prototype that shipped in an afternoon carries real users and real data.
+- [Claude Code Audit](https://vibecop.io/audits/claude-code): A Claude Code audit is an independent technical review of a codebase built with Claude Code's agentic workflow. Vibecop reviews the result of many autonomous multi-file sessions — architecture, security, tool and MCP configuration, and consistency — and reports where agent-authored changes introduced risk that no human reviewed in full.
+- [Replit App Audit](https://vibecop.io/audits/replit): A Replit app audit is an independent technical review of an application built and hosted on Replit. Vibecop reviews the generated code, the auth and database configuration, secrets handling and deployment setup, and reports what has to change before the project carries production traffic or moves onto infrastructure you own.
+
 ## Site
 
 - [/services](https://vibecop.io/services): All audit services, with what each covers and how it is scoped.
-- [/process](https://vibecop.io/process): How an audit runs, from application through to the delivered report.
+- [/process](https://vibecop.io/process): Audit methodology: the ten stages of a Vibecop audit, in order, with the output each stage produces.
 - [/pricing](https://vibecop.io/pricing): What audits cost and what is included at each level.
 - [/case-studies](https://vibecop.io/case-studies): Past engagements and what the audits found.
 - [/about](https://vibecop.io/about): Who we are and the engineering judgment behind the reviews.
