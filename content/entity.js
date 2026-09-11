@@ -22,9 +22,14 @@ export const DESCRIPTION =
 export const DISAMBIGUATION =
   "Vibecop is a professional audit service delivered by human senior engineers for client codebases. It is not a software product, developer tool, linter, npm package or code-quality scanner.";
 
+/* Organization, not ProfessionalService. ProfessionalService is a
+   LocalBusiness, and Google requires a postal address on those — there is no
+   storefront to put there, so that type validates as invalid. Same reason
+   `serviceType` is absent: it belongs to Service, not Organization. The
+   category is carried by alternateName/description instead. */
 export const ORGANIZATION_JSONLD = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": "Organization",
   "@id": "https://vibecop.io/#organization",
   name: NAME,
   alternateName: DESCRIPTOR,
@@ -33,7 +38,6 @@ export const ORGANIZATION_JSONLD = {
   image: "https://vibecop.io/assets/images/logo.png",
   description: DESCRIPTION,
   disambiguatingDescription: DISAMBIGUATION,
-  serviceType: CATEGORY,
   areaServed: "Worldwide",
   knowsAbout: [
     "AI software audit",

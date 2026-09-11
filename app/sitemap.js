@@ -13,15 +13,19 @@ import { AUDIT_PAGES } from "@/content/audit-pages";
  * here, so adding a service adds it to the sitemap on the next build.
  *
  * Deliberately excluded: the kit's blog-layout demos (/one-column,
- * /two-column, and friends) and /coming-soon. They render duplicate or
- * placeholder copy, and submitting near-identical pages is a liability
- * rather than reach. robots.js blocks the same set.
+ * /two-column, /single-blog and friends) and /coming-soon. They render
+ * duplicate or placeholder copy, and submitting near-identical pages is a
+ * liability rather than reach. robots.js blocks the same set.
+ *
+ * Also excluded: /team and /blog. Both are commented out of navigation, so
+ * nothing on the site links to them — submitting a page no visitor can reach
+ * is what Semrush calls an orphan. Uncomment them in content/navigation.js
+ * and they belong back here.
  */
 const PAGES = [
   "/",
   "/about",
   "/process",
-  "/team",
   "/services",
   ...SERVICE_PAGES.map(({ slug }) => `/services/${slug}`),
   "/audits",
@@ -30,8 +34,6 @@ const PAGES = [
   ...CASE_STUDY_PAGES.map(({ slug }) => `/case-studies/${slug}`),
   "/pricing",
   "/faq",
-  "/blog",
-  "/single-blog",
   "/contact",
   "/privacy-policy",
   "/cookie-policy",

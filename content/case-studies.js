@@ -20,7 +20,7 @@ export const CASE_STUDIES = [
     slug: "realtime-auth-gap",
     category: "Security",
     sector: "Creator platform",
-    title: "Bans held on every HTTP request and stopped at the realtime socket",
+    title: "Bans held on every HTTP request but not the realtime socket",
     body: "A third-party pentest returned five findings. The first turned out to be a symptom, and the wider auth review found a second authenticated channel enforcing none of the rules the first one did.",
     stats: ["1 critical, 3 high found", "Deploy outage caught first"],
     image: "/assets/images/gallery-img4.jpg",

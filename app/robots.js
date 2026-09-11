@@ -36,6 +36,7 @@ const DISALLOW = [
   "/three-column-sidebar",
   "/four-column",
   "/six-column-full-width",
+  "/single-blog",
   "/coming-soon",
 ];
 
