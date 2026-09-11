@@ -23,7 +23,7 @@ export const METHODOLOGY = [
   },
   {
     title: "Architecture & data-flow tracing",
-    body: "We trace the paths that matter end to end \u2014 signup, payment, upload, anything that writes money or personal data \u2014 following each one from entry point to storage. Coupling, ownership, and the work happening on the request path become visible here rather than in a diagram.",
+    body: "We trace the paths that matter end to end (signup, payment, upload, anything that writes money or personal data), following each one from entry point to storage. Coupling, ownership, and the work happening on the request path become visible here rather than in a diagram.",
     output: "Traced critical paths, with coupling and bottlenecks marked.",
   },
   {

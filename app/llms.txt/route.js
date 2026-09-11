@@ -4,6 +4,7 @@ export const dynamic = "force-static";
 import { SERVICE_PAGES } from "@/content/service-pages";
 import { AUDIT_PAGES } from "@/content/audit-pages";
 import { DESCRIPTOR, DESCRIPTION, DISAMBIGUATION } from "@/content/entity";
+import { LEARN_PAGES } from "@/content/learn";
 
 /*
  * /llms.txt the llmstxt.org convention: a plain-markdown map of the site for
@@ -59,6 +60,13 @@ ${SERVICE_PAGES.map((s) => `- [${s.title}](${SITE}/services/${s.slug}): ${s.lede
 
 - [All Audits](${SITE}/audits): Index of every audit Vibecop runs.
 ${AUDIT_PAGES.map((p) => `- [${p.h1}](${SITE}/${p.path}): ${p.definition}`).join("\n")}
+
+## Learn
+
+Explainers rather than service pages: each answers one question directly.
+
+- [AI Audit Glossary](${SITE}/learn): Index of every explainer.
+${LEARN_PAGES.map((p) => `- [${p.question}](${SITE}/learn/${p.slug}): ${p.definition}`).join("\n")}
 
 ## Site
 

@@ -14,7 +14,7 @@ import { DESCRIPTION, DESCRIPTOR, ORGANIZATION_JSONLD } from "@/content/entity";
 export const metadata = {
   metadataBase: new URL("https://vibecop.io"),
   title: {
-    default: "Vibecop — AI-Built Software Audit Service",
+    default: "Vibecop: AI-Built Software Audit Service",
     template: "%s | Vibecop",
   },
   description: DESCRIPTION,

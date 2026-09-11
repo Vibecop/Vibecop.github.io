@@ -10,6 +10,7 @@
 
 import { SERVICE_PAGES } from "@/content/service-pages";
 import { AUDIT_PAGES } from "@/content/audit-pages";
+import { LEARN_PAGES } from "@/content/learn";
 
 export const MAIN_NAV = [
   { label: "About", href: "/about" },
@@ -33,6 +34,15 @@ export const MAIN_NAV = [
     children: [
       { label: "All Audits", href: "/audits" },
       ...AUDIT_PAGES.map(({ h1, navLabel, path }) => ({ label: navLabel ?? h1, href: `/${path}` })),
+    ],
+  },
+  {
+    /* The glossary. Labelled by term rather than by the page's question
+       headline, which is too long for a menu row. */
+    label: "Learn",
+    children: [
+      { label: "AI Audit Glossary", href: "/learn" },
+      ...LEARN_PAGES.map(({ term, slug }) => ({ label: term, href: `/learn/${slug}` })),
     ],
   },
   {
@@ -86,6 +96,8 @@ export const FOOTER_NAV = [
     links: [
       { label: "About", href: "/about" },
       { label: "Process", href: "/process" },
+      { label: "Audits", href: "/audits" },
+      { label: "Learn", href: "/learn" },
       { label: "Case Studies", href: "/case-studies" },
       { label: "Pricing", href: "/pricing" },
       { label: "FAQs", href: "/faq" },

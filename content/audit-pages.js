@@ -121,7 +121,7 @@ export const AUDIT_PAGES = [
       "An AI agent audit is an independent review of a product that runs LLM agents in production. Vibecop examines the prompt and context pipeline, tool permissions, memory and retrieval, output handling, cost and rate limits, evaluation and failure behaviour, and reports where an agent can be manipulated, can act beyond its intended authority, or can fail without anyone noticing.",
     checksTitle: "What does an AI agent audit check?",
     checks: [
-      { name: "Prompt injection", detail: "Whether untrusted content — user input, web pages, documents, tool output — can redirect the agent's behaviour." },
+      { name: "Prompt injection", detail: "Whether untrusted content (user input, web pages, documents, tool output) can redirect the agent's behaviour." },
       { name: "Tool permissions", detail: "What each tool can reach, whether the scope is least-privilege, and which calls should require confirmation." },
       { name: "Authorization", detail: "Whether the agent acts with the end user's permissions or with a shared privileged identity." },
       { name: "Context handling", detail: "What enters the context window, whose data it belongs to, and how leakage between users is prevented." },
@@ -171,7 +171,7 @@ export const AUDIT_PAGES = [
     h1: "Vibe Code Audit: Security, Architecture & Production Readiness",
     title: "Vibe Code Audit | Security & Production Readiness Review of Vibe-Coded Apps",
     definition:
-      "Vibe code audits are technical reviews of applications built using AI coding tools such as Cursor, Claude Code, Lovable, Bolt, Replit and Copilot. Vibecop reads the system no one has fully reviewed \u2014 the generated architecture, the security defaults, the database schema, the abandoned experiments \u2014 and reports what is safe to ship, what must be fixed first, and what has to be rebuilt.",
+      "Vibe code audits are technical reviews of applications built using AI coding tools such as Cursor, Claude Code, Lovable, Bolt, Replit and Copilot. Vibecop reads the system no one has fully reviewed, covering the generated architecture, the security defaults, the database schema and the abandoned experiments, and reports what is safe to ship, what must be fixed first, and what has to be rebuilt.",
     checksTitle: "What does a vibe code audit check?",
     checks: [
       { name: "What is actually there", detail: "A full map of the codebase, including the routes, jobs, and tables nobody remembers asking for." },
@@ -205,7 +205,7 @@ export const AUDIT_PAGES = [
         heading: "Vibe coding security audit",
         body: [
           "A vibe coding security audit concentrates on the part of a vibe coded app that fails worst and soonest. AI tools generate working authentication far more reliably than they generate correct authorization, so the login screen usually holds while the endpoint behind it never checks who is asking.",
-          "We test vibe coded app security from outside the interface: calling the API directly, querying the database with the public client key, and requesting objects belonging to another account. Then we check what a leak would cost \u2014 secrets in the repo or the client bundle, tenant data separated only by an application filter, and audit trails that do not exist yet.",
+          "We test vibe coded app security from outside the interface: calling the API directly, querying the database with the public client key, and requesting objects belonging to another account. Then we check what a leak would cost: secrets in the repo or the client bundle, tenant data separated only by an application filter, and audit trails that do not exist yet.",
         ],
       },
       {
@@ -223,7 +223,7 @@ export const AUDIT_PAGES = [
     h1: "Cursor Code Audit",
     title: "Cursor Code Audit | Independent Review of Cursor-Built Applications",
     definition:
-      "A Cursor code audit is an independent technical review of an application built with Cursor's AI editor and agent. Vibecop reviews the code produced across many agent sessions — security, architecture, data handling and consistency — and reports where large accepted diffs introduced risk that review inside the editor did not catch.",
+      "A Cursor code audit is an independent technical review of an application built with Cursor's AI editor and agent. Vibecop reviews the code produced across many agent sessions, covering security, architecture, data handling and consistency, and reports where large accepted diffs introduced risk that review inside the editor did not catch.",
     checksTitle: "What does a Cursor code audit check?",
     checks: [
       { name: "Large accepted diffs", detail: "Multi-file agent changes that were approved in bulk, re-read line by line." },
@@ -249,7 +249,7 @@ export const AUDIT_PAGES = [
     h1: "Lovable App Audit",
     title: "Lovable App Audit | Independent Review of Lovable-Built Applications",
     definition:
-      "A Lovable app audit is an independent technical review of an application generated with Lovable. Vibecop reviews the generated frontend, the backend and database configuration behind it, and the auth and access rules — checking whether data is genuinely protected server-side before the product takes real users, payments, or an enterprise customer.",
+      "A Lovable app audit is an independent technical review of an application generated with Lovable. Vibecop reviews the generated frontend, the backend and database configuration behind it, and the auth and access rules, checking whether data is genuinely protected server-side before the product takes real users, payments, or an enterprise customer.",
     checksTitle: "What does a Lovable app audit check?",
     checks: [
       { name: "Row-level security", detail: "Whether database policies exist on every table, and whether they actually restrict what they claim to." },
@@ -275,7 +275,7 @@ export const AUDIT_PAGES = [
     h1: "Bolt App Audit",
     title: "Bolt App Audit | Independent Review of Bolt-Built Applications",
     definition:
-      "A Bolt app audit is an independent technical review of an application built with Bolt. Vibecop reviews the generated stack end to end — frontend, backend, database rules, deployment configuration and integrations — and reports what needs fixing before a prototype that shipped in an afternoon carries real users and real data.",
+      "A Bolt app audit is an independent technical review of an application built with Bolt. Vibecop reviews the generated stack end to end, covering frontend, backend, database rules, deployment configuration and integrations, and reports what needs fixing before a prototype that shipped in an afternoon carries real users and real data.",
     checksTitle: "What does a Bolt app audit check?",
     checks: [
       { name: "Prototype-to-production gap", detail: "The defaults that were fine for a demo and are not fine for customers." },
@@ -301,7 +301,7 @@ export const AUDIT_PAGES = [
     h1: "Claude Code Audit",
     title: "Claude Code Audit | Independent Review of Claude Code Projects",
     definition:
-      "A Claude Code audit is an independent technical review of a codebase built with Claude Code's agentic workflow. Vibecop reviews the result of many autonomous multi-file sessions — architecture, security, tool and MCP configuration, and consistency — and reports where agent-authored changes introduced risk that no human reviewed in full.",
+      "A Claude Code audit is an independent technical review of a codebase built with Claude Code's agentic workflow. Vibecop reviews the result of many autonomous multi-file sessions, covering architecture, security, tool and MCP configuration and consistency, then reports where agent-authored changes introduced risk that no human reviewed in full.",
     checksTitle: "What does a Claude Code audit check?",
     checks: [
       { name: "Agent-authored changes", detail: "Multi-file edits accepted in a single session, reviewed properly for the first time." },

@@ -6,7 +6,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { AUDIT_PAGES } from "@/content/audit-pages";
 
 const LEDE =
-  "Vibecop runs independent technical audits of software built with AI coding tools. Each audit below answers one question about a codebase — is it secure, will it scale, can it ship — and most engagements combine two or three.";
+  "Vibecop runs independent technical audits of software built with AI coding tools. Each audit below answers one question about a codebase: is it secure, will it scale, can it ship. Most engagements combine two or three.";
 
 export const metadata = {
   title: { absolute: "AI Audits | Independent Technical Reviews of AI-Built Software" },
