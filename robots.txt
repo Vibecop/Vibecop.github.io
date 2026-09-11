@@ -6,6 +6,7 @@ Disallow: /three-column
 Disallow: /three-column-sidebar
 Disallow: /four-column
 Disallow: /six-column-full-width
+Disallow: /single-blog
 Disallow: /coming-soon
 
 User-Agent: GPTBot
@@ -35,6 +36,7 @@ Disallow: /three-column
 Disallow: /three-column-sidebar
 Disallow: /four-column
 Disallow: /six-column-full-width
+Disallow: /single-blog
 Disallow: /coming-soon
 
 Host: https://vibecop.io
