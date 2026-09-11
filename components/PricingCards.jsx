@@ -1,15 +1,66 @@
+"use client";
+
+import { useState } from "react";
 import AuditButton from "@/components/AuditButton";
 import { cn } from "@/lib/cn";
-import { PLANS } from "@/content/pricing";
+import { PLANS, PLAN_GROUPS } from "@/content/pricing";
 
+/**
+ * The plans, one group at a time.
+ *
+ * Audits and ongoing QA are bought by different people for different reasons,
+ * so showing all four at once asked every visitor to read past half of them.
+ * The toggle is the same tablist as the case-study filter: one card set
+ * filtered in state, not duplicated panes.
+ */
 export default function PricingCards({ className }) {
+  const [group, setGroup] = useState(PLAN_GROUPS[0]);
+  /* Hidden cards leave the grid flow entirely, so the track count follows the
+     group on show rather than the four cards in the markup. */
+  const visible = PLANS.filter((plan) => plan.group === group).length;
+
   return (
-    <ul data-stagger className={cn("m-0 grid list-none gap-6 p-0 md:grid-cols-2 lg:grid-cols-4", className)}>
-      {PLANS.map((plan) => (
+    <div className={className}>
+      <div role="tablist" aria-label="Plan type" className="flex flex-wrap justify-center gap-3">
+        {PLAN_GROUPS.map((name) => {
+          const active = name === group;
+          return (
+            <button
+              key={name}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              onClick={() => setGroup(name)}
+              className={cn(
+                "rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200",
+                active ? "vc-btn vc-btn-primary text-white" : "vc-btn vc-btn-outline text-white"
+              )}
+            >
+              {name}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Capped and centred: the old four-wide track left half the row empty
+          for a group this size. */}
+      <ul
+        data-stagger
+        className={cn(
+          "m-0 mx-auto mt-10 grid list-none gap-6 p-0 md:grid-cols-2",
+          visible > 2 ? "max-w-6xl lg:grid-cols-3" : "max-w-4xl"
+        )}
+      >
+        {PLANS.map((plan) => (
         <li
           key={plan.name}
           className={cn(
-            "vc-card vc-card-hover flex min-h-[23rem] flex-col p-6",
+            "vc-card vc-card-hover min-h-[23rem] flex-col p-6",
+            /* Both groups stay in the markup so crawlers (and a JS-less
+               visitor) get all four plans; the inactive one is hidden, not
+               unmounted. flex and hidden are swapped as a pair because two
+               competing display utilities resolve by stylesheet order. */
+            plan.group === group ? "flex" : "hidden",
             plan.featured && "vc-card-accent"
           )}
         >
@@ -41,7 +92,8 @@ export default function PricingCards({ className }) {
             <span className="sr-only"> {plan.name}</span>
           </AuditButton>
         </li>
-      ))}
-    </ul>
+        ))}
+      </ul>
+    </div>
   );
 }
