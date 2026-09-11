@@ -1,7 +1,7 @@
 /* The two ways a client buys: an audit of what exists, or ongoing testing of
    what changes. PricingCards renders one group at a time behind a toggle, so
    the order here is the tab order and the first is what loads. */
-export const PLAN_GROUPS = ["Technical audits", "Quality assurance"];
+export const PLAN_GROUPS = ["Technical Audits", "Quality Assurance"];
 
 export const PLANS = [
   {
