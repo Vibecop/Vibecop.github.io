@@ -1129,7 +1129,9 @@
 
 .velocity-feature {
   position: relative;
-  overflow: hidden;
+  /* clip, not hidden: hidden makes this a scroll container, which would pin
+     the timeline's scroll-driven animations to a box that never scrolls */
+  overflow: clip;
 }
 
 .velocity-feature::before {
@@ -1303,6 +1305,70 @@
 
 .velocity-timeline h3 { margin: 0; color: #fff; font-size: var(--text-h3); line-height: var(--text-h3--line-height); }
 .velocity-timeline p { max-width: 32rem; margin: 0.55rem 0 0; color: var(--color-muted); font-size: var(--text-base); line-height: var(--text-base--line-height); }
+
+/*
+ * Scroll-linked progress: the lit rail tracks the scroll position and each
+ * step lights up as the rail reaches its dot. The view timelines are inset to
+ * a single line 60% down the viewport, so "0%" is the moment an element's top
+ * crosses that line. Native scroll timelines, no JS; browsers without them,
+ * and reduced-motion users, keep the one-shot reveal above.
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .velocity-timeline,
+    .velocity-timeline li { view-timeline-inset: 60% 40%; }
+    .velocity-timeline { view-timeline-name: --plan; }
+    .velocity-timeline li { view-timeline-name: --plan-step; }
+
+    /* the rail spans top:1rem to bottom:1rem, so the range skips those ends */
+    .velocity-timeline::after,
+    .velocity-timeline[data-revealed]::after {
+      transition: none;
+      animation: plan-rail linear both;
+      animation-timeline: --plan;
+      animation-range: cover 1rem cover calc(100% - 1rem);
+    }
+
+    .velocity-timeline li > div,
+    .velocity-timeline-dot {
+      animation-timing-function: var(--ease-entrance);
+      animation-fill-mode: both;
+      animation-timeline: --plan-step;
+      animation-range: cover 0% cover 2.5rem;
+    }
+    .velocity-timeline li > div { animation-name: plan-step-copy; }
+    .velocity-timeline li:not(.is-final) .velocity-timeline-dot { animation-name: plan-step-dot; }
+    .velocity-timeline .is-final .velocity-timeline-dot { animation-name: plan-step-final; }
+  }
+}
+
+@keyframes plan-rail {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes plan-step-copy {
+  from { opacity: 0.3; translate: 0.9rem 0; }
+  to { opacity: 1; translate: none; }
+}
+
+@keyframes plan-step-dot {
+  from { scale: 0.8; }
+  60% { scale: 1.18; }
+  to {
+    scale: 1;
+    border-color: var(--color-brand);
+    /* opaque, or the rail shows through the dot */
+    background: #4a1d12;
+    box-shadow: 0 0 0 0.35rem rgb(3 2 2 / 90%), 0 0 1.1rem rgb(249 91 52 / 50%);
+  }
+}
+
+@keyframes plan-step-final {
+  from { scale: 0.8; filter: grayscale(1) brightness(0.45); }
+  60% { scale: 1.25; }
+  to { scale: 1; filter: none; }
+}
 
 @media (max-width: 900px) {
   .velocity-feature-grid { grid-template-columns: 1fr; }
