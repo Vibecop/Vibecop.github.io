@@ -37,7 +37,7 @@ export default function ArticleCard({ article, cta = "Read More" }) {
         >
           {cta}
           <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" />
-          <span className="sr-only"> — {article.title}</span>
+          <span className="sr-only">: {article.title}</span>
         </Link>
       </div>
     </article>

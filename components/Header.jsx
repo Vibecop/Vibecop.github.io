@@ -168,7 +168,7 @@ export default function Header() {
           className="site-nav rounded-3xl px-5 py-3 lg:px-8"
         >
           <div className="flex items-center justify-between gap-6">
-            <Link href="/" className="shrink-0" aria-label="Vibecop — home">
+            <Link href="/" className="shrink-0" aria-label="Vibecop home">
               <img src="/assets/images/logo.png" alt="Vibecop" className="h-9 w-auto" />
             </Link>
 

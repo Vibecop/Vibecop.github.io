@@ -12,7 +12,7 @@ export default function ComingSoonPage() {
   return (
     <section className="flex min-h-screen flex-col items-center justify-center py-16 text-center">
       <Container className="flex flex-col items-center gap-10">
-        <Link href="/" aria-label="Vibecop — home">
+        <Link href="/" aria-label="Vibecop home">
           <img src="/assets/images/logo.png" alt="Vibecop" className="h-10 w-auto" />
         </Link>
 

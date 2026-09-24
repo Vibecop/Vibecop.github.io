@@ -10,7 +10,7 @@ export default function Footer() {
       <Container>
         <div className="grid gap-6 lg:grid-cols-12" data-stagger>
           <div className="lg:col-span-4">
-            <Link href="/" aria-label="Vibecop — home">
+            <Link href="/" aria-label="Vibecop home">
               <img src="/assets/images/logo.png" alt="Vibecop" className="h-9 w-auto" />
             </Link>
             <p className="mt-6 max-w-sm text-base text-muted">

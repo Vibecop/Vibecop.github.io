@@ -328,7 +328,7 @@ export const SERVICE_PAGES = [
       {
         icon: "fa-shield-halved",
         title: "Before incidents damage trust",
-        body: "Architectural flaws surface under pressure. Senior engineering judgment applied before that pressure arrives \u2014 not after.",
+        body: "Architectural flaws surface under pressure. Senior engineering judgment applied before that pressure arrives, not after.",
       },
     ],
     scopeTitle: "Who You’re Talking To",
@@ -371,7 +371,7 @@ export const SERVICE_PAGES = [
       {
         icon: "fa-code-compare",
         title: "Change impact",
-        body: "A monthly review of what shipped and what it moved structurally \u2014 so drift is caught in the release that caused it, not a year later.",
+        body: "A monthly review of what shipped and what it moved structurally, so drift is caught in the release that caused it, not a year later.",
       },
       {
         icon: "fa-robot",
@@ -386,7 +386,7 @@ export const SERVICE_PAGES = [
       {
         icon: "fa-arrow-trend-down",
         title: "Performance drift",
-        body: "Monitoring for the slow degradation that no single release explains \u2014 the kind that only becomes visible once it is already a problem.",
+        body: "Monitoring for the slow degradation that no single release explains: the kind that only becomes visible once it is already a problem.",
       },
       {
         icon: "fa-lock",

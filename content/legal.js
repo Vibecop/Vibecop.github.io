@@ -146,9 +146,9 @@ export const LEGAL = {
         },
         {
           list: [
-            "Essential Cookies – for core functionality like dashboards, login, and navigation.",
-            "Performance & Analytics Cookies – to help us analyze usage patterns and optimize the platform.",
-            "Marketing Cookies – to deliver relevant product updates, promotions, or feature recommendations."
+            "Essential Cookies: for core functionality like dashboards, login, and navigation.",
+            "Performance & Analytics Cookies: to help us analyze usage patterns and optimize the platform.",
+            "Marketing Cookies: to deliver relevant product updates, promotions, or feature recommendations."
           ]
         },
         {

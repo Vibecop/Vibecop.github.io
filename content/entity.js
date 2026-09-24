@@ -12,7 +12,7 @@
  */
 export const NAME = "Vibecop";
 export const CATEGORY = "AI-built software audit service";
-export const DESCRIPTOR = `${NAME} — ${CATEGORY}`;
+export const DESCRIPTOR = `${NAME}: ${CATEGORY}`;
 
 export const DESCRIPTION =
   "Vibecop is an AI-built software audit service. Senior engineers review applications built with AI coding tools for security, architecture, scalability, reliability and production readiness, then deliver a prioritized roadmap of what to fix.";

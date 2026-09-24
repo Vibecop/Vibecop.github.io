@@ -20,7 +20,7 @@ export default function PostMedia({ post, className }) {
       <div className={cn("aspect-16/10 w-full overflow-hidden", className)}>
         <iframe
           src={post.url}
-          title={`${post.tag} — video`}
+          title={`${post.tag} video`}
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
           allowFullScreen
