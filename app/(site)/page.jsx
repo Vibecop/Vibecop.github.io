@@ -21,7 +21,7 @@ import {
 
 export const metadata = {
   // absolute: the root template appends "| Vibecop", which this already says
-  title: { absolute: "Independent Technical Audits for AI-Built Software | Vibecop" },
+  title: { absolute: "Vibecop | Independent Technical Audits for AI-Built Software" },
   description: HERO.lede,
 };
 
