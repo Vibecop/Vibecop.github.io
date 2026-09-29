@@ -65,6 +65,7 @@ export const MAIN_NAV = [
   //   ],
   // },
   { label: "Pricing", href: "/pricing" },
+  { label: "Contact", href: "/contact" },
 ];
 
 /* Two columns, no more: the footer grid gives each one `lg:col-span-2` beside
@@ -98,3 +99,6 @@ export const SOCIAL_LINKS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/salman-haseeb/", icon: "fa-brands fa-linkedin-in" },
   { label: "X", href: "https://x.com/VibeCop_io", icon: "fa-brands fa-x-twitter" },
 ];
+
+/* Google Calendar booking page for the 15-min strategy call. */
+export const BOOK_CALL_URL = "https://calendar.app.google/uV7cYdU9wSDnxEtE6";

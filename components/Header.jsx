@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
-import { BUY_URL, MAIN_NAV } from "@/content/navigation";
+import { BOOK_CALL_URL, MAIN_NAV } from "@/content/navigation";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { cn } from "@/lib/cn";
@@ -172,28 +172,41 @@ export default function Header() {
               <img src="/assets/images/logo.png" alt="Vibecop" className="h-9 w-auto" />
             </Link>
 
-            <button
-              type="button"
-              aria-expanded={menuOpen}
-              aria-controls="main-menu"
-              aria-label="Toggle navigation"
-              onClick={() => setMenuOpen((v) => !v)}
-              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-xl border border-white/15 lg:hidden"
-            >
-              <span
-                className={cn(
-                  "block h-0.5 w-5 bg-white transition-transform duration-200",
-                  menuOpen && "translate-y-2 rotate-45"
-                )}
-              />
-              <span className={cn("block h-0.5 w-5 bg-white transition-opacity duration-200", menuOpen && "opacity-0")} />
-              <span
-                className={cn(
-                  "block h-0.5 w-5 bg-white transition-transform duration-200",
-                  menuOpen && "-translate-y-2 -rotate-45"
-                )}
-              />
-            </button>
+            {/* On phones the booking CTA stays in the bar rather than behind the
+                hamburger: it is the one action every page should offer. */}
+            <div className="flex items-center gap-3 lg:hidden">
+              <Button
+                href={BOOK_CALL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                size="sm"
+                className="whitespace-nowrap"
+              >
+                Book a call
+              </Button>
+              <button
+                type="button"
+                aria-expanded={menuOpen}
+                aria-controls="main-menu"
+                aria-label="Toggle navigation"
+                onClick={() => setMenuOpen((v) => !v)}
+                className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-xl border border-white/15 lg:hidden"
+              >
+                <span
+                  className={cn(
+                    "block h-0.5 w-5 bg-white transition-transform duration-200",
+                    menuOpen && "translate-y-2 rotate-45"
+                  )}
+                />
+                <span className={cn("block h-0.5 w-5 bg-white transition-opacity duration-200", menuOpen && "opacity-0")} />
+                <span
+                  className={cn(
+                    "block h-0.5 w-5 bg-white transition-transform duration-200",
+                    menuOpen && "-translate-y-2 -rotate-45"
+                  )}
+                />
+              </button>
+            </div>
 
             <div
               id="main-menu"
@@ -232,9 +245,10 @@ export default function Header() {
                 )}
               </ul>
 
-              <div className="mt-5 border-t border-white/10 pt-5 lg:mt-0 lg:border-0 lg:pt-0">
-                <Button href="/contact" className="w-full lg:w-auto">
-                  Contact Us
+              <div className="hidden lg:block">
+                <Button href={BOOK_CALL_URL} target="_blank" rel="noopener noreferrer">
+                  <i className="fa-regular fa-calendar" aria-hidden="true" />
+                  Book a call
                 </Button>
               </div>
             </div>

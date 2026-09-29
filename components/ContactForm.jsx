@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import { cn } from "@/lib/cn";
 import { submitForm } from "@/lib/web3forms";
+import { BOOK_CALL_URL } from "@/content/navigation";
 
 const HELP_OPTIONS = ["Architecture", "Security", "Scale & production"];
 const TIMELINES = ["Select", "ASAP", "1-2 Weeks", "1 Month"];
@@ -118,7 +119,15 @@ export default function ContactForm() {
         aria-live="polite"
         className={cn("mt-4 block text-base", status === "err" ? "text-red-400" : "text-brand")}
       >
-        {status === "ok" && "Thanks we got it. Expect a reply within 24 hours."}
+        {status === "ok" && (
+          <>
+            Thanks we got it. Expect a reply within 24 hours, or{" "}
+            <a href={BOOK_CALL_URL} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
+              book your call now
+            </a>
+            .
+          </>
+        )}
         {status === "err" && "That did not send. Email us at hello@vibecop.io and we will pick it up."}
       </output>
     </form>

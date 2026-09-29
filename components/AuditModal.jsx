@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useId, useRef, useState } from 
 import Badge from "@/components/ui/Badge";
 import Modal from "@/components/ui/Modal";
 import { AUDIT_FIELDS, AUDIT_MODAL } from "@/content/audit";
+import { BOOK_CALL_URL } from "@/content/navigation";
 import { cn } from "@/lib/cn";
 import { submitForm } from "@/lib/web3forms";
 
@@ -165,7 +166,15 @@ function AuditModal({ onClose }) {
           aria-live="polite"
           className={cn("mt-3 block text-sm", status === "err" ? "text-red-400" : "text-brand")}
         >
-          {status === "ok" && AUDIT_MODAL.sentNote}
+          {status === "ok" && (
+            <>
+              {AUDIT_MODAL.sentNote}{" "}
+              <a href={BOOK_CALL_URL} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
+                Skip the wait and book a call
+              </a>
+              .
+            </>
+          )}
           {status === "err" && AUDIT_MODAL.errorNote}
         </output>
       </form>

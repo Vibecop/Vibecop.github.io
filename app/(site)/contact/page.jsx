@@ -4,6 +4,8 @@ import CallToAction from "@/components/CallToAction";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Badge from "@/components/ui/Badge";
+import Button from "@/components/ui/Button";
+import { BOOK_CALL_URL } from "@/content/navigation";
 
 export const metadata = {
   title: "Contact Us",
@@ -54,6 +56,23 @@ export default function ContactPage() {
                 </li>
               ))}
             </ul>
+            <div className="vc-card vc-card-accent mt-10 p-7 md:p-8">
+              <h3 className="text-h3">Skip the form. Book your call.</h3>
+              <p className="mt-3 text-base text-muted">
+                Pick a slot that suits you and talk to an engineer directly.
+              </p>
+              <Button
+                href={BOOK_CALL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                size="lg"
+                className="mt-6 w-full sm:w-auto"
+              >
+                <i className="fa-regular fa-calendar" aria-hidden="true" />
+                Book a 15-min call
+              </Button>
+            </div>
+            <p className="mt-4 text-sm text-muted">Prefer writing it down? Use the form.</p>
           </div>
 
           <ContactForm />
