@@ -6,7 +6,7 @@ import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import AuditButton from "@/components/AuditButton";
-import { AUDIT_PAGES, AUDIT_PAGE_MAP } from "@/content/audit-pages";
+import { AUDIT_PAGES, AUDIT_PAGE_MAP, inAuditMenu } from "@/content/audit-pages";
 
 /*
  * The audit landing pages, one route for all twelve.
@@ -36,7 +36,11 @@ export default async function AuditLandingPage({ params }) {
   const page = AUDIT_PAGE_MAP[slug.join("/")];
   if (!page) notFound();
 
-  const others = AUDIT_PAGES.filter((p) => p.path !== page.path);
+  /* Menu pages list only menu pages, matching the dropdown. Pages kept out of
+     the menu list everything, so they stay cross-linked for search. */
+  const others = AUDIT_PAGES.filter(
+    (p) => p.path !== page.path && (!inAuditMenu(page) || inAuditMenu(p)),
+  );
 
   return (
     <>

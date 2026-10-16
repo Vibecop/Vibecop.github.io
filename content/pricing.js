@@ -1,6 +1,13 @@
 /* The two ways a client buys: an audit of what exists, or ongoing testing of
    what changes. PricingCards renders one group at a time behind a toggle, so
    the order here is the tab order and the first is what loads. */
+import { AUDIT_PAGE_MAP } from "@/content/audit-pages";
+
+/* The audit pages each plan covers, rendered as linked points. Labels come
+   from the audit pages themselves so a rename there follows here. */
+const audits = (...paths) =>
+  paths.map((path) => ({ label: AUDIT_PAGE_MAP[path].h1, href: `/${path}` }));
+
 export const PLAN_GROUPS = ["Technical Audits", "Quality Assurance"];
 
 export const PLANS = [
@@ -12,17 +19,22 @@ export const PLANS = [
   {
     name: "Vibecop Lite Audit", group: "Technical Audits", price: "$1,200", icon: "/assets/images/investment-icon2.png",
     summary: "Find the risks sitting in the code",
+    audits: audits("ai-code-audit", "ai-security-audit"),
     features: ["Full codebase review", "Security & access-control assessment", "Dependency & supply-chain risk check", "Secrets & configuration exposure scan", "Error handling & input validation review", "Code quality & maintainability findings", "Human-verified, evidence-backed findings", "Prioritized fix list"],
   },
   {
     name: "Vibecop Full Audit", group: "Technical Audits", price: "$2,900", icon: "/assets/images/investment-icon1.png",
     summary: "Know exactly what you’re shipping",
+    includes: "Everything in the Lite Audit",
+    audits: audits("ai-software-audit", "ai-agent-audit", "ai-production-readiness-audit"),
     features: ["Full codebase & architecture review", "Security & access-control assessment", "AI/LLM & agent risk review", "Database, API & integration testing", "Production-readiness & infrastructure review", "Performance & scalability analysis", "Human-verified, evidence-backed findings", "Prioritized roadmap & executive report"],
   },
   {
     name: "Vibecop Deep Audit", group: "Technical Audits", price: "$5,000–$8,000+", featured: true, icon: "/assets/images/investment-icon3.png",
     summary: "Assurance for production-critical systems",
-    features: ["Everything in the Full Audit", "Deep architecture analysis & threat modelling", "End-to-end workflow testing", "AI agent & tool permission assessment", "Advanced infrastructure & cloud cost review", "Third-party integration deep dive", "Failure-mode & production risk analysis", "Technical debt & remediation sequencing", "Leadership briefing + optional retest"],
+    includes: "Everything in the Full Audit",
+    audits: audits("ai-architecture-audit"),
+    features: ["Deep architecture analysis & threat modelling", "End-to-end workflow testing", "AI agent & tool permission assessment", "Advanced infrastructure & cloud cost review", "Third-party integration deep dive", "Failure-mode & production risk analysis", "Technical debt & remediation sequencing", "Leadership briefing + optional retest"],
   },
   {
     name: "Continuous quality & AI assurance", group: "Quality Assurance", price: "$750", pricePrefix: "From", priceSuffix: "/month", icon: "/assets/images/investment-icon1.png",

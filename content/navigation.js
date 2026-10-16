@@ -9,7 +9,7 @@
  */
 
 import { SERVICE_PAGES } from "@/content/service-pages";
-import { AUDIT_PAGES } from "@/content/audit-pages";
+import { AUDIT_PAGES, inAuditMenu } from "@/content/audit-pages";
 
 export const MAIN_NAV = [
   { label: "About", href: "/about" },
@@ -27,12 +27,13 @@ export const MAIN_NAV = [
     ],
   },
   {
-    /* The audit landing pages. Flat list rather than a nested menu: the
-       dropdown renders one level, and twelve rows still fit. */
+    /* Menu pages only (see inAuditMenu); /audits still links every page. */
     label: "Audits",
     children: [
       { label: "All Audits", href: "/audits" },
-      ...AUDIT_PAGES.map(({ h1, navLabel, path }) => ({ label: navLabel ?? h1, href: `/${path}` })),
+      ...AUDIT_PAGES.filter(inAuditMenu).map(
+        ({ h1, navLabel, path }) => ({ label: navLabel ?? h1, href: `/${path}` }),
+      ),
     ],
   },
   {

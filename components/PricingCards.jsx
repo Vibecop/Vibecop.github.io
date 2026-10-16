@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import AuditButton from "@/components/AuditButton";
 import { cn } from "@/lib/cn";
@@ -79,6 +80,21 @@ export default function PricingCards({ className }) {
           <p className="mt-3 text-base text-muted">{plan.summary}</p>
 
           <ul className="my-8 list-none space-y-3 border-t border-white/10 p-0 pt-8">
+            {/* The previous tier first, then only the audits this tier adds. */}
+            {plan.includes && (
+              <li className="flex items-center gap-3 text-base font-medium text-white">
+                <i className={cn("fa-solid fa-check text-sm", plan.featured ? "text-brand" : "text-muted-3")} aria-hidden="true" />
+                {plan.includes}
+              </li>
+            )}
+            {plan.audits?.map((audit) => (
+              <li key={audit.href} className="flex items-center gap-3 text-base">
+                <i className={cn("fa-solid fa-check text-sm", plan.featured ? "text-brand" : "text-muted-3")} aria-hidden="true" />
+                <Link href={audit.href} className="font-medium text-white underline decoration-white/30 underline-offset-4 hover:text-brand">
+                  {audit.label}
+                </Link>
+              </li>
+            ))}
             {plan.features.map((feature) => (
               <li key={feature} className="flex items-center gap-3 text-base text-muted">
                     <i className={cn("fa-solid fa-check text-sm", plan.featured ? "text-brand" : "text-muted-3")} aria-hidden="true" />

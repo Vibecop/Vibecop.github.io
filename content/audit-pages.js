@@ -11,18 +11,18 @@
 export const AUDIT_PAGES = [
   {
     path: "ai-software-audit",
-    h1: "AI Software Audit",
-    title: "AI Software Audit | Independent Review of AI-Built Applications",
+    h1: "Software Audit",
+    title: "Software Audit | Independent Technical Review of Your Application",
     definition:
-      "An AI software audit is an independent technical review of an application built partly or entirely with AI coding tools. Vibecop evaluates the codebase, architecture, security, database, infrastructure, integrations, reliability and production readiness, then has senior engineers verify and prioritize the findings.",
-    checksTitle: "What does an AI software audit check?",
+      "A software audit is an independent technical review of an application, however it was built. Vibecop evaluates the codebase, architecture, security, database, infrastructure, integrations, reliability and production readiness, then has senior engineers verify and prioritize the findings.",
+    checksTitle: "What does a software audit check?",
     checks: [
       { name: "Architecture", detail: "Service boundaries, coupling, and data ownership as they were actually built rather than as they were described." },
       { name: "Authentication", detail: "Session handling, token lifetimes, password and OTP flows, and the reset paths that are usually generated last." },
       { name: "Authorization", detail: "Whether every endpoint checks who is asking, and whether that check happens server-side." },
       { name: "Database security", detail: "Row-level security, tenant isolation, migrations, indexes, and the queries that only work at current data volume." },
       { name: "API security", detail: "Input validation, rate limiting, mass assignment, error verbosity, and CORS policy on every public surface." },
-      { name: "Dependencies", detail: "Known CVEs, abandoned packages, and the transitive tree that arrived with a generated scaffold." },
+      { name: "Dependencies", detail: "Known CVEs, abandoned packages, and the transitive tree that arrived with the original scaffold." },
       { name: "Secrets", detail: "Where keys live, what is committed, what reaches the client bundle, and whether anything can be rotated." },
       { name: "Infrastructure", detail: "Hosting, networking, storage permissions, environment separation, and backup and restore that has been tested." },
       { name: "Observability", detail: "Logging, error tracking, and alerting, judged by whether an outage would be noticed before a customer reported it." },
@@ -37,19 +37,19 @@ export const AUDIT_PAGES = [
 
   {
     path: "ai-code-audit",
-    h1: "AI Code Audit",
-    title: "AI Code Audit | Independent Review of AI-Generated Code",
+    h1: "Codebase Audit",
+    title: "Codebase Audit | Independent Line-Level Codebase Review",
     definition:
-      "An AI code audit is an independent line-level review of code written by AI coding assistants. Vibecop reads the generated code the way a senior engineer would in review, checking correctness, error handling, data validation, concurrency, duplication and dead paths, and reports what is wrong rather than what merely looks unusual.",
-    checksTitle: "What does an AI code audit check?",
+      "A codebase audit is an independent line-level review of an application's source code. Vibecop reads the code the way a senior engineer would in review, checking correctness, error handling, data validation, concurrency, duplication and dead paths, and reports what is wrong rather than what merely looks unusual.",
+    checksTitle: "What does a codebase audit check?",
     checks: [
       { name: "Correctness", detail: "Logic that passes a demo and fails on the second case: off-by-one bounds, inverted conditions, wrong operator precedence." },
       { name: "Error handling", detail: "Swallowed exceptions, empty catch blocks, and failures that return success to the caller." },
       { name: "Input validation", detail: "Whether untrusted input is validated at the boundary or trusted all the way to the database." },
       { name: "Data integrity", detail: "Missing transactions, partial writes, and multi-step operations with no rollback." },
       { name: "Concurrency", detail: "Race conditions, non-atomic read-modify-write, and shared state assumed to be single-user." },
-      { name: "Duplication", detail: "The same logic regenerated in four files, each copy drifting separately from the others." },
-      { name: "Dead code", detail: "Unreachable branches, unused exports, and abandoned scaffolding left behind by earlier prompts." },
+      { name: "Duplication", detail: "The same logic repeated in four files, each copy drifting separately from the others." },
+      { name: "Dead code", detail: "Unreachable branches, unused exports, and abandoned scaffolding left behind by earlier attempts." },
       { name: "Type safety", detail: "`any` escapes, silenced compiler errors, and types that describe an older shape of the data." },
       { name: "API contracts", detail: "Whether the client and server agree on the shape, and whether the response is checked before it is used." },
       { name: "Dependency use", detail: "Libraries pulled in for one line, plus reimplementations of what the standard library already does." },
@@ -57,17 +57,17 @@ export const AUDIT_PAGES = [
       { name: "Logging", detail: "Personal data and secrets written to logs, and the paths that log nothing at all." },
       { name: "Test quality", detail: "Tests that assert the implementation rather than the behaviour, and suites that pass with the feature deleted." },
       { name: "Readability", detail: "Naming, structure, and comments, judged by whether a new engineer can safely change the file." },
-      { name: "Consistency", detail: "Competing patterns for the same job, a common signature of code generated across many sessions." },
+      { name: "Consistency", detail: "Competing patterns for the same job, a common signature of code written quickly by many hands." },
     ],
   },
 
   {
     path: "ai-security-audit",
-    h1: "AI Security Audit",
-    title: "AI Security Audit | Security Review of AI-Generated Applications",
+    h1: "Security Audit",
+    title: "Security Audit | Independent Application Security Review",
     definition:
-      "An AI security audit is an independent security review of an application built with AI coding tools. Vibecop maps the threat surface, tests authentication and authorization, inspects secrets handling, database isolation and dependency exposure, and ranks every finding by exploitability and business impact rather than by scanner severity alone.",
-    checksTitle: "What does an AI security audit check?",
+      "A security audit is an independent security review of an application and the infrastructure it runs on. Vibecop maps the threat surface, tests authentication and authorization, inspects secrets handling, database isolation and dependency exposure, and ranks every finding by exploitability and business impact rather than by scanner severity alone.",
+    checksTitle: "What does a security audit check?",
     checks: [
       { name: "Threat surface", detail: "Every route, job, webhook, and storage bucket reachable from outside, enumerated rather than assumed." },
       { name: "Authentication", detail: "Session and token handling, expiry, revocation, and the password and OTP flows around them." },
@@ -77,7 +77,7 @@ export const AUDIT_PAGES = [
       { name: "Injection", detail: "SQL, NoSQL, command, and template injection paths where input reaches an interpreter unescaped." },
       { name: "Rate limiting", detail: "Brute force, credential stuffing, and enumeration protection on login, reset, and OTP endpoints." },
       { name: "Dependency exposure", detail: "Known CVEs in direct and transitive packages, with judgment on which are actually reachable." },
-      { name: "Transport and headers", detail: "TLS configuration, CORS policy, CSP, and the security headers a generated scaffold usually omits." },
+      { name: "Transport and headers", detail: "TLS configuration, CORS policy, CSP, and the security headers a default scaffold usually omits." },
       { name: "File handling", detail: "Upload validation, storage permissions, signed URLs, and path traversal on download." },
       { name: "Data protection", detail: "Encryption at rest and in transit, PII handling, and what ends up in logs and error reports." },
       { name: "LLM attack surface", detail: "Prompt injection, tool permission scope, provider key exposure, and unvalidated model output rendered as trusted." },
@@ -89,11 +89,11 @@ export const AUDIT_PAGES = [
 
   {
     path: "ai-architecture-audit",
-    h1: "AI Architecture Audit",
-    title: "AI Architecture Audit | Architecture Review of AI-Built Systems",
+    h1: "Complete Architecture Audit",
+    title: "Complete Architecture Audit | End-to-End Review of System Architecture",
     definition:
-      "An AI architecture audit is an independent review of the structure of a system built with AI coding tools. Vibecop maps service boundaries, data ownership, coupling and request paths as they exist in the code, then judges which of them hold as load, team size and feature scope grow, and sequences the changes that are still cheap to make.",
-    checksTitle: "What does an AI architecture audit check?",
+      "A complete architecture audit is an independent review of the structure of a whole system, from data model to deployment. Vibecop maps service boundaries, data ownership, coupling and request paths as they exist in the code, then judges which of them hold as load, team size and feature scope grow, and sequences the changes that are still cheap to make.",
+    checksTitle: "What does a complete architecture audit check?",
     checks: [
       { name: "System boundaries", detail: "Where the seams are, whether they follow the domain, and what each component actually owns." },
       { name: "Data ownership", detail: "Which component is the source of truth for each entity, and how many others write to it directly." },
@@ -141,11 +141,11 @@ export const AUDIT_PAGES = [
 
   {
     path: "ai-production-readiness-audit",
-    h1: "AI Production Readiness Audit",
-    title: "AI Production Readiness Audit | Pre-Launch Review for AI-Built Software",
+    h1: "Production Readiness Audit",
+    title: "Production Readiness Audit | Pre-Launch Review for Software Teams",
     definition:
-      "An AI production readiness audit is an independent pre-launch review of an application built with AI coding tools. Vibecop checks whether the system can be deployed, monitored, recovered and supported by a real team under real load, covering deployment, backups, observability, error handling, security baseline, performance and operational ownership before launch rather than after the first incident.",
-    checksTitle: "What does an AI production readiness audit check?",
+      "A production readiness audit is an independent pre-launch review of an application. Vibecop checks whether the system can be deployed, monitored, recovered and supported by a real team under real load, covering deployment, backups, observability, error handling, security baseline, performance and operational ownership before launch rather than after the first incident.",
+    checksTitle: "What does a production readiness audit check?",
     checks: [
       { name: "Deployment", detail: "Reproducible builds, environment configuration, and a deploy that can be repeated by someone else." },
       { name: "Rollback", detail: "A tested path back to the previous version, including database migrations that can be reversed." },
@@ -161,7 +161,7 @@ export const AUDIT_PAGES = [
       { name: "Third-party dependence", detail: "Provider outages, quota limits, and degraded-mode behaviour for each integration." },
       { name: "Compliance basics", detail: "Data residency, retention, consent, and deletion requests, where they apply to you." },
       { name: "Runbook", detail: "Documented steps for the failures most likely to happen in the first month." },
-      { name: "Ownership", detail: "Who maintains this after launch, and what they need to know that only the AI tool currently knows." },
+      { name: "Ownership", detail: "Who maintains this after launch, and what they need to know that only the original builder currently knows." },
     ],
   },
 
@@ -348,6 +348,11 @@ export const AUDIT_PAGES = [
     ],
   },
 ];
+
+/* Pages kept live for search but left out of the Audits menu and out of the
+   "Other audits" grid on menu pages: the vibe code audit and the tool pages
+   under /audits/, which are all flavours of it. */
+export const inAuditMenu = ({ path }) => path !== "vibe-code-audit" && !path.startsWith("audits/");
 
 export const AUDIT_PAGE_MAP = Object.fromEntries(
   AUDIT_PAGES.map((page) => [page.path, page]),
