@@ -1,13 +1,13 @@
-# Vibecop: AI-built software audit service
+# Vibecop: independent software audit service
 
-> Vibecop is an AI-built software audit service. Senior engineers review applications built with AI coding tools for security, architecture, scalability, reliability and production readiness, then deliver a prioritized roadmap of what to fix.
+> Vibecop is an independent software audit service. Senior engineers review AI-built, fast-built and legacy applications for security, architecture, scalability, reliability and production readiness, then deliver a prioritized roadmap of what to fix.
 
 Vibecop is a professional audit service delivered by human senior engineers for client codebases. It is not a software product, developer tool, linter, npm package or code-quality scanner. The service operates at vibecop.io. Every audit pairs
 automated analysis with senior engineer verification, so what you get is
 architectural judgment and prioritized decisions rather than a scanner dump.
 
 Vibecop reviews products built with AI coding tools (Claude Code, Cursor,
-Lovable, Bolt, and similar) as well as conventionally built systems. Typical
+Lovable, Bolt, and similar) as well as fast-built and legacy systems. Typical
 clients are pre-launch teams, products onboarding enterprise customers, and
 teams scaling past the load their original design assumed.
 
