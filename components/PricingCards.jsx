@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import AuditButton from "@/components/AuditButton";
 import { cn } from "@/lib/cn";
-import { PLANS, PLAN_GROUPS } from "@/content/pricing";
+import { AUDIT_PRICING_NOTE, BUNDLE, PLANS, PLAN_GROUPS } from "@/content/pricing";
 
 /**
  * The plans, one group at a time.
@@ -87,14 +86,6 @@ export default function PricingCards({ className }) {
                 {plan.includes}
               </li>
             )}
-            {plan.audits?.map((audit) => (
-              <li key={audit.href} className="flex items-center gap-3 text-base">
-                <i className={cn("fa-solid fa-check text-sm", plan.featured ? "text-brand" : "text-muted-3")} aria-hidden="true" />
-                <Link href={audit.href} className="font-medium text-white underline decoration-white/30 underline-offset-4 hover:text-brand">
-                  {audit.label}
-                </Link>
-              </li>
-            ))}
             {plan.features.map((feature) => (
               <li key={feature} className="flex items-center gap-3 text-base text-muted">
                     <i className={cn("fa-solid fa-check text-sm", plan.featured ? "text-brand" : "text-muted-3")} aria-hidden="true" />
@@ -103,13 +94,63 @@ export default function PricingCards({ className }) {
             ))}
           </ul>
 
-          <AuditButton className="mt-auto w-full">
+          {plan.upsell && (
+            <a href="#confidence-package" className="mb-4 mt-auto text-sm font-medium text-brand underline underline-offset-4">
+              {plan.upsell} →
+            </a>
+          )}
+
+          <AuditButton className={cn("w-full", !plan.upsell && "mt-auto")}>
             Request an audit
             <span className="sr-only"> {plan.name}</span>
           </AuditButton>
         </li>
         ))}
       </ul>
+
+      {/* Outside the toggle so it shows on both tabs. */}
+      <div
+        id="confidence-package"
+        className="vc-card vc-card-accent mx-auto mt-10 grid max-w-6xl scroll-mt-28 gap-8 p-6 md:p-8 lg:grid-cols-[1.2fr_1fr_1fr]"
+      >
+        <div>
+          <span className="rounded-full border border-brand px-2 py-1 text-[10px] font-semibold uppercase text-brand">Best value</span>
+          <h3 className="mt-4 text-2xl font-semibold text-white">{BUNDLE.name}</h3>
+          <p className="mt-2 text-base text-muted">{BUNDLE.tagline}</p>
+          <p className="mt-5 flex items-baseline gap-2 text-white">
+            <span className="text-sm text-muted">From</span>
+            <span className="text-3xl font-bold tracking-tight">{BUNDLE.price}</span>
+            <s className="text-base text-muted">{BUNDLE.was}</s>
+          </p>
+          <p className="mt-2 text-sm text-muted">
+            <span className="font-semibold text-brand">{BUNDLE.saving}</span> · {BUNDLE.delivery}
+          </p>
+        </div>
+
+        {BUNDLE.parts.map((part) => (
+          <div key={part.name}>
+            <h4 className="text-base font-semibold text-white">{part.name}</h4>
+            <ul className="mt-4 list-none space-y-3 p-0">
+              {part.features.map((feature) => (
+                <li key={feature} className="flex items-center gap-3 text-base text-muted">
+                  <i className="fa-solid fa-check text-sm text-brand" aria-hidden="true" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+        <div className="flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center lg:col-span-3">
+          <AuditButton>
+            Get the {BUNDLE.name}
+            <i className="fa-solid fa-arrow-right" aria-hidden="true" />
+          </AuditButton>
+          <p className="m-0 text-sm font-medium text-white">{BUNDLE.extra}</p>
+        </div>
+      </div>
+
+      <p className="mx-auto mt-6 max-w-3xl text-center text-sm text-muted">{AUDIT_PRICING_NOTE}</p>
     </div>
   );
 }

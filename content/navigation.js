@@ -9,38 +9,14 @@
  */
 
 import { SERVICE_PAGES } from "@/content/service-pages";
-import { AUDIT_PAGES, inAuditMenu } from "@/content/audit-pages";
 
 export const MAIN_NAV = [
   { label: "About", href: "/about" },
-  {
-    label: "Services",
-    /* "All Services" rather than an href on the parent: <NavDropdown/> marks
-       itself current from its children, so a parent href would leave the
-       entry unhighlighted on every service detail page. */
-    children: [
-      { label: "All Services", href: "/services" },
-      ...SERVICE_PAGES.map(({ navLabel, slug }) => ({
-        label: navLabel,
-        href: `/services/${slug}`,
-      })),
-    ],
-  },
-  {
-    /* Menu pages only (see inAuditMenu); /audits still links every page. */
-    label: "Audits",
-    children: [
-      { label: "All Audits", href: "/audits" },
-      ...AUDIT_PAGES.filter(inAuditMenu).map(
-        ({ h1, navLabel, path }) => ({ label: navLabel ?? h1, href: `/${path}` }),
-      ),
-    ],
-  },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Pricing", href: "/pricing" },
   {
     label: "Pages",
     children: [
-      { label: "Case Studies", href: "/case-studies" },
-      { label: "Pricing", href: "/pricing" },
       { label: "FAQs", href: "/faq" },
       // { label: "Team", href: "/team" },
       // { label: "Process", href: "/process" },
@@ -65,7 +41,6 @@ export const MAIN_NAV = [
   //     { label: "Six Column", href: "/six-column-full-width" },
   //   ],
   // },
-  { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
 ];
 
