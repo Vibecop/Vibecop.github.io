@@ -47,7 +47,7 @@ automated analysis with senior engineer verification, so what you get is
 architectural judgment and prioritized decisions rather than a scanner dump.
 
 Vibecop reviews products built with AI coding tools (Claude Code, Cursor,
-Lovable, Bolt, and similar) as well as conventionally built systems. Typical
+Lovable, Bolt, and similar) as well as fast-built and legacy systems. Typical
 clients are pre-launch teams, products onboarding enterprise customers, and
 teams scaling past the load their original design assumed.
 

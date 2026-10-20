@@ -8,7 +8,7 @@ import AuditButton from "@/components/AuditButton";
 import { HANDOFF_KIT, METHODOLOGY, METHODOLOGY_LEDE } from "@/content/process";
 
 export const metadata = {
-  title: { absolute: "Audit Methodology | How Vibecop Audits AI-Built Software" },
+  title: { absolute: "Audit Methodology | How Vibecop Audits Software" },
   description: METHODOLOGY_LEDE,
   alternates: { canonical: "/process" },
 };
@@ -17,7 +17,7 @@ export default function ProcessPage() {
   return (
     <>
       <PageBanner
-        title="How Vibecop Audits AI-Built Software"
+        title="How Vibecop Audits Software"
         breadcrumb="Process"
         lede={METHODOLOGY_LEDE}
       />

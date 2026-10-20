@@ -15,7 +15,7 @@ export default function Footer() {
             </Link>
             <p className="mt-6 max-w-sm text-base text-muted">
               <strong className="font-semibold text-white">{DESCRIPTOR}</strong>. Human
-              technical audits for AI-built and fast-built software products.
+              technical audits for AI-built, fast-built and legacy software products.
               Architecture-first. Security-aware. Human-verified.
             </p>
             <ul className="mt-6 flex list-none gap-3 p-0">

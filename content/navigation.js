@@ -8,7 +8,7 @@
  * link rather than a dropdown.
  */
 
-import { SERVICE_PAGES } from "@/content/service-pages";
+import { CASE_STUDY_PAGES } from "@/content/case-studies";
 
 export const MAIN_NAV = [
   { label: "About", href: "/about" },
@@ -46,15 +46,16 @@ export const MAIN_NAV = [
 
 /* Two columns, no more: the footer grid gives each one `lg:col-span-2` beside
    a 4-wide logo block and a 4-wide newsletter panel, so a third would overflow
-   the twelve. The services take one column and everything else the other. */
+   the twelve. The case studies take one column and everything else the other.
+   Titles are too long for the column, so each links by sector and category. */
 export const FOOTER_NAV = [
   {
-    heading: "Services",
+    heading: "Case Studies",
     links: [
-      { label: "All Services", href: "/services" },
-      ...SERVICE_PAGES.map(({ navLabel, slug }) => ({
-        label: navLabel,
-        href: `/services/${slug}`,
+      { label: "All Case Studies", href: "/case-studies" },
+      ...CASE_STUDY_PAGES.map(({ sector, category, slug }) => ({
+        label: `${sector} ${category.toLowerCase()}`,
+        href: `/case-studies/${slug}`,
       })),
     ],
   },
@@ -63,7 +64,6 @@ export const FOOTER_NAV = [
     links: [
       { label: "About", href: "/about" },
       { label: "Process", href: "/process" },
-      { label: "Case Studies", href: "/case-studies" },
       { label: "Pricing", href: "/pricing" },
       { label: "FAQs", href: "/faq" },
       { label: "Contact", href: "/contact" },

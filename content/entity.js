@@ -11,11 +11,11 @@
  * data all move together. That consistency is the whole point.
  */
 export const NAME = "Vibecop";
-export const CATEGORY = "AI-built software audit service";
+export const CATEGORY = "independent software audit service";
 export const DESCRIPTOR = `${NAME}: ${CATEGORY}`;
 
 export const DESCRIPTION =
-  "Vibecop is an AI-built software audit service. Senior engineers review applications built with AI coding tools for security, architecture, scalability, reliability and production readiness, then deliver a prioritized roadmap of what to fix.";
+  "Vibecop is an independent software audit service. Senior engineers review AI-built, fast-built and legacy applications for security, architecture, scalability, reliability and production readiness, then deliver a prioritized roadmap of what to fix.";
 
 /* Says what Vibecop is *not*, because the ambiguity is with a software
    package rather than with another consultancy. */

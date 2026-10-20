@@ -13,7 +13,7 @@ export const METHODOLOGY_LEDE =
 export const METHODOLOGY = [
   {
     title: "Repository & architecture discovery",
-    body: "We take read access and map what is actually there: services, routes, jobs, schemas, environments, and the third parties the system depends on. AI-built codebases routinely contain features nobody remembers requesting, so the map is built from the code rather than from a description of it.",
+    body: "We take read access and map what is actually there: services, routes, jobs, schemas, environments, and the third parties the system depends on. AI-built and legacy codebases routinely contain features nobody remembers requesting, so the map is built from the code rather than from a description of it.",
     output: "A component and dependency map of the system as built.",
   },
   {
