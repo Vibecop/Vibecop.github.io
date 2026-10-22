@@ -83,7 +83,7 @@ export const SERVICE_PAGES = [
     includedTitle: "What’s included in a Security Audit",
     lede: "Threat surface mapping, auth hardening, and access control AI-powered analysis, verified by senior engineers.",
     summary:
-      "Exposed endpoints, misconfigured auth, unencrypted data. These are architecture-level vulnerabilities and they need human judgment to prioritize, validate, and act on. This is not penetration testing it is security validation in the context of how your product is actually built.",
+      "Exposed endpoints, misconfigured auth, unencrypted data. These are architecture-level vulnerabilities and they need human judgment to prioritize, validate, and act on. The audit itself is security validation in the context of how your product is actually built, not a penetration test. A scoped pentest can be added to a Full Audit.",
     price: null,
     priceNote: "Scoped on application",
     included: [

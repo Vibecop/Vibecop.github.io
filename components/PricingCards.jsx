@@ -92,6 +92,12 @@ export default function PricingCards({ className }) {
                 {feature}
               </li>
             ))}
+            {plan.addon && (
+              <li className="flex items-center gap-3 text-base font-medium text-white">
+                <i className="fa-solid fa-plus text-sm text-brand" aria-hidden="true" />
+                {plan.addon}
+              </li>
+            )}
           </ul>
 
           {plan.upsell && (

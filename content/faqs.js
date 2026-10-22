@@ -8,7 +8,7 @@ export const FAQS = [
   {
     question: "Is this penetration testing?",
     answer:
-      "No. Vibecop focuses on production readiness, architecture assurance, scalability risks, infrastructure decisions and security validation not just penetration testing.",
+      "Not by default. Our audits review the code and configuration for production readiness, architecture, scalability, infrastructure and security. Penetration testing, actively attacking the running application, is available as a separately scoped add-on to the Full Audit, with written authorization and an agreed test environment.",
   },
   {
     question: "Are findings automated or human-reviewed?",

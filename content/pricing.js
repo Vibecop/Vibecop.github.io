@@ -28,6 +28,7 @@ export const PLANS = [
     summary: "Know exactly what you’re shipping",
     includes: "Everything in the Lite Audit",
     upsell: "Add QA and save $400 with the Confidence Package",
+    addon: "Penetration testing add-on (scoped separately)",
     features: ["Architecture & data-flow review", "Third-party integrations & APIs", "Cloud & infrastructure review", "Database & background jobs", "AI/LLM & agent risk review", "Production-readiness & deployment review", "Performance & scalability analysis", "Prioritized roadmap & executive report"],
   },
   {
