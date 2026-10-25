@@ -70,6 +70,12 @@ export const LEGAL = {
       blocks: [
         {
           p: "Our platform may use cookies and similar tracking technologies to improve functionality, analyze performance, and personalize your experience. Cookies help remember preferences, feature usage, and platform settings. You can manage cookie preferences through your browser."
+        },
+        {
+          p: "We use Apollo.io's website visitor tracker, which collects your IP address, browser and device details, and the pages you view in order to identify the company or organization you are visiting from. We use this to understand which businesses are interested in our services and to follow up on potential business inquiries. This data is processed by Apollo.io under its own privacy policy."
+        },
+        {
+          p: "We use Google Analytics to understand how visitors find and use our website, including which pages are viewed, how long visits last, and which campaigns or websites referred them. Google Analytics uses cookies and collects device, browser, and approximate location information. This data is processed by Google under its own privacy policy."
         }
       ]
     },
@@ -83,7 +89,7 @@ export const LEGAL = {
           p: "If you have any questions regarding this Privacy Policy, please contact us at info@opzio.com"
         },
         {
-          p: "Last Updated: April 1, 2026"
+          p: "Last Updated: October 25, 2026"
         }
       ]
     }
@@ -161,6 +167,12 @@ export const LEGAL = {
       blocks: [
         {
           p: "Some third-party services, such as analytics providers or embedded SaaS integrations, may place cookies on your device. These cookies are governed by the policies of the respective third parties."
+        },
+        {
+          p: "We use Apollo.io's website visitor tracker, which may set cookies and collects your IP address, browser and device details, and the pages you view to identify the company or organization you are visiting from. These cookies are governed by Apollo.io's privacy policy."
+        },
+        {
+          p: "We use Google Analytics, which sets cookies (such as _ga) to measure visits, pages viewed, and the campaigns or websites that referred you. These cookies are governed by Google's privacy policy."
         }
       ]
     },
@@ -181,7 +193,7 @@ export const LEGAL = {
           p: "By continuing to use this platform, you agree to the use of cookies as described in this policy. If you have any questions, please contact us at info@opzio.com"
         },
         {
-          p: "Last Updated: April 1, 2026"
+          p: "Last Updated: October 25, 2026"
         }
       ]
     }
