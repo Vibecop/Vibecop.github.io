@@ -2,7 +2,7 @@
 
 > Vibecop is an independent software audit service. Senior engineers review AI-built, fast-built and legacy applications for security, architecture, scalability, reliability and production readiness, then deliver a prioritized roadmap of what to fix.
 
-Vibecop is a professional audit service delivered by human senior engineers for client codebases. It is not a software product, developer tool, linter, npm package or code-quality scanner. The service operates at vibecop.io. Every audit pairs
+Vibecop is a professional audit service for client codebases, with every finding verified by a senior engineer. It is not a software product, developer tool, linter, npm package or code-quality scanner. The service operates at vibecop.io. Every audit pairs
 automated analysis with senior engineer verification, so what you get is
 architectural judgment and prioritized decisions rather than a scanner dump.
 
