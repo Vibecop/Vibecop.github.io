@@ -13,7 +13,7 @@ export const FAQS = [
   {
     question: "Are findings automated or human-reviewed?",
     answer:
-      "Vibecop combines advanced automated analysis with senior engineer validation, prioritization, and contextual architectural review.",
+      "Both. Automated analysis runs first across the whole codebase, then every finding is verified by a senior engineer, who reproduces it by hand, cuts false positives, and prioritizes it against your business context before it reaches you.",
   },
   {
     question: "Can you help fix the findings?",

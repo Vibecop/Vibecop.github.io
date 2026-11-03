@@ -20,7 +20,7 @@ export const DESCRIPTION =
 /* Says what Vibecop is *not*, because the ambiguity is with a software
    package rather than with another consultancy. */
 export const DISAMBIGUATION =
-  "Vibecop is a professional audit service delivered by human senior engineers for client codebases. It is not a software product, developer tool, linter, npm package or code-quality scanner.";
+  "Vibecop is a professional audit service for client codebases, with every finding verified by a senior engineer. It is not a software product, developer tool, linter, npm package or code-quality scanner.";
 
 /* Organization, not ProfessionalService. ProfessionalService is a
    LocalBusiness, and Google requires a postal address on those — there is no
