@@ -15,9 +15,8 @@ export const MAIN_NAV = [
   { label: "Case Studies", href: "/case-studies" },
   { label: "Pricing", href: "/pricing" },
   {
-    label: "Pages",
+    label: "Policies",
     children: [
-      { label: "FAQs", href: "/faq" },
       // { label: "Team", href: "/team" },
       // { label: "Process", href: "/process" },
       // { label: "Contact", href: "/contact" },
@@ -41,7 +40,7 @@ export const MAIN_NAV = [
   //     { label: "Six Column", href: "/six-column-full-width" },
   //   ],
   // },
-  { label: "Contact", href: "/contact" },
+  { label: "FAQs", href: "/faq" },
 ];
 
 /* Two columns, no more: the footer grid gives each one `lg:col-span-2` beside
@@ -76,5 +75,5 @@ export const SOCIAL_LINKS = [
   { label: "X", href: "https://x.com/VibeCop_io", icon: "fa-brands fa-x-twitter" },
 ];
 
-/* Google Calendar booking page for the 15-min strategy call. */
-export const BOOK_CALL_URL = "https://calendar.app.google/uV7cYdU9wSDnxEtE6";
+/* The contact form on /contact, where every "Contact us" button lands. */
+export const CONTACT_FORM_HREF = "/contact#contact-form";

@@ -1,7 +1,7 @@
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import AuditButton from "@/components/AuditButton";
-import { BOOK_CALL_URL } from "@/content/navigation";
+import { CONTACT_FORM_HREF } from "@/content/navigation";
 
 /** The closing band most pages end on. */
 export default function CallToAction({
@@ -40,14 +40,8 @@ export default function CallToAction({
               ) : (
                 <AuditButton size="lg">{action.label}</AuditButton>
               )}
-              <Button
-                href={BOOK_CALL_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="outline"
-                size="lg"
-              >
-                Book a call
+              <Button href={CONTACT_FORM_HREF} variant="outline" size="lg">
+                Contact us
               </Button>
             </div>
           </div>

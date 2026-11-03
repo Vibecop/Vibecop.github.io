@@ -60,6 +60,11 @@ const APOLLO_TRACKER = `function initApollo(){var n=Math.random().toString(36).s
 const GA_ID = "G-641JBP0LMK";
 const GA_BOOT = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GA_ID}');`;
 
+/* Saves the utm_* params a visitor landed with, so lib/web3forms.js can attach
+   them to any lead they submit later, even on another page or visit. A new
+   tagged link overwrites the old one: last campaign touch wins. */
+const UTM_CAPTURE = `try{var q=new URLSearchParams(location.search),u={};['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){var v=q.get(k);if(v)u[k]=v});if(Object.keys(u).length)localStorage.setItem('vc_utm',JSON.stringify(u))}catch(e){}`;
+
 export default function RootLayout({ children }) {
   return (
     <html
@@ -91,6 +96,7 @@ export default function RootLayout({ children }) {
         <script dangerouslySetInnerHTML={{ __html: APOLLO_TRACKER }} />
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
         <script dangerouslySetInnerHTML={{ __html: GA_BOOT }} />
+        <script dangerouslySetInnerHTML={{ __html: UTM_CAPTURE }} />
       </head>
       <body>{children}</body>
     </html>

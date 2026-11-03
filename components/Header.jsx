@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
-import { BOOK_CALL_URL, MAIN_NAV } from "@/content/navigation";
+import { CONTACT_FORM_HREF, MAIN_NAV } from "@/content/navigation";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { cn } from "@/lib/cn";
@@ -172,17 +172,11 @@ export default function Header() {
               <img src="/assets/images/logo.png" alt="Vibecop" className="h-9 w-auto" />
             </Link>
 
-            {/* On phones the booking CTA stays in the bar rather than behind the
+            {/* On phones the contact CTA stays in the bar rather than behind the
                 hamburger: it is the one action every page should offer. */}
             <div className="flex items-center gap-3 lg:hidden">
-              <Button
-                href={BOOK_CALL_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                size="sm"
-                className="whitespace-nowrap"
-              >
-                Book a call
+              <Button href={CONTACT_FORM_HREF} size="sm" className="whitespace-nowrap">
+                Contact us
               </Button>
               <button
                 type="button"
@@ -246,9 +240,9 @@ export default function Header() {
               </ul>
 
               <div className="hidden lg:block">
-                <Button href={BOOK_CALL_URL} target="_blank" rel="noopener noreferrer">
-                  <i className="fa-regular fa-calendar" aria-hidden="true" />
-                  Book a call
+                <Button href={CONTACT_FORM_HREF}>
+                  <i className="fa-regular fa-envelope" aria-hidden="true" />
+                  Contact us
                 </Button>
               </div>
             </div>

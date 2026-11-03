@@ -3,10 +3,10 @@
 import { useId, useState } from "react";
 import { cn } from "@/lib/cn";
 import { submitForm } from "@/lib/web3forms";
-import { BOOK_CALL_URL } from "@/content/navigation";
 
 const HELP_OPTIONS = ["Architecture", "Security", "Scale & production"];
 const TIMELINES = ["Select", "ASAP", "1-2 Weeks", "1 Month"];
+const SOURCES = ["Google search", "LinkedIn", "X (Twitter)", "AI assistant (ChatGPT, Claude…)", "Referral", "Other"];
 
 const FIELDS = [
   { id: "name", label: "Name", type: "text", required: true, autoComplete: "name" },
@@ -21,21 +21,26 @@ export default function ContactForm() {
   const base = useId();
   const [help, setHelp] = useState(HELP_OPTIONS[0]);
   const [status, setStatus] = useState(null);
+  const [source, setSource] = useState("");
 
   const inputClass =
     "vc-field w-full rounded-xl px-4 py-3 text-base text-white placeholder:text-muted-3";
 
   return (
     <form
+      id="contact-form"
       data-reveal
-      className="vc-card p-8"
+      className="vc-card scroll-mt-32 p-8"
       onSubmit={async (e) => {
         e.preventDefault();
         const form = e.currentTarget;
         setStatus("sending");
         const ok = await submitForm(form, { subject: "New audit request vibecop.io", help });
         setStatus(ok ? "ok" : "err");
-        if (ok) form.reset();
+        if (ok) {
+          form.reset();
+          setSource("");
+        }
       }}
     >
       <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
@@ -105,6 +110,39 @@ export default function ContactForm() {
             ))}
           </select>
         </div>
+
+        <div>
+          <label htmlFor={`${base}-source`} className="block text-sm font-medium text-white">
+            Where did you hear about us?
+          </label>
+          <select
+            id={`${base}-source`}
+            name="source"
+            value={source}
+            onChange={(e) => setSource(e.target.value)}
+            className={cn(inputClass, "mt-2")}
+          >
+            <option value="">Select</option>
+            {SOURCES.map((s) => (
+              <option key={s}>{s}</option>
+            ))}
+          </select>
+        </div>
+
+        {source === "Referral" && (
+          <div>
+            <label htmlFor={`${base}-referral`} className="block text-sm font-medium text-white">
+              Referral code
+            </label>
+            <input
+              id={`${base}-referral`}
+              name="referral_code"
+              type="text"
+              autoComplete="off"
+              className={cn(inputClass, "mt-2")}
+            />
+          </div>
+        )}
       </div>
 
       <button
@@ -119,15 +157,7 @@ export default function ContactForm() {
         aria-live="polite"
         className={cn("mt-4 block text-base", status === "err" ? "text-red-400" : "text-brand")}
       >
-        {status === "ok" && (
-          <>
-            Thanks we got it. Expect a reply within 24 hours, or{" "}
-            <a href={BOOK_CALL_URL} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
-              book your call now
-            </a>
-            .
-          </>
-        )}
+        {status === "ok" && "Thanks we got it. Expect a reply within 24 hours."}
         {status === "err" && "That did not send. Email us at hello@vibecop.io and we will pick it up."}
       </output>
     </form>
