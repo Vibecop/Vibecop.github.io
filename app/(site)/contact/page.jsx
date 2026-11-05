@@ -1,5 +1,6 @@
 import PageBanner from "@/components/PageBanner";
 import ContactForm from "@/components/ContactForm";
+import FounderNote from "@/components/FounderNote";
 import CallToAction from "@/components/CallToAction";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -54,6 +55,10 @@ export default function ContactPage() {
                 </li>
               ))}
             </ul>
+            <FounderNote
+              className="mt-8"
+              line="You’ll speak directly with Salman Haseeb, founding engineer at Wosh and Head of Product at Veriom."
+            />
           </div>
 
           <ContactForm />

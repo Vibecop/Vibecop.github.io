@@ -11,22 +11,15 @@
 import { CASE_STUDY_PAGES } from "@/content/case-studies";
 
 export const MAIN_NAV = [
-  { label: "About", href: "/about" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Pricing", href: "/pricing" },
   {
-    label: "Policies",
+    label: "About",
     children: [
-      // { label: "Team", href: "/team" },
-      // { label: "Process", href: "/process" },
-      // { label: "Contact", href: "/contact" },
-      // { label: "Coming Soon", href: "/coming-soon" },
-      // { label: "404", href: "/404" },
-      { label: "Privacy Policy", href: "/privacy-policy" },
-      { label: "Cookie Policy", href: "/cookie-policy" },
-      { label: "Terms of Use", href: "/term-of-use" },
+      { label: "About Vibecop", href: "/about" },
+      { label: "Meet the Founder", href: "/about/founder" },
     ],
   },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Pricing", href: "/pricing" },
   // {
   //   label: "Blog",
   //   children: [
@@ -62,12 +55,20 @@ export const FOOTER_NAV = [
     heading: "Company",
     links: [
       { label: "About", href: "/about" },
+      { label: "Meet the Founder", href: "/about/founder" },
       { label: "Process", href: "/process" },
       { label: "Pricing", href: "/pricing" },
       { label: "FAQs", href: "/faq" },
       { label: "Contact", href: "/contact" },
     ],
   },
+];
+
+/* Legal pages: footer bottom bar only, by convention. */
+export const LEGAL_NAV = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Cookie Policy", href: "/cookie-policy" },
+  { label: "Terms of Use", href: "/term-of-use" },
 ];
 
 export const SOCIAL_LINKS = [

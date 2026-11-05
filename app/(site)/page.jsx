@@ -2,6 +2,7 @@ import HeroDashboard from "@/components/HeroDashboard";
 import VelocityPlan from "@/components/VelocityPlan";
 import Accordion from "@/components/Accordion";
 import CallToAction from "@/components/CallToAction";
+import FounderNote from "@/components/FounderNote";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -258,6 +259,8 @@ export default function IndexPage() {
             </li>
           ))}
         </ul>
+
+        <FounderNote className="mx-auto mt-10 max-w-3xl" />
       </Section>
 
       <Section>

@@ -25,6 +25,7 @@ import { AUDIT_PAGES } from "@/content/audit-pages";
 const PAGES = [
   "/",
   "/about",
+  "/about/founder",
   "/process",
   "/services",
   ...SERVICE_PAGES.map(({ slug }) => `/services/${slug}`),

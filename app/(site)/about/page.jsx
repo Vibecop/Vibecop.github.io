@@ -1,5 +1,6 @@
 import PageBanner from "@/components/PageBanner";
 import TeamGrid from "@/components/TeamGrid";
+import FounderNote from "@/components/FounderNote";
 import CallToAction from "@/components/CallToAction";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -67,6 +68,7 @@ export default function AboutPage() {
           lede="The senior engineering judgment behind every Vibecop audit."
         />
         <TeamGrid className="mt-12" limit={4} />
+        <FounderNote className="mx-auto mt-8 max-w-2xl" />
       </Section>
 
       <Section tone="surface">

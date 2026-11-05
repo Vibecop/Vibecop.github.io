@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import NewsletterForm from "@/components/NewsletterForm";
-import { FOOTER_NAV, SOCIAL_LINKS } from "@/content/navigation";
+import { FOOTER_NAV, LEGAL_NAV, SOCIAL_LINKS } from "@/content/navigation";
 import { DESCRIPTOR } from "@/content/entity";
 
 export default function Footer() {
@@ -67,10 +67,24 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 border-t border-white/8 py-7 text-center">
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/8 py-7 text-center md:flex-row">
           <p className="m-0 text-base text-muted">
             Copyright © {new Date().getFullYear()} Vibecop. All Rights Reserved.
           </p>
+          <nav aria-label="Legal">
+            <ul className="m-0 flex list-none flex-wrap justify-center gap-x-6 gap-y-2 p-0">
+              {LEGAL_NAV.map(({ label, href }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-sm text-muted no-underline transition-colors duration-200 hover:text-brand"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </Container>
     </footer>
