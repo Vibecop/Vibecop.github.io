@@ -1,8 +1,14 @@
 "use client";
 
-import { useId, useState } from "react";
+import Script from "next/script";
+import { useId, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 import { submitForm } from "@/lib/web3forms";
+
+/* Web3Forms' shared hCaptcha key for free plans; Web3Forms verifies the
+   h-captcha-response field the widget adds to the form. A paid plan can swap
+   in our own site key, with its secret entered in the Web3Forms dashboard. */
+const HCAPTCHA_SITE_KEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 
 const HELP_OPTIONS = ["Architecture", "Security", "Scale & production"];
 const TIMELINES = ["Select", "ASAP", "1-2 Weeks", "1 Month"];
@@ -22,6 +28,8 @@ export default function ContactForm() {
   const [help, setHelp] = useState(HELP_OPTIONS[0]);
   const [status, setStatus] = useState(null);
   const [source, setSource] = useState("");
+  const captcha = useRef(null);
+  const widget = useRef(null);
 
   const inputClass =
     "vc-field w-full rounded-xl px-4 py-3 text-base text-white placeholder:text-muted-3";
@@ -34,9 +42,12 @@ export default function ContactForm() {
       onSubmit={async (e) => {
         e.preventDefault();
         const form = e.currentTarget;
+        if (!window.hcaptcha?.getResponse(widget.current)) return setStatus("captcha");
         setStatus("sending");
         const ok = await submitForm(form, { subject: "New audit request vibecop.io", help });
         setStatus(ok ? "ok" : "err");
+        /* a token is single use, so the next submit needs a fresh tick */
+        window.hcaptcha.reset(widget.current);
         if (ok) {
           form.reset();
           setSource("");
@@ -145,6 +156,20 @@ export default function ContactForm() {
         )}
       </div>
 
+      {/* explicit render: api.js only auto-renders widgets present when it
+          loads, and this form also mounts on client-side navigation. The ??=
+          stops Strict Mode's double effect rendering a second widget. */}
+      <Script
+        src="https://js.hcaptcha.com/1/api.js?render=explicit&recaptchacompat=off"
+        onReady={() => {
+          widget.current ??= window.hcaptcha.render(captcha.current, {
+            sitekey: HCAPTCHA_SITE_KEY,https://vibecop.io/about/founder
+            theme: "dark",
+          });
+        }}
+      />
+      <div ref={captcha} className="mt-7" />
+
       <button
         type="submit"
         disabled={status === "sending"}
@@ -155,8 +180,9 @@ export default function ContactForm() {
 
       <output
         aria-live="polite"
-        className={cn("mt-4 block text-base", status === "err" ? "text-red-400" : "text-brand")}
+        className={cn("mt-4 block text-base", status === "err" || status === "captcha" ? "text-red-400" : "text-brand")}
       >
+        {status === "captcha" && "Tick the captcha above, then send again."}
         {status === "ok" && "Thanks we got it. Expect a reply within 24 hours."}
         {status === "err" && "That did not send. Email us at hello@vibecop.io and we will pick it up."}
       </output>
