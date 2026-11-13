@@ -1786,3 +1786,52 @@ select.vc-field:has(option[value=""]:checked) { color: var(--color-muted-3, rgb(
   /* parallax on a phone fights the browser's own scroll smoothing */
   .atmo-glow { translate: none !important; }
 }
+
+/* ==================================================================
+ * Founder specializations: a light sweep crosses each card in turn and
+ * the icon pings like a radar. `--i` (the card's index) staggers both.
+ * ================================================================== */
+
+.vc-spec { overflow: hidden; }
+
+.vc-spec::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgb(249 91 52 / 16%) 50%, transparent 65%);
+  content: "";
+  pointer-events: none;
+  transform: translateX(-100%);
+  animation: spec-sweep 6s var(--ease-soft) infinite;
+  animation-delay: calc(var(--i) * 1.5s);
+}
+
+@keyframes spec-sweep {
+  0% { transform: translateX(-100%); }
+  25%, 100% { transform: translateX(100%); }
+}
+
+.vc-spec-icon {
+  position: relative;
+  transition: transform 0.45s var(--ease-entrance), background 0.3s var(--ease-soft);
+}
+
+.vc-spec-icon::after {
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgb(249 91 52 / 60%);
+  border-radius: inherit;
+  content: "";
+  opacity: 0;
+  animation: spec-ping 3s var(--ease-soft) infinite;
+  animation-delay: calc(var(--i) * 0.75s);
+}
+
+@keyframes spec-ping {
+  0% { opacity: 0.9; transform: scale(1); }
+  60%, 100% { opacity: 0; transform: scale(1.55); }
+}
+
+.vc-spec:hover .vc-spec-icon {
+  background: rgb(249 91 52 / 30%);
+  transform: rotate(-8deg) scale(1.12);
+}

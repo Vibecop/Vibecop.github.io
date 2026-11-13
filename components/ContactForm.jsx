@@ -163,7 +163,7 @@ export default function ContactForm() {
         src="https://js.hcaptcha.com/1/api.js?render=explicit&recaptchacompat=off"
         onReady={() => {
           widget.current ??= window.hcaptcha.render(captcha.current, {
-            sitekey: HCAPTCHA_SITE_KEY,https://vibecop.io/about/founder
+            sitekey: HCAPTCHA_SITE_KEY,
             theme: "dark",
           });
         }}

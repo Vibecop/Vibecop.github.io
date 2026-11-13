@@ -16,6 +16,15 @@ export const FOUNDER = {
   ],
 };
 
+/* Shown as specializations for now. Once the certificates are confirmed
+   (exact title, issuer, verify link) they can move to a Certifications row. */
+export const FOUNDER_SPECIALIZATIONS = [
+  { name: "Lead SOC 2 Manager", area: "Security & trust controls", icon: "fa-user-shield" },
+  { name: "EU AI Governance Professional", area: "EU AI Act & responsible AI", icon: "fa-scale-balanced" },
+  { name: "ISO/IEC 27001", area: "Information security management", icon: "fa-lock" },
+  { name: "ISO/IEC 42001:2023", area: "AI management systems", icon: "fa-microchip" },
+];
+
 /* The headline numbers. Keep them countable, no "100s of" anything. */
 export const FOUNDER_STATS = [
   { value: "8+", label: "Years shipping production software" },

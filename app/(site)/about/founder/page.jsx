@@ -4,7 +4,7 @@ import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import AuditButton from "@/components/AuditButton";
-import { FOUNDER, FOUNDER_STATS, FOUNDER_TRACK_RECORD, FOUNDER_WHY } from "@/content/founder";
+import { FOUNDER, FOUNDER_SPECIALIZATIONS, FOUNDER_STATS, FOUNDER_TRACK_RECORD, FOUNDER_WHY } from "@/content/founder";
 
 export const metadata = {
   title: "Meet the Founder",
@@ -31,6 +31,22 @@ export default function FounderPage() {
           />
           <div data-reveal="right">
             <SectionHeading title={FOUNDER.name} eyebrow={FOUNDER.role} align="left" />
+            <p className="m-0 mt-6 text-sm font-semibold uppercase tracking-wide text-muted">
+              Specializations
+            </p>
+            <ul data-stagger className="m-0 mt-3 grid list-none gap-3 p-0 sm:grid-cols-2">
+              {FOUNDER_SPECIALIZATIONS.map(({ name, area, icon }, i) => (
+                <li key={name} style={{ "--i": i }} className="vc-card vc-card-hover vc-spec flex items-center gap-4 p-4">
+                  <span className="vc-spec-icon grid size-11 shrink-0 place-items-center rounded-xl border border-brand/35 bg-brand/15 text-brand">
+                    <i className={`fa-solid ${icon}`} aria-hidden="true" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-white">{name}</span>
+                    <span className="block text-xs text-muted">{area}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
             {FOUNDER.intro.map((p) => (
               <p key={p} className="mt-5 text-base text-muted">
                 {p}
