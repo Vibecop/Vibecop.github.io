@@ -26,7 +26,9 @@ export async function generateMetadata({ params }) {
   if (!page) return {};
   return {
     title: { absolute: page.title },
-    description: page.definition,
+    /* First sentence only: the full definition runs 300+ characters and search
+       results cut at ~155. The whole definition still leads the page. */
+    description: page.definition.split(". ")[0] + ".",
     alternates: { canonical: `/${page.path}` },
   };
 }

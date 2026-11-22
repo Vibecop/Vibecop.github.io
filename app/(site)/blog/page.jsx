@@ -1,15 +1,25 @@
 import PageBanner from "@/components/PageBanner";
 import ArticleCard from "@/components/ArticleCard";
-import Pagination from "@/components/Pagination";
 import CallToAction from "@/components/CallToAction";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { ARTICLES } from "@/content/articles";
+import { AUDIT_PAGES, inAuditMenu } from "@/content/audit-pages";
+import { SERVICE_PAGES } from "@/content/service-pages";
+
+/* The service pages and the audit pages kept out of the Audits menu (vibe
+   code + the per-tool pages) have no menu link, so they are listed here as
+   guides to give them a path in from the site. */
+const GUIDES = [
+  ...SERVICE_PAGES.map((p) => ({ href: `/services/${p.slug}`, title: p.title })),
+  ...AUDIT_PAGES.filter((p) => !inAuditMenu(p)).map((p) => ({ href: `/${p.path}`, title: p.h1 })),
+].map((g, i) => ({ ...g, slug: g.href, image: `/assets/images/gallery-img${(i % 5) + 2}.jpg` }));
 
 export const metadata = {
   title: "Blog",
   description:
-    "SaaS-driven innovation, AI-powered solutions, and scalable growth. Built for startups to launch faster, optimize smarter, and grow without limits.",
+    "Field notes from Vibecop audits: architecture, security and production readiness for software built with AI coding tools.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogPage() {
@@ -27,21 +37,10 @@ export default function BlogPage() {
         />
 
         <div data-stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {ARTICLES.map((article, i) => (
+          {[...ARTICLES, ...GUIDES].map((article, i) => (
             <ArticleCard key={article.slug} article={article} cta={i === 0 ? "Learn More" : "Read More"} />
           ))}
         </div>
-
-        <Pagination
-          current="1"
-          prev="/single-blog"
-          next="/four-column"
-          pages={[
-            { href: "/one-column", label: "1" },
-            { href: "/two-column", label: "2" },
-            { href: "/three-column", label: "3" },
-          ]}
-        />
       </Section>
 
       <CallToAction />

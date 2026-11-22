@@ -18,12 +18,10 @@ app/
     layout.jsx               that chrome, in one place
     page.jsx                 /
     about/ services/ …       one folder per page
-    (blog)/                  the six blog layout demos + the article page
-  (bare)/                    no chrome at all
-    coming-soon/
+    blog/[slug]/             one page per entry in content/articles.js
 components/
   ui/                        Container, Section, SectionHeading, Button, Card, Badge
-  …                          Header, Footer, BlogCard, Accordion, forms, …
+  …                          Header, Footer, ArticleCard, Accordion, forms, …
 content/                     page copy and data, as plain JS
 lib/cn.js                    class-name joiner
 styles/
@@ -176,8 +174,9 @@ the animation and the parallax and shows the end state directly.
   (`designingmedia.com`), in `content/navigation.js`. Change `BUY_URL`.
 * **`public/assets/images/favicon/` does not exist**, so the favicon links 404.
   Drop the folder in to fix it.
-* **The blog is static.** `/single-blog` is one hard-coded article and every
-  card links to it. There are no per-post routes yet.
+* **The blog lists two kinds of entry:** posts from `content/articles.js`
+  (one `/blog/<slug>` route each), plus the service pages and the audit pages
+  kept out of the Audits menu, which link to their own URLs.
 
 ## History
 

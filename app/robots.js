@@ -27,24 +27,11 @@ const AI_CRAWLERS = [
   "cohere-ai", "Amazonbot", "DuckAssistBot", "MistralAI-User",
 ];
 
-/* Kit leftovers: duplicate layout demos and an unlinked placeholder. Crawlable
-   if someone follows a link, but kept out of search results. */
-const DISALLOW = [
-  "/one-column",
-  "/two-column",
-  "/three-column",
-  "/three-column-sidebar",
-  "/four-column",
-  "/six-column-full-width",
-  "/single-blog",
-  "/coming-soon",
-];
-
 export default function robots() {
   return {
     rules: [
-      { userAgent: "*", allow: "/", disallow: DISALLOW },
-      { userAgent: AI_CRAWLERS, allow: "/", disallow: DISALLOW },
+      { userAgent: "*", allow: "/" },
+      { userAgent: AI_CRAWLERS, allow: "/" },
     ],
     sitemap: "https://vibecop.io/sitemap.xml",
     host: "https://vibecop.io",

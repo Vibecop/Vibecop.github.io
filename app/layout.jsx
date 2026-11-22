@@ -19,6 +19,16 @@ export const metadata = {
   },
   description: DESCRIPTION,
   applicationName: DESCRIPTOR,
+  /* './' resolves to each page's own path, so every page gets a self-canonical
+     without repeating it per page. Pages that set their own still win. */
+  alternates: { canonical: "./" },
+  openGraph: {
+    type: "website",
+    siteName: "Vibecop",
+    url: "./",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Vibecop: independent technical audits for AI-built software" }],
+  },
+  twitter: { card: "summary_large_image", site: "@VibeCop_io" },
   icons: {
     icon: [16, 32, 96].map((s) => ({
       url: `/assets/images/favicon/favicon-${s}x${s}.png`,

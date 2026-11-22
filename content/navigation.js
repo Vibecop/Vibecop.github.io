@@ -20,19 +20,7 @@ export const MAIN_NAV = [
   },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Pricing", href: "/pricing" },
-  // {
-  //   label: "Blog",
-  //   children: [
-  //     { label: "Blog", href: "/blog" },
-  //     { label: "Single Blog", href: "/single-blog" },
-  //     { label: "One Column", href: "/one-column" },
-  //     { label: "Two Column", href: "/two-column" },
-  //     { label: "Three Column", href: "/three-column" },
-  //     { label: "Three Column Sidebar", href: "/three-column-sidebar" },
-  //     { label: "Four Column", href: "/four-column" },
-  //     { label: "Six Column", href: "/six-column-full-width" },
-  //   ],
-  // },
+  { label: "Blog", href: "/blog" },
   { label: "FAQs", href: "/faq" },
 ];
 

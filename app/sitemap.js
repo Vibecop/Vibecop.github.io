@@ -4,6 +4,7 @@ export const dynamic = "force-static";
 import { SERVICE_PAGES } from "@/content/service-pages";
 import { CASE_STUDY_PAGES } from "@/content/case-studies";
 import { AUDIT_PAGES } from "@/content/audit-pages";
+import { ARTICLES } from "@/content/articles";
 
 /*
  * The sitemap, generated at build time so it lands in dist/sitemap.xml and
@@ -12,15 +13,10 @@ import { AUDIT_PAGES } from "@/content/audit-pages";
  * Service slugs are read from content/service-pages.js rather than repeated
  * here, so adding a service adds it to the sitemap on the next build.
  *
- * Deliberately excluded: the kit's blog-layout demos (/one-column,
- * /two-column, /single-blog and friends) and /coming-soon. They render
- * duplicate or placeholder copy, and submitting near-identical pages is a
- * liability rather than reach. robots.js blocks the same set.
- *
- * Also excluded: /team and /blog. Both are commented out of navigation, so
- * nothing on the site links to them — submitting a page no visitor can reach
- * is what Semrush calls an orphan. Uncomment them in content/navigation.js
- * and they belong back here.
+ * Deliberately excluded: /team. It is commented out of navigation, so
+ * nothing on the site links to it, and submitting a page no visitor can reach
+ * is what Semrush calls an orphan. Uncomment it in content/navigation.js and
+ * it belongs back here.
  */
 const PAGES = [
   "/",
@@ -31,6 +27,8 @@ const PAGES = [
   ...SERVICE_PAGES.map(({ slug }) => `/services/${slug}`),
   "/audits",
   ...AUDIT_PAGES.map(({ path }) => `/${path}`),
+  "/blog",
+  ...ARTICLES.map(({ slug }) => `/blog/${slug}`),
   "/case-studies",
   ...CASE_STUDY_PAGES.map(({ slug }) => `/case-studies/${slug}`),
   "/pricing",

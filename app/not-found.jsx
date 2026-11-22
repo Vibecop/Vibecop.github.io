@@ -2,7 +2,7 @@ import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Atmosphere from "@/components/Atmosphere";
 
-export const metadata = { title: "404" };
+export const metadata = { title: "404", alternates: { canonical: null } };
 
 export default function NotFound() {
   return (

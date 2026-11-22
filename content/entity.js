@@ -51,5 +51,9 @@ export const ORGANIZATION_JSONLD = {
     "Application security review",
     "Production readiness review",
   ],
-  sameAs: ["https://x.com/VibeCop_io"],
+  sameAs: [
+    "https://x.com/VibeCop_io",
+    "https://clutch.co/profile/vibecop",
+    "https://www.goodfirms.co/company/vibecop",
+  ],
 };

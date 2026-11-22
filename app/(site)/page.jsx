@@ -1,3 +1,4 @@
+import ClutchBadge from "@/components/ClutchBadge";
 import HeroDashboard from "@/components/HeroDashboard";
 import VelocityPlan from "@/components/VelocityPlan";
 import Accordion from "@/components/Accordion";
@@ -107,6 +108,8 @@ export default function IndexPage() {
                   <i className="fa-solid fa-arrow-right text-sm" aria-hidden="true" />
                 </Button>
               </div>
+
+              <ClutchBadge className="hero-rise hero-rise-4 mt-6" />
             </div>
 
             <HeroDashboard />

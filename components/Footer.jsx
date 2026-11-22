@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import NewsletterForm from "@/components/NewsletterForm";
+import ClutchBadge from "@/components/ClutchBadge";
 import { FOOTER_NAV, LEGAL_NAV, SOCIAL_LINKS } from "@/content/navigation";
 import { DESCRIPTOR } from "@/content/entity";
 
@@ -33,6 +34,7 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+            <ClutchBadge className="mt-6" />
           </div>
 
           {FOOTER_NAV.map(({ heading, links }) => (
