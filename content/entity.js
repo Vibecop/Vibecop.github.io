@@ -38,6 +38,7 @@ export const ORGANIZATION_JSONLD = {
   image: "https://vibecop.io/assets/images/logo.png",
   description: DESCRIPTION,
   disambiguatingDescription: DISAMBIGUATION,
+  address: { "@type": "PostalAddress", addressCountry: "PK" },
   areaServed: "Worldwide",
   knowsAbout: [
     "Software audit",

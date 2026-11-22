@@ -71,7 +71,7 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/8 py-7 text-center md:flex-row">
           <p className="m-0 text-base text-muted">
-            Copyright © {new Date().getFullYear()} Vibecop. All Rights Reserved.
+            Copyright © {new Date().getFullYear()} Vibecop. All Rights Reserved. Based in Pakistan, working worldwide.
           </p>
           <nav aria-label="Legal">
             <ul className="m-0 flex list-none flex-wrap justify-center gap-x-6 gap-y-2 p-0">

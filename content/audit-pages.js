@@ -171,7 +171,7 @@ export const AUDIT_PAGES = [
     h1: "Vibe Code Audit: Security, Architecture & Production Readiness",
     title: "Vibe Code Audit | Security & Production Readiness Review of Vibe-Coded Apps",
     definition:
-      "Vibe code audits are technical reviews of applications built using AI coding tools such as Cursor, Claude Code, Lovable, Bolt, Replit and Copilot. Vibecop reads the system no one has fully reviewed: the generated architecture, the security defaults, the database schema and the abandoned experiments. It then reports what is safe to ship, what must be fixed first, and what has to be rebuilt.",
+      "Vibe code audits are technical reviews of applications built using AI coding tools such as Cursor, Claude Code, Lovable, Bolt, Replit, v0, Base44 and Copilot, including their Supabase backends. Vibecop reads the system no one has fully reviewed: the generated architecture, the security defaults, the database schema and the abandoned experiments. It then reports what is safe to ship, what must be fixed first, and what has to be rebuilt.",
     checksTitle: "What does a vibe code audit check?",
     checks: [
       { name: "What is actually there", detail: "A full map of the codebase, including the routes, jobs, and tables nobody remembers asking for." },
@@ -213,6 +213,26 @@ export const AUDIT_PAGES = [
         body: [
           "The three moments that force the question are the same every time: before you take real user data, before an enterprise customer runs their own security review, and before an investor's technical diligence reads the repo. Each one puts the codebase in front of someone who did not build it.",
           "Auditing earlier is cheaper. A structural problem found before launch is a week of work; the same problem found after a year of features built on top of it is a rewrite. If you are close to any of those three moments, the audit is worth running now rather than after.",
+        ],
+      },
+      {
+        heading: "Stacks we audit",
+        body: [
+          "We audit apps built with Lovable, Bolt, Replit, v0, Base44, Cursor and Claude Code, and the Supabase backends most of them sit on. Copilot-assisted and hand-written code are covered too.",
+        ],
+      },
+      {
+        heading: "Price, timing and how to start",
+        body: [
+          "Start with a free 30-minute scoping call: tell us what you built and what worries you, and we tell you which audit fits, or whether you need one at all. Request it through the contact form.",
+          "A Focused Audit of one critical workflow starts at $450. The Lite Audit starts at $1,200 and the Full Audit at $2,900. Most audits are delivered in 3–7 business days, depending on codebase size.",
+        ],
+      },
+      {
+        heading: "After the audit",
+        body: [
+          "The audit tells you what to fix. We can also do the fixing: we implement the critical fixes, add tests around the paths that take money or delete data, harden deployment and monitoring, then stay on as ongoing assurance from $750 a month.",
+          "Vibecop is based in Pakistan and works with teams worldwide.",
         ],
       },
     ],

@@ -28,7 +28,7 @@ export const FAQS = [
   {
     question: "How long does an audit take?",
     answer:
-      "Most reviews are completed within a few days depending on repository size, infrastructure complexity, and scope.",
+      "Most reviews are delivered in 3–7 business days, depending on repository size, infrastructure complexity, and scope.",
   },
   {
     question: "Do you offer ongoing oversight?",

@@ -10,7 +10,7 @@ import { submitForm } from "@/lib/web3forms";
    in our own site key, with its secret entered in the Web3Forms dashboard. */
 const HCAPTCHA_SITE_KEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 
-const HELP_OPTIONS = ["Architecture", "Security", "Scale & production"];
+const HELP_OPTIONS = ["Architecture", "Security", "Scale & production", "Free 30-min call"];
 const TIMELINES = ["Select", "ASAP", "1-2 Weeks", "1 Month"];
 const SOURCES = ["Google search", "LinkedIn", "X (Twitter)", "AI assistant (ChatGPT, Claude…)", "Referral", "Other"];
 
