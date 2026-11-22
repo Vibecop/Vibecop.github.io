@@ -1,13 +1,5 @@
 User-Agent: *
 Allow: /
-Disallow: /one-column
-Disallow: /two-column
-Disallow: /three-column
-Disallow: /three-column-sidebar
-Disallow: /four-column
-Disallow: /six-column-full-width
-Disallow: /single-blog
-Disallow: /coming-soon
 
 User-Agent: GPTBot
 User-Agent: ChatGPT-User
@@ -30,14 +22,6 @@ User-Agent: Amazonbot
 User-Agent: DuckAssistBot
 User-Agent: MistralAI-User
 Allow: /
-Disallow: /one-column
-Disallow: /two-column
-Disallow: /three-column
-Disallow: /three-column-sidebar
-Disallow: /four-column
-Disallow: /six-column-full-width
-Disallow: /single-blog
-Disallow: /coming-soon
 
 Host: https://vibecop.io
 Sitemap: https://vibecop.io/sitemap.xml
